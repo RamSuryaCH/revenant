@@ -38,7 +38,7 @@ function SourceLedger({ tombs, phase }: { tombs: Tombstone[]; phase: Phase }) {
       <ul className="src-ledger mt-3">
         {SOURCES.map((s) => {
           const n = counts[s.id] ?? 0;
-          const state = n > 0 ? "done" : phase === "ready" ? "cited by no package" : "reading";
+          const state = n > 0 ? "done" : phase === "ready" ? "checked, nothing to cite" : "reading";
           return (
             <li key={s.id}>
               <span style={{ minWidth: 150, color: "var(--color-bone)" }}>{s.label}</span>
@@ -160,7 +160,7 @@ export function Graveyard(props: {
           Every claim above is read from a public API field and shows that field. Sources:{" "}
           {SOURCES.map((s, i) => (
             <span key={s.id}>
-              <a className="text-moon underline underline-offset-4" href={s.href} target="_blank" rel="noreferrer">{s.label}</a>
+              <a className="srclink text-moon underline underline-offset-4" href={s.href} target="_blank" rel="noreferrer">{s.label}</a>
               {i < SOURCES.length - 1 ? ", " : "."}
             </span>
           ))}

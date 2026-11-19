@@ -11,7 +11,7 @@ interface HeroProps {
   busy: boolean;
   onScan: (target: string) => void;
   onSandbox: () => void;
-  onExpress: () => void;
+  onExample: () => void;
   onSample: () => void;
   info: string | null;
   error: string | null;
@@ -20,13 +20,13 @@ interface HeroProps {
   toggleReduce: () => void;
 }
 
-export function Hero({ url, setUrl, busy, onScan, onSandbox, onExpress, onSample, info, error, onOpen, reduce, toggleReduce }: HeroProps) {
+export function Hero({ url, setUrl, busy, onScan, onSandbox, onExample, onSample, info, error, onOpen, reduce, toggleReduce }: HeroProps) {
   const input = useRef<HTMLInputElement>(null);
   const [nudge, setNudge] = useState(false);
-  const sentence = `${HERO_COUNTS.badDirect} of ${HERO_COUNTS.direct} direct dependencies in the cursed sample app are dead or dying.`;
+  const sentence = `${HERO_COUNTS.badDirect} of ${HERO_COUNTS.direct} direct dependencies in the cursed sample app are dead or dying (3 shown).`;
 
   return (
-    <header className="relative isolate overflow-hidden">
+    <header className="relative isolate flex min-h-[calc(100svh-100px)] flex-col overflow-hidden">
       <div className="ambient" aria-hidden="true">
         <div className="plot-grid" />
         <div className="fog" style={{ bottom: "-6%" }} />
@@ -34,7 +34,7 @@ export function Hero({ url, setUrl, busy, onScan, onSandbox, onExpress, onSample
         <div className="grain" />
       </div>
 
-      <nav className="relative z-10 mx-auto flex max-w-[1280px] items-center justify-between px-[var(--pad)] py-5" aria-label="Primary">
+      <nav className="relative z-10 mx-auto flex w-full max-w-[1280px] items-center justify-between px-[var(--pad)] py-5" aria-label="Primary">
         <span className="t-title" style={{ fontSize: 24 }}>Revenant</span>
         <span className="flex items-center gap-3">
           <button type="button" className="btn-ghost" aria-pressed={reduce} onClick={toggleReduce}>Reduce motion</button>
@@ -42,7 +42,7 @@ export function Hero({ url, setUrl, busy, onScan, onSandbox, onExpress, onSample
         </span>
       </nav>
 
-      <div className="relative z-10 mx-auto grid max-w-[1280px] grid-cols-[minmax(0,1fr)] gap-4 sm:gap-10 px-[var(--pad)] pb-8 pt-4 lg:grid-cols-12 lg:items-center lg:gap-8 lg:pb-12 lg:pt-8">
+      <div className="relative z-10 mx-auto grid w-full max-w-[1280px] grid-cols-[minmax(0,1fr)] gap-4 sm:gap-10 px-[var(--pad)] pb-8 pt-4 lg:grid-cols-12 lg:items-center lg:gap-8 lg:pb-12 lg:pt-8">
         <div className="min-w-0 lg:col-span-7">
           <p className="t-label lift text-moon" style={{ ["--i" as string]: 0 }}>Kiroween 2026 / Resurrection</p>
           <h1 className="t-display lift mt-4 max-w-[14ch] sm:max-w-none" style={{ ["--i" as string]: 1 }}>Your dependencies have a graveyard.</h1>
@@ -79,20 +79,20 @@ export function Hero({ url, setUrl, busy, onScan, onSandbox, onExpress, onSample
                 inputMode="url"
                 autoComplete="off"
                 spellCheck={false}
-                placeholder="github.com/owner/repo"
+                placeholder="owner/repo or github.com/owner/repo"
                 aria-describedby="scan-hint"
               />
               <button type="submit" className="btn-ember" aria-disabled={busy}>{busy ? "Scanning" : "Scan"}</button>
             </div>
             <p id="scan-hint" className="mt-2 text-sm" style={{ color: nudge ? "var(--color-ember)" : "var(--color-dim)" }}>
-              {busy ? "A scan is running. It finishes in a few seconds." : nudge ? "Paste a GitHub repository URL first, or try the sandbox repo below." : "Reads the root package.json of a public npm repository."}
+              {busy ? "A scan is running. It finishes in a few seconds." : nudge ? "Paste a repository first (owner/repo works), or try the sandbox repo below." : "Reads the root package.json of a public npm repository."}
             </p>
           </form>
 
           <p className="lift mt-1 flex flex-wrap items-center gap-x-4 sm:mt-3 sm:gap-x-5" style={{ ["--i" as string]: 6 }}>
             <span className="hidden text-[15px] text-mist sm:inline">No repo handy?</span>
             <button type="button" className="link-moon" disabled={busy} onClick={onSandbox}>Haunt the sandbox repo</button>
-            <button type="button" className="link-moon" disabled={busy} onClick={onExpress}>or scan express</button>
+            <button type="button" className="link-moon" disabled={busy} onClick={onExample}>or scan bower/bower</button>
             <button type="button" className="link-moon" disabled={busy} onClick={onSample}>or the sample</button>
           </p>
 
@@ -110,10 +110,10 @@ export function Hero({ url, setUrl, busy, onScan, onSandbox, onExpress, onSample
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1280px] border-t border-rule px-[var(--pad)] py-4">
+      <div className="relative z-10 mx-auto mt-auto w-full max-w-[1280px] border-t border-rule px-[var(--pad)] py-4">
         <p className="sr-only">{sentence}</p>
         <p aria-hidden="true" className="t-evidence text-mist">
-          <span className="count tick text-ember" style={{ ["--n" as string]: HERO_COUNTS.badDirect }} /> of {HERO_COUNTS.direct} direct dependencies in the cursed sample app are dead or dying.
+          <span className="count tick text-ember" style={{ ["--n" as string]: HERO_COUNTS.badDirect }} /> of {HERO_COUNTS.direct} direct dependencies in the cursed sample app are dead or dying (3 shown).
         </p>
       </div>
     </header>

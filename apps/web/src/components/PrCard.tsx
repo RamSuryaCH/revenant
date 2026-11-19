@@ -4,9 +4,10 @@ import { useEffect, useMemo, useState } from "react";
 import type { Resurrection } from "@revenant/engine";
 import { artifactFacts } from "@/lib/ledger";
 import { sandboxProof } from "@/lib/proof";
+import { parsePrTotals, type PrTotals } from "@/lib/repo";
 import { ExternalIcon } from "./Glyph";
 
-export type Gk = { phase: "looking" } | { phase: "found"; url: string; number: number } | { phase: "none" } | { phase: "failed"; message: string };
+export type Gk = { phase: "looking" } | { phase: "found"; url: string; number: number; totals: PrTotals | null } | { phase: "none" } | { phase: "failed"; message: string };
 
 const SANDBOX = "RamSuryaCH/revenant-crypt";
 export const isCrypt = (repo: string | null) => !!repo && /(?:^|github\.com\/)ramsuryach\/revenant-crypt(?:\.git)?\/?$/i.test(repo.trim());
@@ -18,9 +19,9 @@ export function useGravekeeper(recipeId: string): Gk {
     let alive = true;
     fetch(`/api/gravekeeper?recipe=${encodeURIComponent(recipeId)}`)
       .then(async (res) => {
-        const j = (await res.json().catch(() => null)) as { pr?: { url: string; number: number } | null; message?: string } | null;
+        const j = (await res.json().catch(() => null)) as { pr?: { url: string; number: number } | null; totals?: unknown; message?: string } | null;
         if (!res.ok) throw new Error(j?.message ?? `Lookup failed (HTTP ${res.status}).`);
-        if (alive) setGk(j?.pr && j.pr.url.startsWith("https://github.com/") ? { phase: "found", url: j.pr.url, number: j.pr.number } : { phase: "none" });
+        if (alive) setGk(j?.pr && j.pr.url.startsWith("https://github.com/") ? { phase: "found", url: j.pr.url, number: j.pr.number, totals: parsePrTotals(j.totals) } : { phase: "none" });
       })
       .catch((e: unknown) => alive && setGk({ phase: "failed", message: e instanceof Error ? e.message : "Lookup failed." }));
     return () => {
@@ -31,7 +32,7 @@ export function useGravekeeper(recipeId: string): Gk {
 }
 
 /** The PR result. Honest in every state: found, not found, lookup failed. */
-export function PrCard({ recipeId, gk, crypt, r, compact = false }: { recipeId: string; gk: Gk; crypt: boolean; r: Resurrection; compact?: boolean }) {
+export function PrCard({ recipeId, gk, crypt, r, scope, compact = false }: { recipeId: string; gk: Gk; crypt: boolean; r: Resurrection; scope: string; compact?: boolean }) {
   const facts = artifactFacts(r);
   const proof = sandboxProof(recipeId);
   return (
@@ -50,18 +51,29 @@ export function PrCard({ recipeId, gk, crypt, r, compact = false }: { recipeId: 
           </a>
           {!compact && (
             <p className="text-[15px] text-mist">
-              {crypt ? "Opened by the Gravekeeper on the sandbox repo. It carries this patch, its Kiro spec and the differential tests." : "The same recipe applied to our sandbox repo. Your scan is a different repo, so use the patch below."}
+              {crypt ? "Opened by the Gravekeeper on the sandbox repo. It carries this patch, its Kiro spec and the differential tests." : "The same recipe applied to our sandbox repo. This is a different repo from the one you scanned, so use the patch below for yours."}
             </p>
           )}
+          <p className="text-[13px] text-dim">Revenant only reads this pull request. Clicking Resurrect does not create it.</p>
         </>
       )}
       {gk.phase === "none" && <p className="text-mist">No open pull request exists for this recipe right now. The patch, spec and tests are ready.</p>}
       {gk.phase === "failed" && <p role="alert" className="text-ember">Could not look up the pull request: {gk.message} The patch still works.</p>}
       <p className="t-evidence text-mist">
-        This patch: <span className="add">+{facts.patch.added}</span> <span className="del">−{facts.patch.removed}</span> in {facts.patch.files} {facts.patch.files === 1 ? "file" : "files"}
-        {proof?.suiteOk && <> · sandbox suite {proof.suitePass} of {proof.suiteTotal} pass</>}
-        {proof?.diffPassed ? <> · {proof.diffPassed} differential tests pass</> : null}
+        Patch to {scope}, source files only: <span className="add">+{facts.patch.added}</span> <span className="del">−{facts.patch.removed}</span> in {facts.patch.files} {facts.patch.files === 1 ? "file" : "files"}
       </p>
+      {gk.phase === "found" && gk.totals && (
+        <p className="t-evidence text-mist">
+          Whole pull request #{gk.number} on GitHub, with its Kiro spec and tests: <span className="add">+{gk.totals.additions}</span> <span className="del">−{gk.totals.deletions}</span> in {gk.totals.files} {gk.totals.files === 1 ? "file" : "files"}
+        </p>
+      )}
+      {proof && (proof.suiteOk || proof.diffPassed) ? (
+        <p className="t-evidence text-mist">
+          Recorded run on the sandbox repo:
+          {proof.suiteOk && <> suite {proof.suitePass} of {proof.suiteTotal} pass</>}
+          {proof.diffPassed ? <>{proof.suiteOk ? " · " : " "}{proof.diffPassed} differential tests pass</> : null}
+        </p>
+      ) : null}
       {proof && !compact && <p className="text-[13px] text-dim">Recorded {proof.date} on {SANDBOX} at {proof.baseSha} by scripts/verify-crypt.mts.</p>}
     </div>
   );
@@ -84,7 +96,7 @@ type SpecPart = "requirements" | "design" | "tasks";
 const TABS = ["diff", "spec", "tests"] as const;
 
 /** PR card, then the patch, spec and tests viewer. */
-export function ResultView({ r, recipeId, crypt }: { r: Resurrection; recipeId: string; crypt: boolean }) {
+export function ResultView({ r, recipeId, crypt, scope }: { r: Resurrection; recipeId: string; crypt: boolean; scope: string }) {
   const gk = useGravekeeper(recipeId);
   const [tab, setTab] = useState<Tab>("diff");
   const [part, setPart] = useState<SpecPart>("requirements");
@@ -115,7 +127,7 @@ export function ResultView({ r, recipeId, crypt }: { r: Resurrection; recipeId: 
 
   return (
     <div className="space-y-5">
-      <PrCard recipeId={recipeId} gk={gk} crypt={crypt} r={r} />
+      <PrCard recipeId={recipeId} gk={gk} crypt={crypt} r={r} scope={scope} />
       <div className="flex flex-wrap items-center gap-2 text-[15px] text-mist">
         <span className="chip">{r.stats.filesChanged} of {r.stats.filesScanned} files change</span>
         <span>{r.package} → {r.replacement}</span>

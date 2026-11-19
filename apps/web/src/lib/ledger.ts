@@ -25,16 +25,31 @@ export function clampAtWord(text: string, max: number): string {
   return `${head}…`;
 }
 
-/** "3 of 3 direct dependencies are dead or dying." */
+/** Headline for a scan. Every number here is derived from the same list the filter bar counts. */
 export function summaryLine(tombs: readonly Tombstone[]): string {
   const direct = tombs.filter((t) => t.direct);
-  const bad = direct.filter((t) => t.status !== "living").length;
   const indirect = tombs.filter((t) => !t.direct);
+  const bad = (l: readonly Tombstone[]) => l.filter((t) => t.status !== "living").length;
+  if (tombs.length > 0 && bad(tombs) === 0) return `${tombs.length} ${tombs.length === 1 ? "package" : "packages"} checked, all alive.`;
   const noun = direct.length === 1 ? "direct dependency is" : "direct dependencies are";
-  const head = direct.length === 0 ? "No direct dependencies found." : `${bad} of ${direct.length} ${noun} dead or dying.`;
+  const head = direct.length === 0 ? "No direct dependencies found." : `${bad(direct)} of ${direct.length} ${noun} dead or dying.`;
   if (indirect.length === 0) return head;
-  const alive = indirect.filter((t) => t.status === "living").length;
-  return `${head} ${indirect.length} indirect packages checked, ${alive} alive.`;
+  const verb = indirect.length === 1 ? "is" : "are";
+  return `${head} ${bad(indirect)} of ${indirect.length} indirect ${indirect.length === 1 ? "package" : "packages"} checked ${verb} dead or dying. ${tombs.length} checked in all.`;
+}
+
+/**
+ * Cut at the last clause boundary (comma, semicolon or " see ") before `max`, closing an open quote,
+ * so a hero epitaph ends on a complete thought. Falls back to a word cut.
+ */
+export function clampAtClause(text: string, max: number): string {
+  const t = text.trim();
+  if (t.length <= max) return t;
+  const head = t.slice(0, max);
+  const cut = Math.max(head.lastIndexOf(", "), head.lastIndexOf("; "), head.lastIndexOf(" see "));
+  if (cut < 20) return clampAtWord(t, max);
+  const clause = head.slice(0, cut).replace(/[\s,;]+$/u, "");
+  return (clause.match(/"/g)?.length ?? 0) % 2 === 1 ? `${clause}"` : clause;
 }
 
 export interface Chip {
