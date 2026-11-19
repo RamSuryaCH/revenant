@@ -44,3 +44,9 @@ An honest record of how Kiro was used to build Revenant. This project was built 
   - 2026-11-19 14:59 UTC: scanned 1 repo, 0 newly dead, reset in dry-run; all three demo PRs still open.
 - **Page check.** Kiro Crew blocks agents from capturing its own dashboard, so the page was checked by rendering the shipped `ui/index.mjs` against the live backend in `apps/crew/scripts/preview.mjs` with Playwright. That is the README screenshot. The in-dashboard page itself was not seen by the agent.
 - **Not verified:** whether the agents can call the MCP tools under the name `@graveyard-watch:revenant` inside a Crew chat.
+
+## 2026-11-19 (round 3b: Ledger of the Dead redesign)
+
+- **Spec first.** `.kiro/specs/graveyard-redesign/` (requirements with EARS criteria, design with mermaid diagrams, traced tasks) and the rewritten `.kiro/steering/design-system.md` were committed before any UI code. Input was an art-direction research note (`DESIGN_DIRECTION.md`, not committed) that critiqued the live site.
+- **Scope.** `apps/web` only; the engine, API routes and data contract are unchanged and no write token is added.
+- Later entries in this section are added as the work lands.
