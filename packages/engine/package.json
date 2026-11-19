@@ -1,0 +1,36 @@
+{
+  "name": "@revenant/engine",
+  "version": "0.1.0",
+  "description": "Revenant engine: scan npm dependency graveyards and resurrect abandoned packages.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
+    "./schema": { "types": "./dist/schema.d.ts", "default": "./dist/schema.js" }
+  },
+  "bin": { "revenant": "./dist/cli.js" },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "sample": "tsx src/cli.ts scan ../../samples/cursed --transitive 12 --out ../../apps/web/public/samples/cursed.scan.json && tsx src/cli.ts resurrect ../../apps/web/public/samples/cursed.scan.json moment --from ../../samples/cursed --out ../../apps/web/public/samples/moment-to-dayjs.json && tsx src/cli.ts resurrect ../../apps/web/public/samples/cursed.scan.json request --from ../../samples/cursed --out ../../apps/web/public/samples/request-to-fetch.json && tsx src/cli.ts resurrect ../../apps/web/public/samples/cursed.scan.json uuid --from ../../samples/cursed --out ../../apps/web/public/samples/uuid3-to-randomuuid.json"
+  },
+  "dependencies": {
+    "diff": "^8.0.2",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/request": "^2.48.12",
+    "dayjs": "^1.11.13",
+    "fast-check": "^4.3.0",
+    "moment": "^2.30.1",
+    "request": "^2.88.2",
+    "tsx": "^4.20.0",
+    "uuid": "3.4.0",
+    "vitest": "^3.2.4"
+  }
+}

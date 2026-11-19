@@ -1,0 +1,1693 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "kind": "path",
+    "ref": "../../samples/cursed"
+  },
+  "ecosystem": "npm",
+  "scannedAt": "2026-11-19T14:08:15.188Z",
+  "tombstones": [
+    {
+      "name": "left-pad",
+      "requested": "^1.3.0",
+      "version": "1.3.0",
+      "direct": true,
+      "status": "dead",
+      "vitality": 0,
+      "epitaphs": [
+        {
+          "kind": "deprecated",
+          "text": "Deprecated: \"use String.prototype.padStart()\"",
+          "evidence": [
+            {
+              "source": "npm",
+              "field": "npm.version.deprecated",
+              "value": "use String.prototype.padStart()",
+              "url": "https://registry.npmjs.org/left-pad/1.3.0"
+            }
+          ]
+        },
+        {
+          "kind": "archived",
+          "text": "Archived on GitHub, last push 2019-04-19",
+          "evidence": [
+            {
+              "source": "github",
+              "field": "github.repos.archived",
+              "value": true,
+              "url": "https://api.github.com/repos/stevemao/left-pad"
+            },
+            {
+              "source": "github",
+              "field": "github.repos.pushed_at",
+              "value": "2019-04-19T14:16:20Z",
+              "url": "https://api.github.com/repos/stevemao/left-pad"
+            }
+          ]
+        },
+        {
+          "kind": "stale-publish",
+          "text": "No publish in 8 years (last 2018-04-09)",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2018-04-09T01:10:45Z"
+            }
+          ]
+        },
+        {
+          "kind": "low-scorecard",
+          "text": "OpenSSF Scorecard 3.9/10",
+          "evidence": [
+            {
+              "source": "scorecard",
+              "field": "scorecard.score",
+              "value": 3.9
+            }
+          ]
+        },
+        {
+          "kind": "successor",
+          "text": "Successor: String.prototype.padStart. left-pad is deprecated; padStart is built in",
+          "evidence": [
+            {
+              "source": "curated",
+              "field": "curated.successors[left-pad]",
+              "value": "String.prototype.padStart"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": {
+        "text": "Cause of death: npm flags 1.3.0 as deprecated (\"use String.prototype.padStart()\"); its repository was archived and made read-only; it went silent on npm after 2018-04-09. Its last recorded commit, on 2019-03-14, read \"Merge pull request #64 from lexjacobs/master\".",
+        "evidence": [
+          {
+            "source": "npm",
+            "field": "npm.version.deprecated",
+            "value": "use String.prototype.padStart()",
+            "url": "https://registry.npmjs.org/left-pad/1.3.0"
+          },
+          {
+            "source": "github",
+            "field": "github.repos.archived",
+            "value": true,
+            "url": "https://api.github.com/repos/stevemao/left-pad"
+          },
+          {
+            "source": "deps.dev",
+            "field": "deps.dev.versions[isDefault].publishedAt",
+            "value": "2018-04-09T01:10:45Z"
+          },
+          {
+            "source": "github",
+            "field": "github.commits[0].commit.message",
+            "value": "Merge pull request #64 from lexjacobs/master",
+            "url": "https://api.github.com/repos/stevemao/left-pad"
+          },
+          {
+            "source": "github",
+            "field": "github.commits[0].commit.committer.date",
+            "value": "2019-03-14T23:18:45Z",
+            "url": "https://api.github.com/repos/stevemao/left-pad"
+          }
+        ]
+      },
+      "successor": {
+        "name": "String.prototype.padStart",
+        "reason": "left-pad is deprecated; padStart is built in",
+        "evidence": [
+          {
+            "source": "curated",
+            "field": "curated.successors[left-pad]",
+            "value": "String.prototype.padStart"
+          }
+        ]
+      },
+      "recipeId": null,
+      "repository": "https://github.com/stevemao/left-pad",
+      "lastPublish": "2018-04-09T01:10:45Z",
+      "vulnerabilityIds": [],
+      "scorecard": 3.9
+    },
+    {
+      "name": "moment",
+      "requested": "^2.19.0",
+      "version": "2.19.0",
+      "direct": true,
+      "status": "dead",
+      "vitality": 0,
+      "epitaphs": [
+        {
+          "kind": "deprecated",
+          "text": "Deprecated: \"Webpack/react-app-scripts crash\"",
+          "evidence": [
+            {
+              "source": "npm",
+              "field": "npm.version.deprecated",
+              "value": "Webpack/react-app-scripts crash",
+              "url": "https://registry.npmjs.org/moment/2.19.0"
+            }
+          ]
+        },
+        {
+          "kind": "vulnerabilities",
+          "text": "3 known vulnerabilities in 2.19.0 (GHSA-446m-mv8f-q348, GHSA-8hfj-j24r-96c4, GHSA-wc69-rhjr-hc9g)",
+          "evidence": [
+            {
+              "source": "osv",
+              "field": "osv.querybatch.results[].vulns[].id",
+              "value": "GHSA-446m-mv8f-q348,GHSA-8hfj-j24r-96c4,GHSA-wc69-rhjr-hc9g"
+            }
+          ]
+        },
+        {
+          "kind": "successor",
+          "text": "Successor: dayjs. moment is in maintenance mode; dayjs has a near-identical API in 2 kB",
+          "evidence": [
+            {
+              "source": "curated",
+              "field": "curated.successors[moment]",
+              "value": "dayjs"
+            }
+          ]
+        },
+        {
+          "kind": "stale-publish",
+          "text": "Maintainers describe the project as legacy / maintenance-only",
+          "evidence": [
+            {
+              "source": "curated",
+              "field": "curated.legacy[moment]",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": {
+        "text": "Cause of death: npm flags 2.19.0 as deprecated (\"Webpack/react-app-scripts crash\"); its maintainers put it into maintenance-only mode; 3 known vulnerabilities remain open for 2.19.0. Its last recorded commit, on 2026-10-08, read \"[bugfix] Bound chooseLocale prefix walk for long locale names (#6458)\".",
+        "evidence": [
+          {
+            "source": "npm",
+            "field": "npm.version.deprecated",
+            "value": "Webpack/react-app-scripts crash",
+            "url": "https://registry.npmjs.org/moment/2.19.0"
+          },
+          {
+            "source": "curated",
+            "field": "curated.legacy[moment]",
+            "value": true
+          },
+          {
+            "source": "osv",
+            "field": "osv.querybatch.results[].vulns[].id",
+            "value": "GHSA-446m-mv8f-q348,GHSA-8hfj-j24r-96c4,GHSA-wc69-rhjr-hc9g"
+          },
+          {
+            "source": "github",
+            "field": "github.commits[0].commit.message",
+            "value": "[bugfix] Bound chooseLocale prefix walk for long locale names (#6458)",
+            "url": "https://api.github.com/repos/moment/moment"
+          },
+          {
+            "source": "github",
+            "field": "github.commits[0].commit.committer.date",
+            "value": "2026-10-08T16:26:53Z",
+            "url": "https://api.github.com/repos/moment/moment"
+          }
+        ]
+      },
+      "successor": {
+        "name": "dayjs",
+        "reason": "moment is in maintenance mode; dayjs has a near-identical API in 2 kB",
+        "evidence": [
+          {
+            "source": "curated",
+            "field": "curated.successors[moment]",
+            "value": "dayjs"
+          }
+        ]
+      },
+      "recipeId": "moment-to-dayjs",
+      "repository": "https://github.com/moment/moment",
+      "lastPublish": "2026-09-15T01:07:26Z",
+      "vulnerabilityIds": [
+        "GHSA-446m-mv8f-q348",
+        "GHSA-8hfj-j24r-96c4",
+        "GHSA-wc69-rhjr-hc9g"
+      ],
+      "scorecard": 6.1
+    },
+    {
+      "name": "node-sass",
+      "requested": "^4.14.1",
+      "version": "4.14.1",
+      "direct": true,
+      "status": "dead",
+      "vitality": 0,
+      "epitaphs": [
+        {
+          "kind": "deprecated",
+          "text": "Deprecated: \"Node Sass is no longer supported. Please use `sass` or `sass-embedded` instead.\"",
+          "evidence": [
+            {
+              "source": "npm",
+              "field": "npm.version.deprecated",
+              "value": "Node Sass is no longer supported. Please use `sass` or `sass-embedded` instead.",
+              "url": "https://registry.npmjs.org/node-sass/4.14.1"
+            }
+          ]
+        },
+        {
+          "kind": "archived",
+          "text": "Archived on GitHub, last push 2024-07-24",
+          "evidence": [
+            {
+              "source": "github",
+              "field": "github.repos.archived",
+              "value": true,
+              "url": "https://api.github.com/repos/sass/node-sass"
+            },
+            {
+              "source": "github",
+              "field": "github.repos.pushed_at",
+              "value": "2024-07-24T21:59:31Z",
+              "url": "https://api.github.com/repos/sass/node-sass"
+            }
+          ]
+        },
+        {
+          "kind": "stale-publish",
+          "text": "No publish in 3 years (last 2023-05-20)",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2023-05-20T06:03:42Z"
+            }
+          ]
+        },
+        {
+          "kind": "vulnerabilities",
+          "text": "1 known vulnerability in 4.14.1 (GHSA-r8f7-9pfq-mjmv)",
+          "evidence": [
+            {
+              "source": "osv",
+              "field": "osv.querybatch.results[].vulns[].id",
+              "value": "GHSA-r8f7-9pfq-mjmv"
+            }
+          ]
+        },
+        {
+          "kind": "low-scorecard",
+          "text": "OpenSSF Scorecard 3.2/10",
+          "evidence": [
+            {
+              "source": "scorecard",
+              "field": "scorecard.score",
+              "value": 3.2
+            }
+          ]
+        },
+        {
+          "kind": "successor",
+          "text": "Successor: sass. node-sass (LibSass) is deprecated in favour of Dart Sass",
+          "evidence": [
+            {
+              "source": "curated",
+              "field": "curated.successors[node-sass]",
+              "value": "sass"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": {
+        "text": "Cause of death: npm flags 4.14.1 as deprecated (\"Node Sass is no longer supported. Please use `sass` or `sass-embedded` instead.\"); its repository was archived and made read-only; it went silent on npm after 2023-05-20; 1 known vulnerability remains open for 4.14.1. Its last recorded commit, on 2024-07-24, read \"Mark end-of-life\".",
+        "evidence": [
+          {
+            "source": "npm",
+            "field": "npm.version.deprecated",
+            "value": "Node Sass is no longer supported. Please use `sass` or `sass-embedded` instead.",
+            "url": "https://registry.npmjs.org/node-sass/4.14.1"
+          },
+          {
+            "source": "github",
+            "field": "github.repos.archived",
+            "value": true,
+            "url": "https://api.github.com/repos/sass/node-sass"
+          },
+          {
+            "source": "deps.dev",
+            "field": "deps.dev.versions[isDefault].publishedAt",
+            "value": "2023-05-20T06:03:42Z"
+          },
+          {
+            "source": "osv",
+            "field": "osv.querybatch.results[].vulns[].id",
+            "value": "GHSA-r8f7-9pfq-mjmv"
+          },
+          {
+            "source": "github",
+            "field": "github.commits[0].commit.message",
+            "value": "Mark end-of-life",
+            "url": "https://api.github.com/repos/sass/node-sass"
+          },
+          {
+            "source": "github",
+            "field": "github.commits[0].commit.committer.date",
+            "value": "2024-07-24T21:59:18Z",
+            "url": "https://api.github.com/repos/sass/node-sass"
+          }
+        ]
+      },
+      "successor": {
+        "name": "sass",
+        "reason": "node-sass (LibSass) is deprecated in favour of Dart Sass",
+        "evidence": [
+          {
+            "source": "curated",
+            "field": "curated.successors[node-sass]",
+            "value": "sass"
+          }
+        ]
+      },
+      "recipeId": null,
+      "repository": "https://github.com/sass/node-sass",
+      "lastPublish": "2023-05-20T06:03:42Z",
+      "vulnerabilityIds": [
+        "GHSA-r8f7-9pfq-mjmv"
+      ],
+      "scorecard": 3.2
+    },
+    {
+      "name": "node-uuid",
+      "requested": "^1.4.8",
+      "version": "1.4.8",
+      "direct": true,
+      "status": "dead",
+      "vitality": 0,
+      "epitaphs": [
+        {
+          "kind": "deprecated",
+          "text": "Deprecated: \"Use uuid module instead\"",
+          "evidence": [
+            {
+              "source": "npm",
+              "field": "npm.version.deprecated",
+              "value": "Use uuid module instead",
+              "url": "https://registry.npmjs.org/node-uuid/1.4.8"
+            }
+          ]
+        },
+        {
+          "kind": "archived",
+          "text": "Archived on GitHub, last push 2020-01-16",
+          "evidence": [
+            {
+              "source": "github",
+              "field": "github.repos.archived",
+              "value": true,
+              "url": "https://api.github.com/repos/broofa/node-uuid"
+            },
+            {
+              "source": "github",
+              "field": "github.repos.pushed_at",
+              "value": "2020-01-16T17:28:04Z",
+              "url": "https://api.github.com/repos/broofa/node-uuid"
+            }
+          ]
+        },
+        {
+          "kind": "stale-publish",
+          "text": "No publish in 9 years (last 2017-03-22)",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2017-03-22T00:30:38Z"
+            }
+          ]
+        },
+        {
+          "kind": "low-scorecard",
+          "text": "OpenSSF Scorecard 2.0/10",
+          "evidence": [
+            {
+              "source": "scorecard",
+              "field": "scorecard.score",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "kind": "successor",
+          "text": "Successor: crypto.randomUUID. node-uuid was renamed to uuid and is deprecated",
+          "evidence": [
+            {
+              "source": "curated",
+              "field": "curated.successors[node-uuid]",
+              "value": "crypto.randomUUID"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": {
+        "text": "Cause of death: npm flags 1.4.8 as deprecated (\"Use uuid module instead\"); its repository was archived and made read-only; it went silent on npm after 2017-03-22. Its last recorded commit, on 2020-01-16, read \"Move along\".",
+        "evidence": [
+          {
+            "source": "npm",
+            "field": "npm.version.deprecated",
+            "value": "Use uuid module instead",
+            "url": "https://registry.npmjs.org/node-uuid/1.4.8"
+          },
+          {
+            "source": "github",
+            "field": "github.repos.archived",
+            "value": true,
+            "url": "https://api.github.com/repos/broofa/node-uuid"
+          },
+          {
+            "source": "deps.dev",
+            "field": "deps.dev.versions[isDefault].publishedAt",
+            "value": "2017-03-22T00:30:38Z"
+          },
+          {
+            "source": "github",
+            "field": "github.commits[0].commit.message",
+            "value": "Move along",
+            "url": "https://api.github.com/repos/broofa/node-uuid"
+          },
+          {
+            "source": "github",
+            "field": "github.commits[0].commit.committer.date",
+            "value": "2020-01-16T17:28:03Z",
+            "url": "https://api.github.com/repos/broofa/node-uuid"
+          }
+        ]
+      },
+      "successor": {
+        "name": "crypto.randomUUID",
+        "reason": "node-uuid was renamed to uuid and is deprecated",
+        "evidence": [
+          {
+            "source": "curated",
+            "field": "curated.successors[node-uuid]",
+            "value": "crypto.randomUUID"
+          }
+        ]
+      },
+      "recipeId": null,
+      "repository": "https://github.com/broofa/node-uuid",
+      "lastPublish": "2017-03-22T00:30:38Z",
+      "vulnerabilityIds": [],
+      "scorecard": 2
+    },
+    {
+      "name": "request",
+      "requested": "^2.88.2",
+      "version": "2.88.2",
+      "direct": true,
+      "status": "dead",
+      "vitality": 0,
+      "epitaphs": [
+        {
+          "kind": "deprecated",
+          "text": "Deprecated: \"request has been deprecated, see https://github.com/request/request/issues/3142\"",
+          "evidence": [
+            {
+              "source": "npm",
+              "field": "npm.version.deprecated",
+              "value": "request has been deprecated, see https://github.com/request/request/issues/3142",
+              "url": "https://registry.npmjs.org/request/2.88.2"
+            }
+          ]
+        },
+        {
+          "kind": "stale-publish",
+          "text": "No publish in 6 years (last 2020-02-11)",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2020-02-11T16:35:36Z"
+            }
+          ]
+        },
+        {
+          "kind": "vulnerabilities",
+          "text": "1 known vulnerability in 2.88.2 (GHSA-p8p7-x288-28g6)",
+          "evidence": [
+            {
+              "source": "osv",
+              "field": "osv.querybatch.results[].vulns[].id",
+              "value": "GHSA-p8p7-x288-28g6"
+            }
+          ]
+        },
+        {
+          "kind": "low-scorecard",
+          "text": "OpenSSF Scorecard 3.6/10",
+          "evidence": [
+            {
+              "source": "scorecard",
+              "field": "scorecard.score",
+              "value": 3.6
+            }
+          ]
+        },
+        {
+          "kind": "successor",
+          "text": "Successor: native fetch. request was deprecated in 2020; fetch ships in Node 18+",
+          "evidence": [
+            {
+              "source": "curated",
+              "field": "curated.successors[request]",
+              "value": "native fetch"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": {
+        "text": "Cause of death: npm flags 2.88.2 as deprecated (\"request has been deprecated, see https://github.com/request/request/issues/3142\"); it went silent on npm after 2020-02-11; 1 known vulnerability remains open for 2.88.2. Its last recorded commit, on 2020-02-11, read \"README: typo in deprecation message (#3268)\".",
+        "evidence": [
+          {
+            "source": "npm",
+            "field": "npm.version.deprecated",
+            "value": "request has been deprecated, see https://github.com/request/request/issues/3142",
+            "url": "https://registry.npmjs.org/request/2.88.2"
+          },
+          {
+            "source": "deps.dev",
+            "field": "deps.dev.versions[isDefault].publishedAt",
+            "value": "2020-02-11T16:35:36Z"
+          },
+          {
+            "source": "osv",
+            "field": "osv.querybatch.results[].vulns[].id",
+            "value": "GHSA-p8p7-x288-28g6"
+          },
+          {
+            "source": "github",
+            "field": "github.commits[0].commit.message",
+            "value": "README: typo in deprecation message (#3268)",
+            "url": "https://api.github.com/repos/request/request"
+          },
+          {
+            "source": "github",
+            "field": "github.commits[0].commit.committer.date",
+            "value": "2020-02-11T23:39:46Z",
+            "url": "https://api.github.com/repos/request/request"
+          }
+        ]
+      },
+      "successor": {
+        "name": "native fetch",
+        "reason": "request was deprecated in 2020; fetch ships in Node 18+",
+        "evidence": [
+          {
+            "source": "curated",
+            "field": "curated.successors[request]",
+            "value": "native fetch"
+          }
+        ]
+      },
+      "recipeId": "request-to-fetch",
+      "repository": "https://github.com/request/request",
+      "lastPublish": "2020-02-11T16:35:36Z",
+      "vulnerabilityIds": [
+        "GHSA-p8p7-x288-28g6"
+      ],
+      "scorecard": 3.6
+    },
+    {
+      "name": "tslint",
+      "requested": "^5.20.1",
+      "version": "5.20.1",
+      "direct": true,
+      "status": "dead",
+      "vitality": 0,
+      "epitaphs": [
+        {
+          "kind": "deprecated",
+          "text": "Marked deprecated on deps.dev",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].isDeprecated",
+              "value": true
+            }
+          ]
+        },
+        {
+          "kind": "archived",
+          "text": "Archived on GitHub, last push 2021-03-25",
+          "evidence": [
+            {
+              "source": "github",
+              "field": "github.repos.archived",
+              "value": true,
+              "url": "https://api.github.com/repos/palantir/tslint"
+            },
+            {
+              "source": "github",
+              "field": "github.repos.pushed_at",
+              "value": "2021-03-25T15:41:38Z",
+              "url": "https://api.github.com/repos/palantir/tslint"
+            }
+          ]
+        },
+        {
+          "kind": "stale-publish",
+          "text": "No publish in 6 years (last 2020-07-31)",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2020-07-31T17:25:07Z"
+            }
+          ]
+        },
+        {
+          "kind": "low-scorecard",
+          "text": "OpenSSF Scorecard 3.2/10",
+          "evidence": [
+            {
+              "source": "scorecard",
+              "field": "scorecard.score",
+              "value": 3.2
+            }
+          ]
+        },
+        {
+          "kind": "successor",
+          "text": "Successor: typescript-eslint. TSLint was deprecated in 2019 in favour of ESLint",
+          "evidence": [
+            {
+              "source": "curated",
+              "field": "curated.successors[tslint]",
+              "value": "typescript-eslint"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": {
+        "text": "Cause of death: its repository was archived and made read-only; it went silent on npm after 2020-07-31. Its last recorded commit, on 2021-03-25, read \"docs(README): point to typescript-eslint roadmap\".",
+        "evidence": [
+          {
+            "source": "github",
+            "field": "github.repos.archived",
+            "value": true,
+            "url": "https://api.github.com/repos/palantir/tslint"
+          },
+          {
+            "source": "deps.dev",
+            "field": "deps.dev.versions[isDefault].publishedAt",
+            "value": "2020-07-31T17:25:07Z"
+          },
+          {
+            "source": "github",
+            "field": "github.commits[0].commit.message",
+            "value": "docs(README): point to typescript-eslint roadmap",
+            "url": "https://api.github.com/repos/palantir/tslint"
+          },
+          {
+            "source": "github",
+            "field": "github.commits[0].commit.committer.date",
+            "value": "2021-03-25T15:41:38Z",
+            "url": "https://api.github.com/repos/palantir/tslint"
+          }
+        ]
+      },
+      "successor": {
+        "name": "typescript-eslint",
+        "reason": "TSLint was deprecated in 2019 in favour of ESLint",
+        "evidence": [
+          {
+            "source": "curated",
+            "field": "curated.successors[tslint]",
+            "value": "typescript-eslint"
+          }
+        ]
+      },
+      "recipeId": null,
+      "repository": "https://github.com/palantir/tslint",
+      "lastPublish": "2020-07-31T17:25:07Z",
+      "vulnerabilityIds": [],
+      "scorecard": 3.2
+    },
+    {
+      "name": "request-promise",
+      "requested": "^4.2.6",
+      "version": "4.2.6",
+      "direct": true,
+      "status": "dead",
+      "vitality": 5,
+      "epitaphs": [
+        {
+          "kind": "deprecated",
+          "text": "Deprecated: \"request-promise has been deprecated because it extends the now deprecated request package, see https://github.com/request/request/issues/31…\"",
+          "evidence": [
+            {
+              "source": "npm",
+              "field": "npm.version.deprecated",
+              "value": "request-promise has been deprecated because it extends the now deprecated request package, see https://github.com/request/request/issues/3142",
+              "url": "https://registry.npmjs.org/request-promise/4.2.6"
+            }
+          ]
+        },
+        {
+          "kind": "stale-publish",
+          "text": "No publish in 6 years (last 2020-07-22)",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2020-07-22T01:41:07Z"
+            }
+          ]
+        },
+        {
+          "kind": "low-scorecard",
+          "text": "OpenSSF Scorecard 2.3/10",
+          "evidence": [
+            {
+              "source": "scorecard",
+              "field": "scorecard.score",
+              "value": 2.3
+            }
+          ]
+        },
+        {
+          "kind": "successor",
+          "text": "Successor: native fetch. request-promise depends on the deprecated request",
+          "evidence": [
+            {
+              "source": "curated",
+              "field": "curated.successors[request-promise]",
+              "value": "native fetch"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": {
+        "text": "Cause of death: npm flags 4.2.6 as deprecated (\"request-promise has been deprecated because it extends the now deprecated request package, see http…\"); it went silent on npm after 2020-07-22. Its last recorded commit, on 2020-07-22, read \"Version 4.2.6\".",
+        "evidence": [
+          {
+            "source": "npm",
+            "field": "npm.version.deprecated",
+            "value": "request-promise has been deprecated because it extends the now deprecated request package, see https://github.com/request/request/issues/3142",
+            "url": "https://registry.npmjs.org/request-promise/4.2.6"
+          },
+          {
+            "source": "deps.dev",
+            "field": "deps.dev.versions[isDefault].publishedAt",
+            "value": "2020-07-22T01:41:07Z"
+          },
+          {
+            "source": "github",
+            "field": "github.commits[0].commit.message",
+            "value": "Version 4.2.6",
+            "url": "https://api.github.com/repos/request/request-promise"
+          },
+          {
+            "source": "github",
+            "field": "github.commits[0].commit.committer.date",
+            "value": "2020-07-22T01:36:14Z",
+            "url": "https://api.github.com/repos/request/request-promise"
+          }
+        ]
+      },
+      "successor": {
+        "name": "native fetch",
+        "reason": "request-promise depends on the deprecated request",
+        "evidence": [
+          {
+            "source": "curated",
+            "field": "curated.successors[request-promise]",
+            "value": "native fetch"
+          }
+        ]
+      },
+      "recipeId": null,
+      "repository": "https://github.com/request/request-promise",
+      "lastPublish": "2020-07-22T01:41:07Z",
+      "vulnerabilityIds": [],
+      "scorecard": 2.3
+    },
+    {
+      "name": "uuid",
+      "requested": "^3.4.0",
+      "version": "3.4.0",
+      "direct": true,
+      "status": "dead",
+      "vitality": 40,
+      "epitaphs": [
+        {
+          "kind": "deprecated",
+          "text": "Deprecated: \"uuid@10 and below is no longer supported. For ESM codebases, update to uuid@latest. For CommonJS codebases, use uuid@11 (but be aware this…\"",
+          "evidence": [
+            {
+              "source": "npm",
+              "field": "npm.version.deprecated",
+              "value": "uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).",
+              "url": "https://registry.npmjs.org/uuid/3.4.0"
+            }
+          ]
+        },
+        {
+          "kind": "vulnerabilities",
+          "text": "1 known vulnerability in 3.4.0 (GHSA-w5hq-g745-h8pq)",
+          "evidence": [
+            {
+              "source": "osv",
+              "field": "osv.querybatch.results[].vulns[].id",
+              "value": "GHSA-w5hq-g745-h8pq"
+            }
+          ]
+        },
+        {
+          "kind": "successor",
+          "text": "Successor: crypto.randomUUID. uuid@3 is unsupported; randomUUID is built into Node 14.17+ and browsers",
+          "evidence": [
+            {
+              "source": "curated",
+              "field": "curated.successors[uuid]",
+              "value": "crypto.randomUUID"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": {
+        "text": "Cause of death: npm flags 3.4.0 as deprecated (\"uuid@10 and below is no longer supported. For ESM codebases, update to uuid@latest. For CommonJS co…\"); 1 known vulnerability remains open for 3.4.0. Its last recorded commit, on 2026-11-01, read \"docs: fix stale v1, v6, v7 and CLI details in README (#991)\".",
+        "evidence": [
+          {
+            "source": "npm",
+            "field": "npm.version.deprecated",
+            "value": "uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).",
+            "url": "https://registry.npmjs.org/uuid/3.4.0"
+          },
+          {
+            "source": "osv",
+            "field": "osv.querybatch.results[].vulns[].id",
+            "value": "GHSA-w5hq-g745-h8pq"
+          },
+          {
+            "source": "github",
+            "field": "github.commits[0].commit.message",
+            "value": "docs: fix stale v1, v6, v7 and CLI details in README (#991)",
+            "url": "https://api.github.com/repos/uuidjs/uuid"
+          },
+          {
+            "source": "github",
+            "field": "github.commits[0].commit.committer.date",
+            "value": "2026-11-01T16:11:16Z",
+            "url": "https://api.github.com/repos/uuidjs/uuid"
+          }
+        ]
+      },
+      "successor": {
+        "name": "crypto.randomUUID",
+        "reason": "uuid@3 is unsupported; randomUUID is built into Node 14.17+ and browsers",
+        "evidence": [
+          {
+            "source": "curated",
+            "field": "curated.successors[uuid]",
+            "value": "crypto.randomUUID"
+          }
+        ]
+      },
+      "recipeId": "uuid3-to-randomuuid",
+      "repository": "https://github.com/uuidjs/uuid",
+      "lastPublish": "2026-10-10T00:30:19Z",
+      "vulnerabilityIds": [
+        "GHSA-w5hq-g745-h8pq"
+      ],
+      "scorecard": 4.4
+    },
+    {
+      "name": "bower",
+      "requested": "^1.8.14",
+      "version": "1.8.14",
+      "direct": true,
+      "status": "dying",
+      "vitality": 65,
+      "epitaphs": [
+        {
+          "kind": "stale-publish",
+          "text": "No publish in 4 years (last 2022-03-14)",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2022-03-14T15:41:33Z"
+            }
+          ]
+        },
+        {
+          "kind": "successor",
+          "text": "Successor: npm. bower recommends migrating to npm/yarn",
+          "evidence": [
+            {
+              "source": "curated",
+              "field": "curated.successors[bower]",
+              "value": "npm"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": {
+        "text": "Cause of death: it went silent on npm after 2022-03-14.",
+        "evidence": [
+          {
+            "source": "deps.dev",
+            "field": "deps.dev.versions[isDefault].publishedAt",
+            "value": "2022-03-14T15:41:33Z"
+          }
+        ]
+      },
+      "successor": {
+        "name": "npm",
+        "reason": "bower recommends migrating to npm/yarn",
+        "evidence": [
+          {
+            "source": "curated",
+            "field": "curated.successors[bower]",
+            "value": "npm"
+          }
+        ]
+      },
+      "recipeId": null,
+      "repository": null,
+      "lastPublish": "2022-03-14T15:41:33Z",
+      "vulnerabilityIds": [],
+      "scorecard": null
+    },
+    {
+      "name": "lodash",
+      "requested": "^4.17.21",
+      "version": "4.17.21",
+      "direct": true,
+      "status": "living",
+      "vitality": 80,
+      "epitaphs": [
+        {
+          "kind": "healthy",
+          "text": "Alive: last publish 2026-04-01",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2026-04-01T21:01:20Z"
+            }
+          ]
+        },
+        {
+          "kind": "vulnerabilities",
+          "text": "2 known vulnerabilities in 4.17.21 (GHSA-r5fr-rjxr-66jc, GHSA-xxjr-mmjv-4gpg)",
+          "evidence": [
+            {
+              "source": "osv",
+              "field": "osv.querybatch.results[].vulns[].id",
+              "value": "GHSA-r5fr-rjxr-66jc,GHSA-xxjr-mmjv-4gpg"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": null,
+      "successor": null,
+      "recipeId": null,
+      "repository": "https://github.com/lodash/lodash",
+      "lastPublish": "2026-04-01T21:01:20Z",
+      "vulnerabilityIds": [
+        "GHSA-r5fr-rjxr-66jc",
+        "GHSA-xxjr-mmjv-4gpg"
+      ],
+      "scorecard": 6.6
+    },
+    {
+      "name": "zod",
+      "requested": "^3.24.0",
+      "version": "3.24.0",
+      "direct": true,
+      "status": "living",
+      "vitality": 90,
+      "epitaphs": [
+        {
+          "kind": "healthy",
+          "text": "Alive: last publish 2026-10-12",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2026-10-12T16:29:37Z"
+            }
+          ]
+        },
+        {
+          "kind": "vulnerabilities",
+          "text": "1 known vulnerability in 3.24.0 (GHSA-mrhx-c7xc-m3w5)",
+          "evidence": [
+            {
+              "source": "osv",
+              "field": "osv.querybatch.results[].vulns[].id",
+              "value": "GHSA-mrhx-c7xc-m3w5"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": null,
+      "successor": null,
+      "recipeId": null,
+      "repository": "https://github.com/colinhacks/zod",
+      "lastPublish": "2026-10-12T16:29:37Z",
+      "vulnerabilityIds": [
+        "GHSA-mrhx-c7xc-m3w5"
+      ],
+      "scorecard": 5.5
+    },
+    {
+      "name": "express",
+      "requested": "^4.21.2",
+      "version": "4.21.2",
+      "direct": true,
+      "status": "living",
+      "vitality": 100,
+      "epitaphs": [
+        {
+          "kind": "healthy",
+          "text": "Alive: last publish 2026-10-09",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2026-10-09T12:56:54Z"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": null,
+      "successor": null,
+      "recipeId": null,
+      "repository": "https://github.com/expressjs/express",
+      "lastPublish": "2026-10-09T12:56:54Z",
+      "vulnerabilityIds": [],
+      "scorecard": 8.9
+    },
+    {
+      "name": "tar",
+      "requested": "2.2.2",
+      "version": "2.2.2",
+      "direct": false,
+      "status": "dead",
+      "vitality": 20,
+      "epitaphs": [
+        {
+          "kind": "deprecated",
+          "text": "Deprecated: \"Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version…\"",
+          "evidence": [
+            {
+              "source": "npm",
+              "field": "npm.version.deprecated",
+              "value": "Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me",
+              "url": "https://registry.npmjs.org/tar/2.2.2"
+            }
+          ]
+        },
+        {
+          "kind": "vulnerabilities",
+          "text": "15 known vulnerabilities in 2.2.2 (GHSA-23hp-3jrh-7fpw, GHSA-34x7-hfp2-rc4v, GHSA-3jfq-g458-7qm9, …)",
+          "evidence": [
+            {
+              "source": "osv",
+              "field": "osv.querybatch.results[].vulns[].id",
+              "value": "GHSA-23hp-3jrh-7fpw,GHSA-34x7-hfp2-rc4v,GHSA-3jfq-g458-7qm9,GHSA-5955-9wpr-37jh,GHSA-83g3-92jg-28cx,GHSA-8qq5-rm4j-mr97,GHSA-8x88-c5mf-7j5w,GHSA-9ppj-qmqm-q256,GHSA-f5x3-32g6-xq36,GHSA-gvwx-54wh-qm9j,GHSA-qffp-2rhf-9h96,GHSA-r292-9mhp-454m,GHSA-r6q2-hw4h-h46w,GHSA-vmf3-w455-68vh,GHSA-w8wr-v893-vjvp"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": {
+        "text": "Cause of death: npm flags 2.2.2 as deprecated (\"Old versions of tar are not supported, and contain widely publicized security vulnerabilities, whic…\"); 15 known vulnerabilities remain open for 2.2.2.",
+        "evidence": [
+          {
+            "source": "npm",
+            "field": "npm.version.deprecated",
+            "value": "Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me",
+            "url": "https://registry.npmjs.org/tar/2.2.2"
+          },
+          {
+            "source": "osv",
+            "field": "osv.querybatch.results[].vulns[].id",
+            "value": "GHSA-23hp-3jrh-7fpw,GHSA-34x7-hfp2-rc4v,GHSA-3jfq-g458-7qm9,GHSA-5955-9wpr-37jh,GHSA-83g3-92jg-28cx,GHSA-8qq5-rm4j-mr97,GHSA-8x88-c5mf-7j5w,GHSA-9ppj-qmqm-q256,GHSA-f5x3-32g6-xq36,GHSA-gvwx-54wh-qm9j,GHSA-qffp-2rhf-9h96,GHSA-r292-9mhp-454m,GHSA-r6q2-hw4h-h46w,GHSA-vmf3-w455-68vh,GHSA-w8wr-v893-vjvp"
+          }
+        ]
+      },
+      "successor": null,
+      "recipeId": null,
+      "repository": "https://github.com/isaacs/node-tar",
+      "lastPublish": "2026-11-11T18:11:10Z",
+      "vulnerabilityIds": [
+        "GHSA-23hp-3jrh-7fpw",
+        "GHSA-34x7-hfp2-rc4v",
+        "GHSA-3jfq-g458-7qm9",
+        "GHSA-5955-9wpr-37jh",
+        "GHSA-83g3-92jg-28cx",
+        "GHSA-8qq5-rm4j-mr97",
+        "GHSA-8x88-c5mf-7j5w",
+        "GHSA-9ppj-qmqm-q256",
+        "GHSA-f5x3-32g6-xq36",
+        "GHSA-gvwx-54wh-qm9j",
+        "GHSA-qffp-2rhf-9h96",
+        "GHSA-r292-9mhp-454m",
+        "GHSA-r6q2-hw4h-h46w",
+        "GHSA-vmf3-w455-68vh",
+        "GHSA-w8wr-v893-vjvp"
+      ],
+      "scorecard": 5.2
+    },
+    {
+      "name": "scss-tokenizer",
+      "requested": "0.2.3",
+      "version": "0.2.3",
+      "direct": false,
+      "status": "dying",
+      "vitality": 45,
+      "epitaphs": [
+        {
+          "kind": "stale-publish",
+          "text": "No publish in 4 years (last 2022-08-10)",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2022-08-10T01:29:35Z"
+            }
+          ]
+        },
+        {
+          "kind": "vulnerabilities",
+          "text": "1 known vulnerability in 0.2.3 (GHSA-7mwh-4pqv-wmr8)",
+          "evidence": [
+            {
+              "source": "osv",
+              "field": "osv.querybatch.results[].vulns[].id",
+              "value": "GHSA-7mwh-4pqv-wmr8"
+            }
+          ]
+        },
+        {
+          "kind": "low-scorecard",
+          "text": "OpenSSF Scorecard 2.1/10",
+          "evidence": [
+            {
+              "source": "scorecard",
+              "field": "scorecard.score",
+              "value": 2.1
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": {
+        "text": "Cause of death: it went silent on npm after 2022-08-10; 1 known vulnerability remains open for 0.2.3.",
+        "evidence": [
+          {
+            "source": "deps.dev",
+            "field": "deps.dev.versions[isDefault].publishedAt",
+            "value": "2022-08-10T01:29:35Z"
+          },
+          {
+            "source": "osv",
+            "field": "osv.querybatch.results[].vulns[].id",
+            "value": "GHSA-7mwh-4pqv-wmr8"
+          }
+        ]
+      },
+      "successor": null,
+      "recipeId": null,
+      "repository": "https://github.com/sasstools/scss-tokenizer",
+      "lastPublish": "2022-08-10T01:29:35Z",
+      "vulnerabilityIds": [
+        "GHSA-7mwh-4pqv-wmr8"
+      ],
+      "scorecard": 2.1
+    },
+    {
+      "name": "escape-string-regexp",
+      "requested": "1.0.5",
+      "version": "1.0.5",
+      "direct": false,
+      "status": "dying",
+      "vitality": 55,
+      "epitaphs": [
+        {
+          "kind": "stale-publish",
+          "text": "No publish in 5 years (last 2021-04-17)",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2021-04-17T15:45:50Z"
+            }
+          ]
+        },
+        {
+          "kind": "low-scorecard",
+          "text": "OpenSSF Scorecard 3.6/10",
+          "evidence": [
+            {
+              "source": "scorecard",
+              "field": "scorecard.score",
+              "value": 3.6
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": {
+        "text": "Cause of death: it went silent on npm after 2021-04-17.",
+        "evidence": [
+          {
+            "source": "deps.dev",
+            "field": "deps.dev.versions[isDefault].publishedAt",
+            "value": "2021-04-17T15:45:50Z"
+          }
+        ]
+      },
+      "successor": null,
+      "recipeId": null,
+      "repository": "https://github.com/sindresorhus/escape-string-regexp",
+      "lastPublish": "2021-04-17T15:45:50Z",
+      "vulnerabilityIds": [],
+      "scorecard": 3.6
+    },
+    {
+      "name": "trim-newlines",
+      "requested": "1.0.0",
+      "version": "1.0.0",
+      "direct": false,
+      "status": "dying",
+      "vitality": 60,
+      "epitaphs": [
+        {
+          "kind": "stale-publish",
+          "text": "No publish in 3 years (last 2023-03-20)",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2023-03-20T17:36:52Z"
+            }
+          ]
+        },
+        {
+          "kind": "vulnerabilities",
+          "text": "1 known vulnerability in 1.0.0 (GHSA-7p7h-4mm5-852v)",
+          "evidence": [
+            {
+              "source": "osv",
+              "field": "osv.querybatch.results[].vulns[].id",
+              "value": "GHSA-7p7h-4mm5-852v"
+            }
+          ]
+        },
+        {
+          "kind": "low-scorecard",
+          "text": "OpenSSF Scorecard 3.6/10",
+          "evidence": [
+            {
+              "source": "scorecard",
+              "field": "scorecard.score",
+              "value": 3.6
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": {
+        "text": "Cause of death: it went silent on npm after 2023-03-20; 1 known vulnerability remains open for 1.0.0.",
+        "evidence": [
+          {
+            "source": "deps.dev",
+            "field": "deps.dev.versions[isDefault].publishedAt",
+            "value": "2023-03-20T17:36:52Z"
+          },
+          {
+            "source": "osv",
+            "field": "osv.querybatch.results[].vulns[].id",
+            "value": "GHSA-7p7h-4mm5-852v"
+          }
+        ]
+      },
+      "successor": null,
+      "recipeId": null,
+      "repository": "https://github.com/sindresorhus/trim-newlines",
+      "lastPublish": "2023-03-20T17:36:52Z",
+      "vulnerabilityIds": [
+        "GHSA-7p7h-4mm5-852v"
+      ],
+      "scorecard": 3.6
+    },
+    {
+      "name": "minimatch",
+      "requested": "3.0.8",
+      "version": "3.0.8",
+      "direct": false,
+      "status": "dying",
+      "vitality": 70,
+      "epitaphs": [
+        {
+          "kind": "vulnerabilities",
+          "text": "3 known vulnerabilities in 3.0.8 (GHSA-23c5-xmqv-rm74, GHSA-3ppc-4f35-3m26, GHSA-7r86-cg39-jmmj)",
+          "evidence": [
+            {
+              "source": "osv",
+              "field": "osv.querybatch.results[].vulns[].id",
+              "value": "GHSA-23c5-xmqv-rm74,GHSA-3ppc-4f35-3m26,GHSA-7r86-cg39-jmmj"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": {
+        "text": "Cause of death: 3 known vulnerabilities remain open for 3.0.8.",
+        "evidence": [
+          {
+            "source": "osv",
+            "field": "osv.querybatch.results[].vulns[].id",
+            "value": "GHSA-23c5-xmqv-rm74,GHSA-3ppc-4f35-3m26,GHSA-7r86-cg39-jmmj"
+          }
+        ]
+      },
+      "successor": null,
+      "recipeId": null,
+      "repository": "https://github.com/isaacs/minimatch",
+      "lastPublish": "2026-11-16T21:52:08Z",
+      "vulnerabilityIds": [
+        "GHSA-23c5-xmqv-rm74",
+        "GHSA-3ppc-4f35-3m26",
+        "GHSA-7r86-cg39-jmmj"
+      ],
+      "scorecard": 6.2
+    },
+    {
+      "name": "form-data",
+      "requested": "2.3.3",
+      "version": "2.3.3",
+      "direct": false,
+      "status": "living",
+      "vitality": 80,
+      "epitaphs": [
+        {
+          "kind": "healthy",
+          "text": "Alive: last publish 2026-06-12",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2026-06-12T17:37:53Z"
+            }
+          ]
+        },
+        {
+          "kind": "vulnerabilities",
+          "text": "2 known vulnerabilities in 2.3.3 (GHSA-fjxv-7rqg-78g4, GHSA-hmw2-7cc7-3qxx)",
+          "evidence": [
+            {
+              "source": "osv",
+              "field": "osv.querybatch.results[].vulns[].id",
+              "value": "GHSA-fjxv-7rqg-78g4,GHSA-hmw2-7cc7-3qxx"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": null,
+      "successor": null,
+      "recipeId": null,
+      "repository": "https://github.com/form-data/form-data",
+      "lastPublish": "2026-06-12T17:37:53Z",
+      "vulnerabilityIds": [
+        "GHSA-fjxv-7rqg-78g4",
+        "GHSA-hmw2-7cc7-3qxx"
+      ],
+      "scorecard": 4.2
+    },
+    {
+      "name": "qs",
+      "requested": "6.5.5",
+      "version": "6.5.5",
+      "direct": false,
+      "status": "living",
+      "vitality": 80,
+      "epitaphs": [
+        {
+          "kind": "healthy",
+          "text": "Alive: last publish 2026-10-28",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2026-10-28T23:41:47Z"
+            }
+          ]
+        },
+        {
+          "kind": "vulnerabilities",
+          "text": "2 known vulnerabilities in 6.5.5 (GHSA-4mjr-xmp4-gh2g, GHSA-6rw7-vpxm-498p)",
+          "evidence": [
+            {
+              "source": "osv",
+              "field": "osv.querybatch.results[].vulns[].id",
+              "value": "GHSA-4mjr-xmp4-gh2g,GHSA-6rw7-vpxm-498p"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": null,
+      "successor": null,
+      "recipeId": null,
+      "repository": "https://github.com/ljharb/qs",
+      "lastPublish": "2026-10-28T23:41:47Z",
+      "vulnerabilityIds": [
+        "GHSA-4mjr-xmp4-gh2g",
+        "GHSA-6rw7-vpxm-498p"
+      ],
+      "scorecard": 5.8
+    },
+    {
+      "name": "has-ansi",
+      "requested": "2.0.0",
+      "version": "2.0.0",
+      "direct": false,
+      "status": "living",
+      "vitality": 82,
+      "epitaphs": [
+        {
+          "kind": "healthy",
+          "text": "Alive: last publish 2025-09-08",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2025-09-08T15:08:53Z"
+            }
+          ]
+        },
+        {
+          "kind": "stale-publish",
+          "text": "No publish in 1 year (last 2025-09-08)",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2025-09-08T15:08:53Z"
+            }
+          ]
+        },
+        {
+          "kind": "low-scorecard",
+          "text": "OpenSSF Scorecard 3.5/10",
+          "evidence": [
+            {
+              "source": "scorecard",
+              "field": "scorecard.score",
+              "value": 3.5
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": null,
+      "successor": null,
+      "recipeId": null,
+      "repository": "https://github.com/sindresorhus/has-ansi",
+      "lastPublish": "2025-09-08T15:08:53Z",
+      "vulnerabilityIds": [],
+      "scorecard": 3.5
+    },
+    {
+      "name": "ansi-styles",
+      "requested": "3.2.1",
+      "version": "3.2.1",
+      "direct": false,
+      "status": "living",
+      "vitality": 90,
+      "epitaphs": [
+        {
+          "kind": "healthy",
+          "text": "Alive: last publish 2026-07-26",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2026-07-26T14:57:36Z"
+            }
+          ]
+        },
+        {
+          "kind": "low-scorecard",
+          "text": "OpenSSF Scorecard 3.7/10",
+          "evidence": [
+            {
+              "source": "scorecard",
+              "field": "scorecard.score",
+              "value": 3.7
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": null,
+      "successor": null,
+      "recipeId": null,
+      "repository": "https://github.com/chalk/ansi-styles",
+      "lastPublish": "2026-07-26T14:57:36Z",
+      "vulnerabilityIds": [],
+      "scorecard": 3.7
+    },
+    {
+      "name": "strip-ansi",
+      "requested": "5.2.0",
+      "version": "5.2.0",
+      "direct": false,
+      "status": "living",
+      "vitality": 90,
+      "epitaphs": [
+        {
+          "kind": "healthy",
+          "text": "Alive: last publish 2026-02-26",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2026-02-26T13:51:11Z"
+            }
+          ]
+        },
+        {
+          "kind": "low-scorecard",
+          "text": "OpenSSF Scorecard 3.6/10",
+          "evidence": [
+            {
+              "source": "scorecard",
+              "field": "scorecard.score",
+              "value": 3.6
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": null,
+      "successor": null,
+      "recipeId": null,
+      "repository": "https://github.com/chalk/strip-ansi",
+      "lastPublish": "2026-02-26T13:51:11Z",
+      "vulnerabilityIds": [],
+      "scorecard": 3.6
+    },
+    {
+      "name": "supports-color",
+      "requested": "5.5.0",
+      "version": "5.5.0",
+      "direct": false,
+      "status": "living",
+      "vitality": 90,
+      "epitaphs": [
+        {
+          "kind": "healthy",
+          "text": "Alive: last publish 2026-07-26",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2026-07-26T15:13:36Z"
+            }
+          ]
+        },
+        {
+          "kind": "low-scorecard",
+          "text": "OpenSSF Scorecard 3.7/10",
+          "evidence": [
+            {
+              "source": "scorecard",
+              "field": "scorecard.score",
+              "value": 3.7
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": null,
+      "successor": null,
+      "recipeId": null,
+      "repository": "https://github.com/chalk/supports-color",
+      "lastPublish": "2026-07-26T15:13:36Z",
+      "vulnerabilityIds": [],
+      "scorecard": 3.7
+    },
+    {
+      "name": "tough-cookie",
+      "requested": "2.5.0",
+      "version": "2.5.0",
+      "direct": false,
+      "status": "living",
+      "vitality": 90,
+      "epitaphs": [
+        {
+          "kind": "healthy",
+          "text": "Alive: last publish 2026-11-06",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2026-11-06T17:26:01Z"
+            }
+          ]
+        },
+        {
+          "kind": "vulnerabilities",
+          "text": "1 known vulnerability in 2.5.0 (GHSA-72xf-g2v4-qvf3)",
+          "evidence": [
+            {
+              "source": "osv",
+              "field": "osv.querybatch.results[].vulns[].id",
+              "value": "GHSA-72xf-g2v4-qvf3"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": null,
+      "successor": null,
+      "recipeId": null,
+      "repository": "https://github.com/salesforce/tough-cookie",
+      "lastPublish": "2026-11-06T17:26:01Z",
+      "vulnerabilityIds": [
+        "GHSA-72xf-g2v4-qvf3"
+      ],
+      "scorecard": 6.6
+    }
+  ],
+  "summary": {
+    "total": 24,
+    "dead": 9,
+    "dying": 5,
+    "living": 10,
+    "graveyardScore": 75
+  },
+  "notes": [
+    "Transitive tree has 199 packages; analysed the 12 with the most known vulnerabilities (fan-out cap)."
+  ],
+  "truncated": false,
+  "fromCache": false
+}
