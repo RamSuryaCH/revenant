@@ -1,39 +1,39 @@
 # Tasks: Graveyard redesign
 
-- [ ] 1. Tokens and type
-  - [ ] 1.1 Colour, type, spacing and motion tokens in `globals.css`; fonts in `layout.tsx`
-  - [ ] 1.2 `lib/contrast.ts`, `lib/tokens.ts` and a contrast test for every pair
-  - [ ] 1.3 No text under 12 px; `edge` borders on inputs
+- [x] 1. Tokens and type
+  - [x] 1.1 Colour, type, spacing and motion tokens in `globals.css`; fonts in `layout.tsx`
+  - [x] 1.2 `lib/contrast.ts`, `lib/tokens.ts` and a contrast test for every pair
+  - [x] 1.3 No text under 12 px; `edge` borders on inputs
   - _Requirements: R8.1, R8.2, R8.5_
-- [ ] 2. Pure helpers and tests
-  - [ ] 2.1 `lib/ledger.ts`: `clampAtWord`, `summaryLine`, `sourceChips`, `evidenceRows`, patch line counts
-  - [ ] 2.2 Tests: every rendered claim has a source and field; hero data equals the sample
+- [x] 2. Pure helpers and tests
+  - [x] 2.1 `lib/ledger.ts`: `clampAtWord`, `summaryLine`, `sourceChips`, `evidenceRows`, patch line counts
+  - [x] 2.2 Tests: every rendered claim has a source and field; hero data equals the sample
   - _Requirements: R2.2, R2.3, R3.1, R3.2, R3.3, R8.6_
-- [ ] 3. Hero
-  - [ ] 3.1 Remove the moon and the lantern scene; new headline, combined scan control, readable links
-  - [ ] 3.2 Three bundled tombstones with chips, ledger counter
-  - [ ] 3.3 Mobile snap strip at 390 and 360
+- [x] 3. Hero
+  - [x] 3.1 Remove the moon and the lantern scene; new headline, combined scan control, readable links
+  - [x] 3.2 Three bundled tombstones with chips, ledger counter
+  - [x] 3.3 Mobile snap strip at 390 and 360
   - _Requirements: R1.1 to R1.6_
-- [ ] 4. Graveyard hierarchy
-  - [ ] 4.1 Stone cards for dead and dying, alive ledger, filter, summary line
-  - [ ] 4.2 Long repo name wrap; scrollWidth check at 360 and 390
+- [x] 4. Graveyard hierarchy
+  - [x] 4.1 Stone cards for dead and dying, alive ledger, filter, summary line
+  - [x] 4.2 Long repo name wrap; scrollWidth check at 360 and 390
   - _Requirements: R2.1 to R2.6, R3.1_
-- [ ] 5. Drawer and evidence table
-  - [ ] 5.1 Dialog as drawer and bottom sheet, focus return, sticky action bar
-  - [ ] 5.2 Evidence table with linked sources, successor card, no-recipe state
+- [x] 5. Drawer and evidence table
+  - [x] 5.1 Dialog as drawer and bottom sheet, focus return, sticky action bar
+  - [x] 5.2 Evidence table with linked sources, successor card, no-recipe state
   - _Requirements: R3.2, R3.4, R4.1 to R4.4_
-- [ ] 6. Resurrect sequence
-  - [ ] 6.1 WAAPI timeline, real data, hold and failure paths, skip
-  - [ ] 6.2 Reduced-motion step-through and in-page toggle
-  - [ ] 6.3 PR card and patch, spec, tests viewer
+- [x] 6. Resurrect sequence
+  - [x] 6.1 WAAPI timeline, real data, hold and failure paths, skip
+  - [x] 6.2 Reduced-motion step-through and in-page toggle
+  - [x] 6.3 PR card and patch, spec, tests viewer
   - _Requirements: R5.1 to R5.6, R6.1 to R6.3_
-- [ ] 7. Scan progress
-  - [ ] 7.1 Source ledger, plots that fill, aria-live
+- [x] 7. Scan progress
+  - [x] 7.1 Source ledger, plots that fill, aria-live
   - _Requirements: R7.1, R7.2_
-- [ ] 8. Verification
-  - [ ] 8.1 typecheck, lint, all tests, build
-  - [ ] 8.2 Lighthouse mobile, contrast, keyboard, reduced motion, 360 and 390
-  - [ ] 8.3 Before and after screenshots in `docs/`, README images
+- [x] 8. Verification
+  - [x] 8.1 typecheck, lint, all tests, build
+  - [x] 8.2 Lighthouse mobile, contrast, keyboard, reduced motion, 360 and 390
+  - [x] 8.3 Before and after screenshots in `docs/`, README images
   - [ ] 8.4 Self-review against the direction document
   - [ ] 8.5 PR, preview check, squash-merge, production check
   - _Requirements: R8.1 to R8.6_

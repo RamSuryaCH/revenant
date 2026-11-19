@@ -396,7 +396,7 @@ dialog.stage {
   padding: 0;
   border: 0;
   color: var(--color-bone);
-  background: rgb(7 8 12 / 0.96);
+  background: radial-gradient(ellipse 70% 60% at 50% 45%, #10131b, var(--color-ink));
   overflow: hidden;
 }
 dialog.stage[open] { display: flex; align-items: center; justify-content: center; }
@@ -474,3 +474,5 @@ html[data-reduce="true"] .stone:hover, html[data-reduce="true"] .stone:focus-vis
 .lift { animation: lift var(--dur-panel) var(--ease-out) both; animation-delay: calc(var(--i, 0) * 70ms); }
 .snap > li.tombrise { animation-name: lift; animation-duration: var(--dur-scene); }
 @media (prefers-reduced-motion: reduce) { .lift { animation: none !important; } }
+
+@media (max-width: 479px) { .seg button { padding: 0 10px; gap: 6px; font-size: 13px; } }

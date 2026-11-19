@@ -9,9 +9,9 @@
 [#2 request to native fetch](https://github.com/RamSuryaCH/revenant-crypt/pull/2) ·
 [#3 uuid@3 to crypto.randomUUID](https://github.com/RamSuryaCH/revenant-crypt/pull/3)
 
-![Revenant landing page: moonlit graveyard and the Exhume button](docs/hero.png)
+![Revenant landing page: headline, scan control and three real tombstones with their sources](docs/redesign/after-desktop-hero.png)
 
-Revenant maps a repository's npm dependencies as a graveyard. Dead and dying packages become **tombstones** with epitaphs and a cause of death; healthy ones are **living lanterns**. Every sentence cites the API field it came from, so nothing is invented. For three curated migrations, **Resurrect** produces:
+Revenant maps a repository's npm dependencies as a graveyard. Dead and dying packages become **tombstones** with epitaphs and a cause of death; healthy ones collapse into a quiet **alive ledger**. Every sentence cites the API field it came from, so nothing is invented. For three curated migrations, **Resurrect** produces:
 
 1. a **Kiro spec** (EARS requirements, mermaid design, traceable tasks),
 2. a **unified diff** you can download as a `.patch` and `git apply`,
@@ -19,11 +19,11 @@ Revenant maps a repository's npm dependencies as a graveyard. Dead and dying pac
 
 Built for Kiroween 2026, category **Resurrection**.
 
-![From landing page to tombstones to a resurrection with its live pull request](docs/resurrection.gif)
+![The Resurrect moment ends on the real pull request on the sandbox repo](docs/redesign/after-resurrect-pr.png)
 
 | Graveyard | Resurrection |
 |---|---|
-| ![Tombstones for dead and dying dependencies of the cached sample](docs/graveyard.png) | ![moment tombstone opened, with the live Gravekeeper pull request link and the patch](docs/resurrect.png) |
+| ![Tombstones for dead and dying dependencies of the cached sample](docs/redesign/after-desktop-graveyard.png) | ![request tombstone opened: cause of death and the evidence table, one row per cited field](docs/redesign/after-desktop-drawer.png) |
 
 ## 30-second quickstart
 
