@@ -44,3 +44,12 @@ An honest record of how Kiro was used to build Revenant. This project was built 
   - 2026-11-19 14:59 UTC: scanned 1 repo, 0 newly dead, reset in dry-run; all three demo PRs still open.
 - **Page check.** Kiro Crew blocks agents from capturing its own dashboard, so the page was checked by rendering the shipped `ui/index.mjs` against the live backend in `apps/crew/scripts/preview.mjs` with Playwright. That is the README screenshot. The in-dashboard page itself was not seen by the agent.
 - **Not verified:** whether the agents can call the MCP tools under the name `@graveyard-watch:revenant` inside a Crew chat.
+
+## 2026-11-19 (round 3b: Ledger of the Dead redesign)
+
+- **Spec first.** `.kiro/specs/graveyard-redesign/` (requirements with EARS criteria, design with mermaid diagrams, traced tasks) and the rewritten `.kiro/steering/design-system.md` were committed before any UI code. Input was an art-direction research note (`DESIGN_DIRECTION.md`, not committed) that critiqued the live site.
+- **Scope.** `apps/web` only; the engine, API routes and data contract are unchanged and no write token is added.
+- **Built to the spec.** New tokens and OFL fonts, a hero that shows three real cited tombstones, stone cards for the dead and a collapsed ledger for the living, an evidence-table drawer, and one Web Animations API timeline for Resurrect fed by the real response. Contrast is a unit test over every token pair (`apps/web/tests/contrast.test.ts`), and a second test asserts every rendered claim keeps its source and field.
+- **Measured, not assumed.** Lighthouse mobile first scored 88 (LCP 2.9 s, TBT 320 ms) on a local production build. Making the hero entrance transform-only and lazy-loading the graveyard and drawer lifted it to 96 with TBT 10 ms. The default simulated LCP stayed at 2.8 s locally while the Chrome-throttled run reported 1.5 s; both are recorded in PR #5.
+- **A bug found by looking.** On a 390 px screen the first hero build clipped the scan box because a grid column had no `min-width: 0`. `overflow-x: clip` hid it from the scrollWidth check, so the check alone was not enough; a screenshot caught it.
+- **Not done by Kiro.** The Vercel preview sits behind deployment protection, so the preview could not be opened in an unauthenticated browser; production is checked after the merge.

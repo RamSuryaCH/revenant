@@ -8,7 +8,7 @@
   "scripts": {
     "typecheck": "pnpm -r typecheck",
     "lint": "eslint .",
-    "test": "pnpm --filter @revenant/engine test && pnpm --filter @revenant/mcp test && pnpm --filter @revenant/crew test",
+    "test": "pnpm --filter @revenant/engine test && pnpm --filter @revenant/web test && pnpm --filter @revenant/mcp test && pnpm --filter @revenant/crew test",
     "build": "pnpm --filter @revenant/engine build && pnpm --filter @revenant/web build",
     "sample": "pnpm --filter @revenant/engine run sample",
     "embed": "node scripts/embed-recipes.mjs"
