@@ -64,4 +64,11 @@ describe("patchCounts and artifactFacts", () => {
     expect(f.spec.dir).toContain(r.spec.slug);
     expect(f.tests.path).toBe(r.tests.path);
   });
+  it("test count on the stage matches the recorded differential run", () => {
+    const want: Record<string, number> = { "moment-to-dayjs": 7, "request-to-fetch": 6, "uuid3-to-randomuuid": 4 };
+    for (const [id, n] of Object.entries(want)) {
+      const r = JSON.parse(readFileSync(new URL(`../public/samples/${id}.json`, import.meta.url), "utf8"));
+      expect(artifactFacts(r).tests.properties).toBe(n);
+    }
+  });
 });

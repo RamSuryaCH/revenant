@@ -27,9 +27,9 @@ Built for Kiroween 2026, category **Resurrection**.
 
 ## 30-second quickstart
 
-1. Open [revenant-beta.vercel.app](https://revenant-beta.vercel.app) and press **Exhume a cursed repo**.
-2. Click the `moment` tombstone, then **Resurrect moment**: read the patch, the Kiro spec and the tests, or download the `.patch`.
-3. Press **Haunt the sandbox repo**, open any curated tombstone and follow the link to its live pull request.
+1. Open [revenant-beta.vercel.app](https://revenant-beta.vercel.app) and press **Haunt the sandbox repo** (cached, under a second). Or press **or scan bower/bower** for a live scan.
+2. Click the `moment` tombstone, then **Resurrect moment**: the stage shows the patch, the Kiro spec and the tests, and ends on the real pull request on the sandbox repo. You can also download the `.patch`.
+3. Open any other curated tombstone (`request`, `uuid`) and follow the link to its live pull request.
 
 ## What it does
 

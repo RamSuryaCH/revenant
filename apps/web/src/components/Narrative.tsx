@@ -58,7 +58,7 @@ export function Narrative() {
             <div className="beat-copy">
               <span className="beat-n" aria-hidden="true">03</span>
               <h3 className="t-title">Resurrect</h3>
-              <p>One click turns the epitaph into a Kiro spec, a patch and property tests. On the sandbox repo the result is a real pull request.</p>
+              <p>One click shows the Kiro spec, the patch and the property tests for the epitaph. On the sandbox repo it ends on the real pull request it became.</p>
             </div>
             <figure className="artifact prshot">
               <p className="t-label text-ember">Recorded run on the sandbox repo</p>

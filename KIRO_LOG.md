@@ -11,7 +11,7 @@ An honest record of how Kiro was used to build Revenant. This project was built 
   - `schema-regenerate-sample`: schema, tombstone or scoring change runs `pnpm sample` and the schema validation test.
   - `recipe-change-run-pbt`: a recipe, shim or differential test change re-embeds the files and runs all recipe properties.
   - `spec-traceability-check`: an agent prompt that checks requirement ids against task citations when a spec changes.
-- **Agents (`.kiro/agents`).** `medium` (writes specs from evidence), `necromancer` (applies recipes and runs differential tests), `gravekeeper` (re-scans and diffs). The spec generator in `packages/engine/src/recipes/spec.ts` implements the Medium's output format in code; the agent files describe the same contract for Kiro to use.
+- **Agents (`.kiro/agents`).** `medium` (writes specs from evidence), `necromancer` (applies recipes and runs differential tests), `gravekeeper` (verifies a recipe against the sandbox and opens or reuses its pull request; it does not re-scan). The spec generator in `packages/engine/src/recipes/spec.ts` implements the Medium's output format in code; the agent files describe the same contract for Kiro to use.
 - **Property-based testing.** fast-check drives three kinds of tests: scoring invariants, evidence equality, and differential old-versus-new tests for each recipe against the real libraries (moment/dayjs, request/fetch shim, uuid@3/randomUUID).
 - **Known gaps.** The hooks have been authored but only the commands they run were exercised by hand, not through the Kiro hook runner. The AI-written plan for uncurated packages is not built.
 - **Tasks checked off as code landed.** The engine, recipes and graveyard UI task lists were ticked after the matching code and tests existed (UI and mocked-fetch scan tests landed after the specs were written, so those tasks were genuinely open when the specs were committed). Lighthouse on the deployed landing: performance 100, accessibility 100, best practices 100.
@@ -75,3 +75,7 @@ An honest record of how Kiro was used to build Revenant. This project was built 
 
 - **Spec first.** `.kiro/specs/final-polish/` (EARS requirements, design, traced tasks) was committed before any code, from the independent judge-style review `qa-final` (P1-1 to P1-3, P2-1 to P2-8; not committed).
 - **Honest copy.** The hero and share image said one click raises a pull request while the Resurrect card said it does not. Both now say a click shows the spec, the patch, the tests and the real pull request it became.
+- **Resurrect stage.** The crack no longer runs through the stone's text, focus moves to Close when the stage opens, and the stage's test count is now read from the recipe's test file (7, 6 and 4), matching the recorded differential runs. A unit test pins the three counts.
+- **Hero.** The three links sit on two deliberate rows at 390 px, and the desktop hero no longer forces a full-height band.
+- **Design docs added after the fact** for `mcp-server` and `crew-app`, each with one diagram, written from the code as built.
+- **Measured on prod.** Lighthouse 13.6.0, mobile, headless, one run on the live URL (2026-11-19): performance 100, accessibility 100, best practices 100, SEO 100.

@@ -83,6 +83,7 @@ export function ResurrectSequence(props: Props) {
   const [step, setStep] = useState(0);
   const gk = useGravekeeper(recipeId);
   const retry = useRef<HTMLButtonElement>(null);
+  const closeBtn = useRef<HTMLButtonElement>(null);
 
   // Keyboard users land on "Try again" when an attempt fails.
   useEffect(() => {
@@ -107,6 +108,7 @@ export function ResurrectSequence(props: Props) {
   useEffect(() => {
     const d = dlg.current;
     if (d && !d.open) d.showModal();
+    closeBtn.current?.focus();
   }, []);
 
   const fetchOnce = useCallback(async () => {
@@ -259,7 +261,7 @@ export function ResurrectSequence(props: Props) {
     >
       <div className="stage-skip">
         {!reduce && phase === "playing" && <button type="button" className="btn-ghost" onClick={() => skip.current()}>Skip</button>}
-        <button type="button" className="btn-ghost" onClick={close}>Close</button>
+        <button ref={closeBtn} type="button" className="btn-ghost" onClick={close}>Close</button>
       </div>
       <h2 id="stage-title" className="sr-only">Resurrecting {t.name}</h2>
       <p role="status" aria-live="polite" className="sr-only">{caption}</p>
@@ -270,7 +272,7 @@ export function ResurrectSequence(props: Props) {
           <div ref={stone} className="big-stone" style={{ opacity: 0 }}>
             <div ref={glow} className="glow" style={{ opacity: 0 }} aria-hidden="true" />
             <svg className="crackline" viewBox="0 0 300 400" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-              <path ref={crack} d="M150 20 L138 90 L162 150 L130 220 L158 280 L140 340 L150 400" pathLength={1} strokeDasharray={1} strokeDashoffset={1} fill="none" stroke="#0b0e16" strokeWidth="3" strokeLinejoin="round" />
+              <path ref={crack} d="M150 262 L138 296 L162 322 L132 354 L158 380 L146 400" pathLength={1} strokeDasharray={1} strokeDashoffset={1} fill="none" stroke="#0b0e16" strokeWidth="3" strokeLinejoin="round" />
             </svg>
             <div className="names">
               <span className="t-label" style={{ color: "var(--color-stone-text)" }}>Here lies</span>
@@ -284,7 +286,7 @@ export function ResurrectSequence(props: Props) {
               {[
                 { k: "Patch", v: facts ? <><span className="num add">+<span className="count" data-count={facts.patch.added} aria-label={String(facts.patch.added)} /></span> <span className="num del">−<span className="count" data-count={facts.patch.removed} aria-label={String(facts.patch.removed)} /></span> in {facts.patch.files} {facts.patch.files === 1 ? "file" : "files"}</> : "…" },
                 { k: "Kiro spec", v: facts ? <>{facts.spec.files.join(", ")} in <span className="num">{facts.spec.dir}</span></> : "…" },
-                { k: "Tests", v: facts ? <><span className="count num" data-count={facts.tests.properties} aria-label={String(facts.tests.properties)} /> differential properties in <span className="num">{facts.tests.path}</span></> : "…" },
+                { k: "Tests", v: facts ? <><span className="count num" data-count={facts.tests.properties} aria-label={String(facts.tests.properties)} /> differential tests in <span className="num">{facts.tests.path}</span></> : "…" },
               ].map((c, i) => (
                 <div key={c.k} ref={(el) => { cardEls.current[i] = el; }} className="acard">
                   <span className="t-label k">{c.k}</span>
@@ -310,7 +312,7 @@ export function ResurrectSequence(props: Props) {
                 <ul className="list-disc space-y-1 pl-5">
                   <li>Patch: +{facts.patch.added} −{facts.patch.removed} in {facts.patch.files} {facts.patch.files === 1 ? "file" : "files"}</li>
                   <li>Kiro spec: {facts.spec.files.join(", ")} in {facts.spec.dir}</li>
-                  <li>Tests: {facts.tests.properties} differential properties in {facts.tests.path}</li>
+                  <li>Tests: {facts.tests.properties} differential tests in {facts.tests.path}</li>
                 </ul>
               ) : <p>{error ?? "Waiting for the response."}</p>)}
               {step === 4 && (r ? <PrCard recipeId={recipeId} gk={gk} crypt={crypt} r={r} scope={scope} /> : <p>{error ?? "Waiting for the response."}</p>)}
