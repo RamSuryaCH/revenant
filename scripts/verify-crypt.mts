@@ -50,10 +50,11 @@ for (const id of Object.keys(RECIPES)) {
   sh("npm", ["install", "--no-save", "--no-audit", "--no-fund", ...deps], dir);
   const d = sh("npx", ["vitest", "run", RECIPES[id]!.testFile.path], dir);
   console.log(id, "npm test:", t.ok, "differential:", d.ok);
+  const scrub = (s: string) => s.split(root).join("<sandbox>");
   (result.recipes as Record<string, unknown>)[id] = {
     filesChanged: r.files.map((f) => f.path),
-    npmTest: { ok: t.ok, summary: summary(t.out) || tail(t.out, 15) },
-    differential: { ok: d.ok, command: `npm install --no-save ${deps.join(" ")} && npx vitest run ${RECIPES[id]!.testFile.path}`, output: tail(stripVTControlCharacters(d.out), 14) },
+    npmTest: { ok: t.ok, summary: scrub(summary(t.out) || tail(t.out, 15)) },
+    differential: { ok: d.ok, command: `npm install --no-save ${deps.join(" ")} && npx vitest run ${RECIPES[id]!.testFile.path}`, output: scrub(tail(stripVTControlCharacters(d.out), 14)) },
   };
 }
 mkdirSync("apps/web/src/data", { recursive: true });
