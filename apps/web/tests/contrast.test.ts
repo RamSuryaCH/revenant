@@ -16,7 +16,7 @@ describe("colour tokens", () => {
   });
 
   it("uses no font size below 12px in the stylesheet or components", () => {
-    const files = ["../src/app/globals.css", "../src/components/App.tsx", "../src/components/Hero.tsx", "../src/components/Stone.tsx", "../src/components/Graveyard.tsx", "../src/components/Drawer.tsx", "../src/components/ResurrectSequence.tsx", "../src/components/PrCard.tsx"];
+    const files = ["../src/app/globals.css", "../src/components/App.tsx", "../src/components/Hero.tsx", "../src/components/Stone.tsx", "../src/components/Graveyard.tsx", "../src/components/Drawer.tsx", "../src/components/ResurrectSequence.tsx", "../src/components/PrCard.tsx", "../src/components/Narrative.tsx", "../src/components/StoneArt.tsx"];
     for (const f of files) {
       const src = readFileSync(new URL(f, import.meta.url), "utf8");
       for (const m of src.matchAll(/text-\[(\d+(?:\.\d+)?)px\]|font-size:\s*(\d+(?:\.\d+)?)px/g)) {

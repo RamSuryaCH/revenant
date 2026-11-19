@@ -42,8 +42,8 @@ export function Hero({ url, setUrl, busy, onScan, onSandbox, onExample, onSample
         </span>
       </nav>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-[1280px] grid-cols-[minmax(0,1fr)] gap-4 sm:gap-10 px-[var(--pad)] pb-8 pt-4 lg:grid-cols-12 lg:items-center lg:gap-8 lg:pb-12 lg:pt-8">
-        <div className="min-w-0 lg:col-span-7">
+      <div className="relative z-10 mx-auto grid w-full max-w-[1280px] grid-cols-[minmax(0,1fr)] gap-4 sm:gap-10 px-[var(--pad)] pb-8 pt-4 lg:grid-cols-12 lg:items-center lg:gap-10 lg:pb-12 lg:pt-8">
+        <div className="min-w-0 lg:col-span-6">
           <p className="t-label lift text-moon" style={{ ["--i" as string]: 0 }}>Kiroween 2026 / Resurrection</p>
           <h1 className="t-display lift mt-4 max-w-[14ch] sm:max-w-none" style={{ ["--i" as string]: 1 }}>Your dependencies have a graveyard.</h1>
           <p className="lift mt-4 max-w-[52ch] text-base sm:mt-5 sm:text-[17px] leading-relaxed text-mist" style={{ ["--i" as string]: 3 }}>
@@ -100,7 +100,7 @@ export function Hero({ url, setUrl, busy, onScan, onSandbox, onExample, onSample
           {error && <p role="alert" className="mt-4 max-w-[560px] rounded-xl border border-ember-deep bg-ember/10 px-4 py-3 text-[15px]">{error}</p>}
         </div>
 
-        <div className="min-w-0 lg:col-span-5">
+        <div className="min-w-0 lg:col-span-6">
           <p className="t-label mb-2 text-dim">Three of the dead, with their sources</p>
           <ul className="snap" aria-label="Example tombstones from the cached sample">
             {HERO_STONES.map((t, i) => (

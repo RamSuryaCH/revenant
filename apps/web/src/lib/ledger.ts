@@ -1,5 +1,18 @@
 import type { Evidence, Resurrection, Tombstone } from "@revenant/engine";
 
+/**
+ * The text an epitaph is shown with. The engine says "Marked deprecated on deps.dev" for the field
+ * `deps.dev.versions[isDefault].isDeprecated`, which is about the latest release, not the scanned one.
+ * The field and source are untouched; only the sentence is made exact.
+ */
+export function displayEpitaph(e: { text: string; evidence: readonly { field: string }[] } | undefined): string {
+  if (!e) return "";
+  if (e.text === "Marked deprecated on deps.dev" && e.evidence.some((x) => x.field === "deps.dev.versions[isDefault].isDeprecated")) {
+    return "The latest release on deps.dev is marked deprecated";
+  }
+  return e.text;
+}
+
 export const SOURCE_LABEL: Record<string, string> = {
   npm: "npm registry",
   "deps.dev": "deps.dev",
@@ -89,7 +102,7 @@ export interface EvidenceRow {
 export function evidenceRows(t: Tombstone): EvidenceRow[] {
   const rows: EvidenceRow[] = [];
   if (t.causeOfDeath) rows.push({ group: "cause", claim: t.causeOfDeath.text.replace(/^Cause of death: /, ""), chips: t.causeOfDeath.evidence.map(chipOf) });
-  for (const e of t.epitaphs) rows.push({ group: "epitaph", claim: e.text, chips: e.evidence.map(chipOf) });
+  for (const e of t.epitaphs) rows.push({ group: "epitaph", claim: displayEpitaph(e), chips: e.evidence.map(chipOf) });
   if (t.successor) rows.push({ group: "successor", claim: `${t.successor.name}: ${t.successor.reason}`, chips: t.successor.evidence.map(chipOf) });
   return rows;
 }
