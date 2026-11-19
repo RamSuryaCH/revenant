@@ -5,7 +5,7 @@
     "ref": "../../samples/cursed"
   },
   "ecosystem": "npm",
-  "scannedAt": "2026-11-19T14:08:15.188Z",
+  "scannedAt": "2026-11-19T14:19:10.939Z",
   "tombstones": [
     {
       "name": "left-pad",
@@ -185,7 +185,7 @@
         }
       ],
       "causeOfDeath": {
-        "text": "Cause of death: npm flags 2.19.0 as deprecated (\"Webpack/react-app-scripts crash\"); its maintainers put it into maintenance-only mode; 3 known vulnerabilities remain open for 2.19.0. Its last recorded commit, on 2026-10-08, read \"[bugfix] Bound chooseLocale prefix walk for long locale names (#6458)\".",
+        "text": "Cause of death: npm flags 2.19.0 as deprecated (\"Webpack/react-app-scripts crash\"); its maintainers put it into maintenance-only mode; 3 known vulnerabilities remain open for 2.19.0.",
         "evidence": [
           {
             "source": "npm",
@@ -202,18 +202,6 @@
             "source": "osv",
             "field": "osv.querybatch.results[].vulns[].id",
             "value": "GHSA-446m-mv8f-q348,GHSA-8hfj-j24r-96c4,GHSA-wc69-rhjr-hc9g"
-          },
-          {
-            "source": "github",
-            "field": "github.commits[0].commit.message",
-            "value": "[bugfix] Bound chooseLocale prefix walk for long locale names (#6458)",
-            "url": "https://api.github.com/repos/moment/moment"
-          },
-          {
-            "source": "github",
-            "field": "github.commits[0].commit.committer.date",
-            "value": "2026-10-08T16:26:53Z",
-            "url": "https://api.github.com/repos/moment/moment"
           }
         ]
       },
@@ -878,7 +866,7 @@
         }
       ],
       "causeOfDeath": {
-        "text": "Cause of death: npm flags 3.4.0 as deprecated (\"uuid@10 and below is no longer supported. For ESM codebases, update to uuid@latest. For CommonJS co…\"); 1 known vulnerability remains open for 3.4.0. Its last recorded commit, on 2026-11-01, read \"docs: fix stale v1, v6, v7 and CLI details in README (#991)\".",
+        "text": "Cause of death: npm flags 3.4.0 as deprecated (\"uuid@10 and below is no longer supported. For ESM codebases, update to uuid@latest. For CommonJS co…\"); 1 known vulnerability remains open for 3.4.0.",
         "evidence": [
           {
             "source": "npm",
@@ -890,18 +878,6 @@
             "source": "osv",
             "field": "osv.querybatch.results[].vulns[].id",
             "value": "GHSA-w5hq-g745-h8pq"
-          },
-          {
-            "source": "github",
-            "field": "github.commits[0].commit.message",
-            "value": "docs: fix stale v1, v6, v7 and CLI details in README (#991)",
-            "url": "https://api.github.com/repos/uuidjs/uuid"
-          },
-          {
-            "source": "github",
-            "field": "github.commits[0].commit.committer.date",
-            "value": "2026-11-01T16:11:16Z",
-            "url": "https://api.github.com/repos/uuidjs/uuid"
           }
         ]
       },
@@ -1231,52 +1207,52 @@
       "scorecard": 2.1
     },
     {
-      "name": "escape-string-regexp",
-      "requested": "1.0.5",
-      "version": "1.0.5",
+      "name": "bytes",
+      "requested": "3.1.2",
+      "version": "3.1.2",
       "direct": false,
       "status": "dying",
       "vitality": 55,
       "epitaphs": [
         {
           "kind": "stale-publish",
-          "text": "No publish in 5 years (last 2021-04-17)",
+          "text": "No publish in 4 years (last 2022-01-28)",
           "evidence": [
             {
               "source": "deps.dev",
               "field": "deps.dev.versions[isDefault].publishedAt",
-              "value": "2021-04-17T15:45:50Z"
+              "value": "2022-01-28T05:02:37Z"
             }
           ]
         },
         {
           "kind": "low-scorecard",
-          "text": "OpenSSF Scorecard 3.6/10",
+          "text": "OpenSSF Scorecard 2.8/10",
           "evidence": [
             {
               "source": "scorecard",
               "field": "scorecard.score",
-              "value": 3.6
+              "value": 2.8
             }
           ]
         }
       ],
       "causeOfDeath": {
-        "text": "Cause of death: it went silent on npm after 2021-04-17.",
+        "text": "Cause of death: it went silent on npm after 2022-01-28.",
         "evidence": [
           {
             "source": "deps.dev",
             "field": "deps.dev.versions[isDefault].publishedAt",
-            "value": "2021-04-17T15:45:50Z"
+            "value": "2022-01-28T05:02:37Z"
           }
         ]
       },
       "successor": null,
       "recipeId": null,
-      "repository": "https://github.com/sindresorhus/escape-string-regexp",
-      "lastPublish": "2021-04-17T15:45:50Z",
+      "repository": "https://github.com/visionmedia/bytes.js",
+      "lastPublish": "2022-01-28T05:02:37Z",
       "vulnerabilityIds": [],
-      "scorecard": 3.6
+      "scorecard": 2.8
     },
     {
       "name": "trim-newlines",
@@ -1470,173 +1446,6 @@
       "scorecard": 5.8
     },
     {
-      "name": "has-ansi",
-      "requested": "2.0.0",
-      "version": "2.0.0",
-      "direct": false,
-      "status": "living",
-      "vitality": 82,
-      "epitaphs": [
-        {
-          "kind": "healthy",
-          "text": "Alive: last publish 2025-09-08",
-          "evidence": [
-            {
-              "source": "deps.dev",
-              "field": "deps.dev.versions[isDefault].publishedAt",
-              "value": "2025-09-08T15:08:53Z"
-            }
-          ]
-        },
-        {
-          "kind": "stale-publish",
-          "text": "No publish in 1 year (last 2025-09-08)",
-          "evidence": [
-            {
-              "source": "deps.dev",
-              "field": "deps.dev.versions[isDefault].publishedAt",
-              "value": "2025-09-08T15:08:53Z"
-            }
-          ]
-        },
-        {
-          "kind": "low-scorecard",
-          "text": "OpenSSF Scorecard 3.5/10",
-          "evidence": [
-            {
-              "source": "scorecard",
-              "field": "scorecard.score",
-              "value": 3.5
-            }
-          ]
-        }
-      ],
-      "causeOfDeath": null,
-      "successor": null,
-      "recipeId": null,
-      "repository": "https://github.com/sindresorhus/has-ansi",
-      "lastPublish": "2025-09-08T15:08:53Z",
-      "vulnerabilityIds": [],
-      "scorecard": 3.5
-    },
-    {
-      "name": "ansi-styles",
-      "requested": "3.2.1",
-      "version": "3.2.1",
-      "direct": false,
-      "status": "living",
-      "vitality": 90,
-      "epitaphs": [
-        {
-          "kind": "healthy",
-          "text": "Alive: last publish 2026-07-26",
-          "evidence": [
-            {
-              "source": "deps.dev",
-              "field": "deps.dev.versions[isDefault].publishedAt",
-              "value": "2026-07-26T14:57:36Z"
-            }
-          ]
-        },
-        {
-          "kind": "low-scorecard",
-          "text": "OpenSSF Scorecard 3.7/10",
-          "evidence": [
-            {
-              "source": "scorecard",
-              "field": "scorecard.score",
-              "value": 3.7
-            }
-          ]
-        }
-      ],
-      "causeOfDeath": null,
-      "successor": null,
-      "recipeId": null,
-      "repository": "https://github.com/chalk/ansi-styles",
-      "lastPublish": "2026-07-26T14:57:36Z",
-      "vulnerabilityIds": [],
-      "scorecard": 3.7
-    },
-    {
-      "name": "strip-ansi",
-      "requested": "5.2.0",
-      "version": "5.2.0",
-      "direct": false,
-      "status": "living",
-      "vitality": 90,
-      "epitaphs": [
-        {
-          "kind": "healthy",
-          "text": "Alive: last publish 2026-02-26",
-          "evidence": [
-            {
-              "source": "deps.dev",
-              "field": "deps.dev.versions[isDefault].publishedAt",
-              "value": "2026-02-26T13:51:11Z"
-            }
-          ]
-        },
-        {
-          "kind": "low-scorecard",
-          "text": "OpenSSF Scorecard 3.6/10",
-          "evidence": [
-            {
-              "source": "scorecard",
-              "field": "scorecard.score",
-              "value": 3.6
-            }
-          ]
-        }
-      ],
-      "causeOfDeath": null,
-      "successor": null,
-      "recipeId": null,
-      "repository": "https://github.com/chalk/strip-ansi",
-      "lastPublish": "2026-02-26T13:51:11Z",
-      "vulnerabilityIds": [],
-      "scorecard": 3.6
-    },
-    {
-      "name": "supports-color",
-      "requested": "5.5.0",
-      "version": "5.5.0",
-      "direct": false,
-      "status": "living",
-      "vitality": 90,
-      "epitaphs": [
-        {
-          "kind": "healthy",
-          "text": "Alive: last publish 2026-07-26",
-          "evidence": [
-            {
-              "source": "deps.dev",
-              "field": "deps.dev.versions[isDefault].publishedAt",
-              "value": "2026-07-26T15:13:36Z"
-            }
-          ]
-        },
-        {
-          "kind": "low-scorecard",
-          "text": "OpenSSF Scorecard 3.7/10",
-          "evidence": [
-            {
-              "source": "scorecard",
-              "field": "scorecard.score",
-              "value": 3.7
-            }
-          ]
-        }
-      ],
-      "causeOfDeath": null,
-      "successor": null,
-      "recipeId": null,
-      "repository": "https://github.com/chalk/supports-color",
-      "lastPublish": "2026-07-26T15:13:36Z",
-      "vulnerabilityIds": [],
-      "scorecard": 3.7
-    },
-    {
       "name": "tough-cookie",
       "requested": "2.5.0",
       "version": "2.5.0",
@@ -1676,6 +1485,162 @@
         "GHSA-72xf-g2v4-qvf3"
       ],
       "scorecard": 6.6
+    },
+    {
+      "name": "async-function",
+      "requested": "1.0.0",
+      "version": "1.0.0",
+      "direct": false,
+      "status": "living",
+      "vitality": 92,
+      "epitaphs": [
+        {
+          "kind": "healthy",
+          "text": "Alive: last publish 2025-01-23",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2025-01-23T03:15:54Z"
+            }
+          ]
+        },
+        {
+          "kind": "stale-publish",
+          "text": "No publish in 1 year (last 2025-01-23)",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2025-01-23T03:15:54Z"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": null,
+      "successor": null,
+      "recipeId": null,
+      "repository": "https://github.com/ljharb/async-function",
+      "lastPublish": "2025-01-23T03:15:54Z",
+      "vulnerabilityIds": [],
+      "scorecard": null
+    },
+    {
+      "name": "async-generator-function",
+      "requested": "1.0.0",
+      "version": "1.0.0",
+      "direct": false,
+      "status": "living",
+      "vitality": 92,
+      "epitaphs": [
+        {
+          "kind": "healthy",
+          "text": "Alive: last publish 2025-02-14",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2025-02-14T18:35:17Z"
+            }
+          ]
+        },
+        {
+          "kind": "stale-publish",
+          "text": "No publish in 1 year (last 2025-02-14)",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2025-02-14T18:35:17Z"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": null,
+      "successor": null,
+      "recipeId": null,
+      "repository": "https://github.com/ljharb/async-generator-function",
+      "lastPublish": "2025-02-14T18:35:17Z",
+      "vulnerabilityIds": [],
+      "scorecard": null
+    },
+    {
+      "name": "call-bind-apply-helpers",
+      "requested": "1.0.2",
+      "version": "1.0.2",
+      "direct": false,
+      "status": "living",
+      "vitality": 92,
+      "epitaphs": [
+        {
+          "kind": "healthy",
+          "text": "Alive: last publish 2025-02-12",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2025-02-12T19:24:56Z"
+            }
+          ]
+        },
+        {
+          "kind": "stale-publish",
+          "text": "No publish in 1 year (last 2025-02-12)",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2025-02-12T19:24:56Z"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": null,
+      "successor": null,
+      "recipeId": null,
+      "repository": "https://github.com/ljharb/call-bind-apply-helpers",
+      "lastPublish": "2025-02-12T19:24:56Z",
+      "vulnerabilityIds": [],
+      "scorecard": null
+    },
+    {
+      "name": "call-bound",
+      "requested": "1.0.4",
+      "version": "1.0.4",
+      "direct": false,
+      "status": "living",
+      "vitality": 92,
+      "epitaphs": [
+        {
+          "kind": "healthy",
+          "text": "Alive: last publish 2025-03-03",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2025-03-03T17:50:03Z"
+            }
+          ]
+        },
+        {
+          "kind": "stale-publish",
+          "text": "No publish in 1 year (last 2025-03-03)",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2025-03-03T17:50:03Z"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": null,
+      "successor": null,
+      "recipeId": null,
+      "repository": "https://github.com/ljharb/call-bound",
+      "lastPublish": "2025-03-03T17:50:03Z",
+      "vulnerabilityIds": [],
+      "scorecard": null
     }
   ],
   "summary": {

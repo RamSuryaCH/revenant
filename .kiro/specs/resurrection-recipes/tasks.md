@@ -18,7 +18,7 @@
   - _Requirements: R1.2, R2.2_
 - [x] 6. Hook: re-embed and re-run tests when recipes change
   - _Requirements: R3.2_
-- [ ] 7. Web: Resurrect panel (spec, diff, tests, download .patch)
+- [x] 7. Web: Resurrect panel (spec, diff, tests, download .patch)
   - _Requirements: R1.1, R4.1, R5.1_
 - [ ] 8. AI-written plan behind a feature flag
   - _Requirements: R4.2_ (deferred)

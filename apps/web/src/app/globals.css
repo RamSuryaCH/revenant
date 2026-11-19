@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #06080f;
+  --color-ink-2: #0b1020;
+  --color-ink-3: #131a2e;
+  --color-bone: #ece6d6;
+  --color-bone-dim: #a9a79c;
+  --color-moon: #a8bde0;
+  --color-ember: #ff8a4c;
+  --color-ember-deep: #d9541e;
+  --color-stone: #cfc8b6;
+  --color-moss: #9fb58a;
+  --color-lantern: #ffd37a;
+  --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jb), ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+:root {
+  color-scheme: dark;
+  --mx: 0;
+  --my: 0;
+}
+
+html {
+  background: var(--color-ink);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-ember);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-lantern);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- hero scenery ---------- */
+.scene-layer {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.px-1 { transform: translate3d(calc(var(--mx) * -6px), calc(var(--my) * -4px), 0); }
+.px-2 { transform: translate3d(calc(var(--mx) * -14px), calc(var(--my) * -6px), 0); }
+.px-3 { transform: translate3d(calc(var(--mx) * -26px), calc(var(--my) * -8px), 0); }
+
+.fog {
+  position: absolute;
+  left: -50%;
+  width: 200%;
+  height: 40%;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 30% 60% at 20% 50%, rgb(168 189 224 / 0.16), transparent 70%),
+    radial-gradient(ellipse 35% 55% at 55% 60%, rgb(168 189 224 / 0.12), transparent 70%),
+    radial-gradient(ellipse 28% 60% at 85% 45%, rgb(168 189 224 / 0.14), transparent 70%);
+  animation: drift 70s linear infinite;
+}
+.fog.slow { animation-duration: 110s; animation-direction: reverse; opacity: 0.8; }
+
+@keyframes drift {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-25%, 0, 0); }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translate3d(0, 28px, 0) scale(0.97); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+.rise {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 55ms);
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  45% { opacity: 0.82; }
+  50% { opacity: 1; }
+  70% { opacity: 0.9; }
+}
+.flicker { animation: flicker 4.5s ease-in-out infinite; }
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgb(255 138 76 / 0.45); }
+  100% { box-shadow: 0 0 0 18px rgb(255 138 76 / 0); }
+}
+.ember-pulse { animation: pulse-ring 2.4s ease-out infinite; }
+
+.title-glow {
+  text-shadow: 0 0 60px rgb(168 189 224 / 0.35), 0 2px 0 rgb(0 0 0 / 0.4);
+}
+
+/* ---------- plots ---------- */
+.plot {
+  position: relative;
+  display: block;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), filter 0.35s;
+}
+.plot:hover, .plot:focus-visible { transform: translate3d(0, -6px, 0); filter: drop-shadow(0 12px 24px rgb(168 189 224 / 0.18)); }
+.plot[data-status="dying"] { transform: rotate(-2.2deg); }
+.plot[data-status="dying"]:nth-child(even) { transform: rotate(1.8deg); }
+.plot[data-status="dying"]:hover, .plot[data-status="dying"]:focus-visible { transform: rotate(0deg) translate3d(0, -6px, 0); }
+
+dialog.crypt {
+  margin: auto;
+  color: var(--color-bone);
+  background: linear-gradient(180deg, #10172b, #0a0f1e);
+  border: 1px solid rgb(168 189 224 / 0.25);
+  border-radius: 20px;
+  padding: 0;
+  width: min(920px, calc(100vw - 24px));
+  max-height: calc(100dvh - 24px);
+  box-shadow: 0 40px 120px rgb(0 0 0 / 0.7);
+}
+dialog.crypt::backdrop { background: rgb(3 5 10 / 0.78); backdrop-filter: blur(4px); }
+dialog.crypt[open] { animation: rise 0.35s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+.diff-add { background: rgb(111 227 176 / 0.12); color: #bff0d8; }
+.diff-del { background: rgb(255 107 107 / 0.12); color: #ffc2c2; }
+.diff-hunk { color: var(--color-moon); }
+.diff-meta { color: var(--color-bone-dim); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fog, .flicker, .ember-pulse, .rise, dialog.crypt[open] { animation: none !important; }
+  .scene-layer { transition: none; transform: none !important; }
+  .plot, .plot:hover, .plot:focus-visible { transition: none; }
+}

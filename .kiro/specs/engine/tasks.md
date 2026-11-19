@@ -25,5 +25,5 @@
   - [x] 6.1 `revenant scan`, `revenant resurrect`
   - [x] 6.2 `pnpm sample` writes `apps/web/public/samples/*`
   - _Requirements: R1.2, R6.1_
-- [ ] 7. Scan with mocked fetch: rate-limit fallback test
+- [x] 7. Scan with mocked fetch: rate-limit fallback test
   - _Requirements: R3.4, R3.5_

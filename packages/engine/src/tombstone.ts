@@ -107,7 +107,7 @@ export function buildTombstone(f: PackageFacts, now: Date): Tombstone {
       evs.push(ev(FIELDS.vulnIds, "osv", f.vulnIds.join(",")));
     }
     let text = parts.length ? `Cause of death: ${parts.join("; ")}.` : "Cause of death: slow decline across several weak health signals.";
-    if (f.lastCommitMessage && f.lastCommitDate) {
+    if (f.lastCommitMessage && f.lastCommitDate && yearsBetween(f.lastCommitDate, now) >= 1) {
       text += ` Its last recorded commit, on ${day(f.lastCommitDate)}, read "${clip(oneLine(f.lastCommitMessage), 80)}".`;
       evs.push(ev(FIELDS.lastCommitMessage, "github", f.lastCommitMessage, ghUrl), ev(FIELDS.lastCommitDate, "github", f.lastCommitDate, ghUrl));
     }

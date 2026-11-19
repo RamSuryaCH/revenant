@@ -68,7 +68,7 @@ ${i.addedFiles.map((f) => `- \`${f}\` (new)`).join("\n")}
 
 - [ ] 1. Apply the patch (\`git apply ${slug}.patch\`)
   - [ ] 1.1 Review every \`TODO(revenant)\` comment
-  - [ ] 1.2 Install the replacement${r.package === "moment" ? " (\`dayjs\`)" : ""}
+  - [ ] 1.2 Install the replacement${r.package === "moment" ? " (`dayjs`)" : ""}
   - _Requirements: R1.1, R1.2, R2.2_
 - [ ] 2. Run the differential property-based tests (\`${r.testFile.path}\`)
   - [ ] 2.1 Install test deps: \`${r.testFile.deps.join(" ")}\`
