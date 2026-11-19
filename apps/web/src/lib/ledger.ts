@@ -125,7 +125,7 @@ export function artifactFacts(r: Resurrection) {
   return {
     patch: { files: r.stats.filesChanged, added, removed },
     spec: { dir: `.kiro/specs/${r.spec.slug}/`, files: ["requirements.md", "design.md", "tasks.md"] },
-    tests: { path: r.tests.path, properties: (r.tests.content.match(/\bfc\.assert\(|\bfc\.property\(/g) ?? []).length },
+    tests: { path: r.tests.path, properties: (r.tests.content.match(/^\s*(?:it|test)(?:\.each)?\(/gm) ?? []).length },
     replacement: r.replacement,
   };
 }

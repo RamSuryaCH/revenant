@@ -26,7 +26,7 @@ export function Hero({ url, setUrl, busy, onScan, onSandbox, onExample, onSample
   const sentence = `${HERO_COUNTS.badDirect} of ${HERO_COUNTS.direct} direct dependencies in the cursed sample app are dead or dying (3 shown).`;
 
   return (
-    <header className="relative isolate flex min-h-[calc(100svh-100px)] flex-col overflow-hidden">
+    <header className="relative isolate flex min-h-[calc(100svh-100px)] flex-col lg:min-h-0 overflow-hidden">
       <div className="ambient" aria-hidden="true">
         <div className="plot-grid" />
         <div className="fog" style={{ bottom: "-6%" }} />
@@ -47,7 +47,7 @@ export function Hero({ url, setUrl, busy, onScan, onSandbox, onExample, onSample
           <p className="t-label lift text-moon" style={{ ["--i" as string]: 0 }}>Kiroween 2026 / Resurrection</p>
           <h1 className="t-display lift mt-4 max-w-[14ch] sm:max-w-none" style={{ ["--i" as string]: 1 }}>Your dependencies have a graveyard.</h1>
           <p className="lift mt-4 max-w-[52ch] text-base sm:mt-5 sm:text-[17px] leading-relaxed text-mist" style={{ ["--i" as string]: 3 }}>
-            Paste a repo. Every dead package gets an epitaph that cites its source. One click raises a Kiro spec, a patch, property tests and a real pull request.
+            Paste a repo. Every dead package gets an epitaph that cites its source. One click shows the Kiro spec, the patch, the property tests and the real pull request it became.
           </p>
 
           <form
@@ -89,9 +89,9 @@ export function Hero({ url, setUrl, busy, onScan, onSandbox, onExample, onSample
             </p>
           </form>
 
-          <p className="lift mt-1 flex flex-wrap items-center gap-x-4 sm:mt-3 sm:gap-x-5" style={{ ["--i" as string]: 6 }}>
+          <p className="lift mt-1 grid grid-cols-[auto_auto] justify-start gap-x-5 sm:mt-3 sm:flex sm:flex-wrap sm:items-center sm:gap-x-5" style={{ ["--i" as string]: 6 }}>
             <span className="hidden text-[15px] text-mist sm:inline">No repo handy?</span>
-            <button type="button" className="link-moon" disabled={busy} onClick={onSandbox}>Haunt the sandbox repo</button>
+            <button type="button" className="link-moon col-span-2 justify-self-start" disabled={busy} onClick={onSandbox}>Haunt the sandbox repo</button>
             <button type="button" className="link-moon" disabled={busy} onClick={onExample}>or scan bower/bower</button>
             <button type="button" className="link-moon" disabled={busy} onClick={onSample}>or the sample</button>
           </p>

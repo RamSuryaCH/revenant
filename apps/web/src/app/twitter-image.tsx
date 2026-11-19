@@ -17,7 +17,7 @@ export default function Image() {
         <div style={{ display: "flex", flexDirection: "column", width: 470, justifyContent: "center" }}>
           <div style={{ fontSize: 22, letterSpacing: 3, color: "#9db4ff", textTransform: "uppercase" }}>Kiroween 2026 / Resurrection</div>
           <div style={{ fontSize: 68, lineHeight: 1.02, marginTop: 20, fontWeight: 600 }}>Your dependencies have a graveyard.</div>
-          <div style={{ fontSize: 26, color: "#a9b0c0", marginTop: 24, lineHeight: 1.35 }}>Every epitaph cites its source. One click raises a spec, a patch and a pull request.</div>
+          <div style={{ fontSize: 26, color: "#a9b0c0", marginTop: 24, lineHeight: 1.35 }}>Every epitaph cites its source. One click shows the spec, the patch, the tests and the real pull request.</div>
           <div style={{ fontSize: 30, color: "#ff8a4c", marginTop: 28, fontWeight: 600 }}>Revenant</div>
         </div>
         <div style={{ display: "flex", flex: 1, alignItems: "flex-end", justifyContent: "flex-end", gap: 16 }}>
