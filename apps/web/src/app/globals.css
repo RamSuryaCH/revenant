@@ -493,6 +493,9 @@ html[data-reduce="true"] .beat { opacity: 1 !important; transform: none !importa
 
 /* Mobile: the status filter stays in the thumb zone while the graveyard is on screen. */
 @media (max-width: 767px) {
+  /* Last in the flex column so the bar rests at the end and sticks to the screen bottom for the whole graveyard. */
+  .yard { display: flex; flex-direction: column; }
+  .filterbar { order: 90; margin-top: 24px; }
   .filterbar { position: sticky; bottom: 0; z-index: 20; margin-left: calc(var(--pad) * -1); margin-right: calc(var(--pad) * -1); padding: 10px var(--pad) calc(10px + env(safe-area-inset-bottom)); background: var(--color-ink); border-top: 1px solid var(--color-rule); overflow-x: auto; }
 }
 .big-num { margin: 0 0 12px; }

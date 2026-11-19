@@ -91,7 +91,7 @@ export function Graveyard(props: {
   ];
 
   return (
-    <section id="graveyard" className="relative mx-auto max-w-[1280px] scroll-mt-4 px-[var(--pad)] pb-24 pt-20 lg:pt-28" aria-labelledby="yard-title">
+    <section id="graveyard" className="yard relative mx-auto max-w-[1280px] scroll-mt-4 px-[var(--pad)] pb-24 pt-20 lg:pt-28" aria-labelledby="yard-title">
       <div className="border-t border-rule pt-6">
         <p className="t-label text-moon">{eyebrow}</p>
         <h2 id="yard-title" className="t-display wrap-any mt-3">{title || "The graveyard"}</h2>
