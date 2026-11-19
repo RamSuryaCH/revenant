@@ -44,14 +44,14 @@ export function Hero({ url, setUrl, busy, onScan, onSandbox, onExpress, onSample
 
       <div className="relative z-10 mx-auto grid max-w-[1280px] grid-cols-[minmax(0,1fr)] gap-4 sm:gap-10 px-[var(--pad)] pb-8 pt-4 lg:grid-cols-12 lg:items-center lg:gap-8 lg:pb-12 lg:pt-8">
         <div className="min-w-0 lg:col-span-7">
-          <p className="t-label rise text-moon" style={{ ["--i" as string]: 0 }}>Kiroween 2026 / Resurrection</p>
-          <h1 className="t-display rise mt-4 max-w-[14ch] sm:max-w-none" style={{ ["--i" as string]: 1 }}>Your dependencies have a graveyard.</h1>
-          <p className="rise mt-4 max-w-[52ch] text-base sm:mt-5 sm:text-[17px] leading-relaxed text-mist" style={{ ["--i" as string]: 3 }}>
+          <p className="t-label lift text-moon" style={{ ["--i" as string]: 0 }}>Kiroween 2026 / Resurrection</p>
+          <h1 className="t-display lift mt-4 max-w-[14ch] sm:max-w-none" style={{ ["--i" as string]: 1 }}>Your dependencies have a graveyard.</h1>
+          <p className="lift mt-4 max-w-[52ch] text-base sm:mt-5 sm:text-[17px] leading-relaxed text-mist" style={{ ["--i" as string]: 3 }}>
             Paste a repo. Every dead package gets an epitaph that cites its source. One click raises a Kiro spec, a patch, property tests and a real pull request.
           </p>
 
           <form
-            className="rise mt-5 max-w-[560px] sm:mt-8"
+            className="lift mt-5 max-w-[560px] sm:mt-8"
             style={{ ["--i" as string]: 5 }}
             noValidate
             onSubmit={(e) => {
@@ -89,7 +89,7 @@ export function Hero({ url, setUrl, busy, onScan, onSandbox, onExpress, onSample
             </p>
           </form>
 
-          <p className="rise mt-1 flex flex-wrap items-center gap-x-4 sm:mt-3 sm:gap-x-5" style={{ ["--i" as string]: 6 }}>
+          <p className="lift mt-1 flex flex-wrap items-center gap-x-4 sm:mt-3 sm:gap-x-5" style={{ ["--i" as string]: 6 }}>
             <span className="hidden text-[15px] text-mist sm:inline">No repo handy?</span>
             <button type="button" className="link-moon" disabled={busy} onClick={onSandbox}>Haunt the sandbox repo</button>
             <button type="button" className="link-moon" disabled={busy} onClick={onExpress}>or scan express</button>

@@ -468,3 +468,9 @@ html[data-reduce="true"] .stone:hover, html[data-reduce="true"] .stone:focus-vis
 @keyframes tick { from { --n: 0; } }
 .tick { animation: tick 900ms var(--ease-out) 2.4s backwards; }
 @media (max-width: 899px) { .big-stone { width: min(300px, 70vw, 36dvh); } }
+
+/* Above-the-fold content never starts at opacity 0, so text paints (LCP) as soon as fonts and CSS arrive. */
+@keyframes lift { from { transform: translate3d(0, 16px, 0); } to { transform: none; } }
+.lift { animation: lift var(--dur-panel) var(--ease-out) both; animation-delay: calc(var(--i, 0) * 70ms); }
+.snap > li.tombrise { animation-name: lift; animation-duration: var(--dur-scene); }
+@media (prefers-reduced-motion: reduce) { .lift { animation: none !important; } }

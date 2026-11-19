@@ -3,9 +3,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ScanResult, Tombstone } from "@revenant/engine";
 import type { ScanEvent } from "@/app/api/scan/route";
-import { Drawer } from "./Drawer";
-import { Graveyard } from "./Graveyard";
+import dynamic from "next/dynamic";
 import { Hero } from "./Hero";
+
+// Off the critical path: the first view is the hero only.
+const Graveyard = dynamic(() => import("./Graveyard").then((m) => m.Graveyard), { ssr: false });
+const Drawer = dynamic(() => import("./Drawer").then((m) => m.Drawer), { ssr: false });
 
 type Phase = "idle" | "loading" | "streaming" | "ready";
 
@@ -53,6 +56,15 @@ export function App() {
   const [scanId, setScanId] = useState(0);
   const [reduce, toggleReduce] = useReduceMotion();
   const yardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const warm = () => {
+      void import("./Drawer");
+      void import("./Graveyard");
+    };
+    const id = window.setTimeout(warm, 2500);
+    return () => clearTimeout(id);
+  }, []);
 
   const reveal = useCallback(() => {
     requestAnimationFrame(() => yardRef.current?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }));
@@ -223,7 +235,7 @@ export function App() {
         Data: npm registry, deps.dev, OSV, OpenSSF Scorecard, GitHub. Built with Kiro. MIT licensed. Fonts: Fraunces, Inter, JetBrains Mono (SIL OFL 1.1).
       </footer>
 
-      <Drawer t={selected} opener={opener} onClose={() => setSelected(null)} repo={fromHero ? null : repo} sample={fromHero ? true : isSample} reduce={reduce} />
+      {selected && <Drawer t={selected} opener={opener} onClose={() => setSelected(null)} repo={fromHero ? null : repo} sample={fromHero ? true : isSample} reduce={reduce} />}
     </>
   );
 }

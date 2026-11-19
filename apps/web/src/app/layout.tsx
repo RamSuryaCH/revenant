@@ -5,7 +5,7 @@ import "./globals.css";
 // OFL 1.1 fonts, self-hosted by next/font at build time.
 const display = Fraunces({ subsets: ["latin"], variable: "--font-fraunces", axes: ["opsz"], display: "swap", adjustFontFallback: true });
 const sans = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jb", display: "swap", weight: ["400", "500"] });
+const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jb", display: "swap", weight: ["400", "500"], preload: false });
 
 export const metadata: Metadata = {
   title: "Revenant: resurrect the packages your project buried",
