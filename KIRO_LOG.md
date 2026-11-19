@@ -24,3 +24,11 @@ An honest record of how Kiro was used to build Revenant. This project was built 
 - **Live PRs.** [revenant-crypt#1](https://github.com/RamSuryaCH/revenant-crypt/pull/1), [#2](https://github.com/RamSuryaCH/revenant-crypt/pull/2), [#3](https://github.com/RamSuryaCH/revenant-crypt/pull/3), left open. Re-running the command reused #1 instead of opening a duplicate. GitHub Actions checks on them fail in 2-3 s because of the account billing lock, so the local suite output is pasted in each PR body.
 - **Agent updated.** `.kiro/agents/gravekeeper.json` now describes what it really does (verify, then open or reuse sandbox PRs).
 - **Still not done.** Hooks are still not exercised through the Kiro hook runner.
+
+## 2026-11-19 (MCP server and Graveyard Watch Crew app)
+
+- **Specs before crew code.** `.kiro/specs/crew-app` and `.kiro/specs/mcp-server` (requirements and tasks) were committed before `apps/crew`. The MCP server code (`packages/mcp`) was written first and its spec after; the spec header says so.
+- **MCP server.** Four tools over stdio, optional loopback-only streamable HTTP. 21 vitest tests, including `..` traversal, symlink escapes, overwrite refusal and a protocol-level listing. A raw-client smoke run (`pnpm --filter @revenant/mcp smoke`) called all four tools against a copy of `samples/cursed`: 8 dead, 1 dying, 3 living; `/etc` as workspace refused.
+- **Crew app.** Scaffolded with `kirocrew app init`, then edited. Installed locally with `kirocrew app install apps/crew`. `kirocrew app enable` was refused by Kiro Crew's third-party trust policy; the owner must approve it in the App Store. **Until that happens the page, the agents and the cron registration are unverified, and the cron has not run.**
+- **Manual run of the watch logic (not the cron).** `node apps/crew/bin/nightly.mjs` was run twice from a terminal with `REVENANT_WATCH_DATA=/tmp/gwdata` and `REVENANT_RESET_DRY_RUN=1`, against live GitHub and registry data for `RamSuryaCH/revenant-crypt`. Run 1 recorded a baseline; run 2 compared with it. Output of run 2: "no new deaths across 1 watched repo(s)"; snapshot 2 dead, 1 dying, 0 living, graveyard score 100; reset ran in dry-run and listed `revenant/uuid3-to-randomuuid` for deletion without deleting it.
+- **Hooks.** The existing `.kiro` hooks were not triggered through Kiro in this round (no Kiro IDE hook runner was used).
