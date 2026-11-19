@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "revenant": {
+      "command": "node",
+      "args": ["packages/mcp/dist/cli.js"],
+      "env": { "REVENANT_WORKSPACE": "." },
+      "autoApprove": ["scan_dependencies", "explain_tombstone"],
+      "disabled": false
+    }
+  }
+}

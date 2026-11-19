@@ -88,6 +88,56 @@ pnpm typecheck && pnpm lint && pnpm test && pnpm build
 
 Vitest unit tests plus fast-check properties (at least 100 runs): scoring bounds and monotonicity, the evidence-equality invariant, no-op on unrelated code, and differential old-versus-new tests for each recipe against the real `moment`/`dayjs`, `request` and `uuid@3`.
 
+## Use Revenant inside Kiro
+
+Revenant ships an MCP server and a Kiro Crew app. Both use the same engine as the web app, so the evidence behind every cause of death is identical.
+
+### MCP server (Kiro IDE, Kiro CLI, any MCP client)
+
+```bash
+pnpm install && pnpm --filter @revenant/engine build && pnpm --filter @revenant/mcp build
+```
+
+Paste into `.kiro/settings/mcp.json` (this repo already has it, so Revenant uses itself):
+
+```json
+{
+  "mcpServers": {
+    "revenant": {
+      "command": "node",
+      "args": ["/absolute/path/to/revenant/packages/mcp/dist/cli.js"],
+      "env": { "REVENANT_WORKSPACE": "/absolute/path/to/your/project" },
+      "autoApprove": ["scan_dependencies", "explain_tombstone"]
+    }
+  }
+}
+```
+
+| Tool | What it does |
+|---|---|
+| `scan_dependencies` | Repo URL or workspace directory to a graveyard summary (20 worst, truncated) |
+| `explain_tombstone` | One package's cause of death with each cited API field |
+| `plan_resurrection` | Writes a real Kiro spec to `.kiro/specs/resurrect-<pkg>/` (curated packages only) |
+| `apply_recipe` | Returns the patch, its honest limits and the differential test; never edits sources |
+
+Everything is confined to `REVENANT_WORKSPACE` (default: the current directory); paths outside it, including symlink escapes, are refused. Check it standalone with `pnpm --filter @revenant/mcp smoke`. Streamable HTTP is optional: `node packages/mcp/dist/cli.js --http 3939`.
+
+### Kiro Crew app: Graveyard Watch
+
+A dashboard page of watched repositories as tombstones, a "newly dead since last night" list, a `necromancer` agent, a `gravekeeper` agent, two skills, the MCP server above, and a nightly job (02:00) that rescans and resets the demo repo `RamSuryaCH/revenant-crypt` (only that repo, only through its own `scripts/reset.sh`).
+
+```bash
+pnpm install && pnpm --filter @revenant/crew build   # bundles backend, nightly job and MCP server into apps/crew
+kirocrew app install apps/crew
+kirocrew app enable graveyard-watch                   # third-party apps need your trust: approve it in the App Store prompt
+```
+
+![Graveyard Watch page](docs/graveyard-watch.png)
+
+The screenshot is the app's real page bundle and live backend data, rendered by `node apps/crew/scripts/preview.mjs` (a local harness with a stand-in for the Crew SDK), because an agent cannot capture the Kiro Crew dashboard itself.
+
+Needs only Node 20+. Optional: `GITHUB_TOKEN` for GitHub limits, `REVENANT_CRYPT_DIR` for the local clone used by the nightly reset, `REVENANT_RESET_LIVE=1` to make the nightly reset real. Without it the reset is a dry run, because a live reset closes the open `revenant/*` demo pull requests and deletes their branches.
+
 ## Built with Kiro
 
 See [KIRO_LOG.md](KIRO_LOG.md) for an honest, dated account, and `.kiro/` for the specs, steering, hooks and custom agents. Design notes: [DESIGN.md](DESIGN.md).
