@@ -67,3 +67,20 @@ describe("scoring properties", () => {
     expect(graveyardScore([{ status: "dead" }, { status: "living" }])).toBe(50);
   });
 });
+
+describe("stable packages are not dying", () => {
+  const stable: Signals = { deprecated: false, archived: false, yearsSincePublish: 9, vulnerabilityCount: 0, scorecard: 3.1 };
+  it("a clean package untouched for 9 years is living", () => {
+    expect(statusOf(stable)).toBe("living");
+    expect(vitality(stable)).toBeGreaterThan(75);
+  });
+  it("age plus a known vulnerability still counts", () => {
+    expect(statusOf({ ...stable, vulnerabilityCount: 1 })).toBe("dying");
+  });
+  it("a curated legacy mark still counts with age", () => {
+    expect(statusOf({ ...stable, yearsSincePublish: 3, scorecard: 8, legacy: true })).toBe("dying");
+  });
+  it("deprecated stays dead however fresh", () => {
+    expect(statusOf({ ...stable, yearsSincePublish: 0, deprecated: true })).toBe("dead");
+  });
+});

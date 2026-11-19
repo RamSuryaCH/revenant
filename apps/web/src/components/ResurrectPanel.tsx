@@ -106,21 +106,39 @@ export function ResurrectPanel({ pkg, recipeId, repo, sample, version, evidence 
     setTimeout(() => setCopied(false), 1600);
   };
 
+  const TABS = ["diff", "spec", "tests"] as const;
+  const onTabKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const i = TABS.indexOf(tab);
+    const next = e.key === "ArrowRight" ? (i + 1) % 3 : e.key === "ArrowLeft" ? (i + 2) % 3 : e.key === "Home" ? 0 : e.key === "End" ? 2 : -1;
+    if (next < 0) return;
+    e.preventDefault();
+    setTab(TABS[next]!);
+    requestAnimationFrame(() => document.getElementById(`tab-${TABS[next]}`)?.focus());
+  };
+
   return (
     <div className="space-y-4">
+      <div className="flex items-center gap-4" aria-hidden="true">
+        <svg viewBox="0 0 64 80" className="tomb-rise h-14 w-12 shrink-0" focusable="false">
+          <path d="M6 80 V30 Q6 6 32 6 Q58 6 58 30 V80 Z" fill="#9097a8" stroke="#c9d3ee" strokeOpacity="0.4" />
+          <circle cx="32" cy="38" r="15" fill="#ffd37a" className="tomb-glow" />
+          <path d="M0 80 H64" stroke="#0b1020" strokeWidth="6" />
+        </svg>
+        <span className="tomb-glow font-display text-lg text-lantern">Risen.</span>
+      </div>
       <div className="flex flex-wrap items-center gap-2 text-sm">
         <span className="rounded-full bg-ember/15 px-3 py-1 font-mono text-xs text-ember">{r.stats.filesChanged} of {r.stats.filesScanned} files change</span>
         <span className="text-bone-dim">{pkg} → {r.replacement}</span>
       </div>
-      <div role="tablist" aria-label="Resurrection output" className="flex gap-1 border-b border-white/10">
-        {(["diff", "spec", "tests"] as const).map((t) => (
-          <button key={t} role="tab" aria-selected={tab === t} onClick={() => setTab(t)} className={`-mb-px border-b-2 px-4 py-2 font-mono text-xs uppercase tracking-widest transition-colors ${tab === t ? "border-ember text-bone" : "border-transparent text-bone-dim hover:text-bone"}`}>
+      <div role="tablist" aria-label="Resurrection output" className="flex gap-1 border-b border-white/10" onKeyDown={onTabKey}>
+        {TABS.map((t) => (
+          <button key={t} id={`tab-${t}`} role="tab" aria-selected={tab === t} aria-controls={`panel-${t}`} tabIndex={tab === t ? 0 : -1} onClick={() => setTab(t)} className={`-mb-px border-b-2 px-4 py-2 font-mono text-xs uppercase tracking-widest transition-colors ${tab === t ? "border-ember text-bone" : "border-transparent text-bone-dim hover:text-bone"}`}>
             {t === "diff" ? "Patch" : t === "spec" ? "Kiro spec" : "Tests"}
           </button>
         ))}
       </div>
       {tab === "diff" && (
-        <div className="space-y-3" role="tabpanel">
+        <div className="space-y-3" role="tabpanel" id="panel-diff" aria-labelledby="tab-diff">
           {!sample && repo && isCrypt(repo) && r.patch && <Gravekeeper recipeId={recipeId} />}
           {r.patch ? <DiffView patch={r.patch} /> : <p className="text-sm text-bone-dim">Nothing to migrate in the scanned files.</p>}
           <div className="flex flex-wrap items-center gap-2">
@@ -130,7 +148,7 @@ export function ResurrectPanel({ pkg, recipeId, repo, sample, version, evidence 
         </div>
       )}
       {tab === "spec" && (
-        <div role="tabpanel" className="space-y-3">
+        <div role="tabpanel" id="panel-spec" aria-labelledby="tab-spec" className="space-y-3">
           <p className="text-sm text-bone-dim">Drop these into <code className="font-mono text-moon">.kiro/specs/{r.spec.slug}/</code>.</p>
           <div className="flex gap-2">
             {(["requirements", "design", "tasks"] as const).map((p) => (
@@ -141,7 +159,7 @@ export function ResurrectPanel({ pkg, recipeId, repo, sample, version, evidence 
         </div>
       )}
       {tab === "tests" && (
-        <div role="tabpanel" className="space-y-3">
+        <div role="tabpanel" id="panel-tests" aria-labelledby="tab-tests" className="space-y-3">
           <p className="text-sm text-bone-dim">Differential property-based tests (fast-check) compare the old and new behaviour. Run: <code className="break-all font-mono text-moon">{r.tests.runCommand}</code></p>
           <pre className="max-h-[48vh] overflow-auto rounded-lg bg-black/40 p-4 font-mono text-[12px] leading-relaxed" tabIndex={0}><code>{r.tests.content}</code></pre>
         </div>

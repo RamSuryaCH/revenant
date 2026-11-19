@@ -20,6 +20,7 @@ export function App() {
   const [notes, setNotes] = useState<string[]>([]);
   const [banner, setBanner] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [info, setInfo] = useState<string | null>(null);
   const [sourceLabel, setSourceLabel] = useState("");
   const [isSample, setIsSample] = useState(true);
   const [repo, setRepo] = useState<string | null>(null);
@@ -80,6 +81,7 @@ export function App() {
   const runLive = useCallback(
     async (target: string) => {
       setError(null);
+      setInfo(null);
       setBanner(null);
       setFilter("all");
       setPhase("loading");
@@ -108,6 +110,7 @@ export function App() {
       let buf = "";
       let finished = false;
       let failed: string | null = null;
+      let notice: string | null = null;
       try {
         for (;;) {
           const { value, done } = await reader.read();
@@ -130,14 +133,25 @@ export function App() {
               finished = true;
               setTombs(ev.data.tombstones);
               setNotes(ev.data.notes);
-              if (ev.data.ecosystem === "unsupported" || ev.data.tombstones.length === 0) failed = ev.data.notes[0] ?? "No npm dependencies found.";
+              if (ev.data.ecosystem === "unsupported" || ev.data.tombstones.length === 0) {
+                notice = ev.data.notes[0] ?? "This repository has no npm dependencies to scan.";
+              }
               setPhase("ready");
               setStatus(`${ev.data.tombstones.length} packages unearthed`);
-            } else if (ev.type === "error") failed = ev.message;
+            } else if (ev.type === "error") {
+              if (ev.code === "not-found") notice = ev.message;
+              else failed = ev.message;
+            }
           }
         }
       } catch {
         failed = "The connection dropped during the scan.";
+      }
+      if (notice) {
+        setInfo(notice);
+        setTombs([]);
+        setPhase("idle");
+        return;
       }
       if (failed && !finished) return loadSample(`${failed} Showing the cached sample instead.`);
       if (failed) {
@@ -198,12 +212,16 @@ export function App() {
                 autoComplete="off"
                 spellCheck={false}
                 placeholder="https://github.com/owner/repo"
-                className="min-w-0 flex-1 rounded-full border border-white/15 bg-black/35 px-5 py-3 font-mono text-sm text-bone backdrop-blur placeholder:text-bone-dim/70 focus:border-moon"
+                className="min-w-0 flex-1 rounded-full border border-white/15 bg-black/35 px-5 py-3 font-mono text-sm text-bone backdrop-blur placeholder:text-bone-dim focus:border-moon"
+                aria-describedby="scan-hint"
               />
               <button type="submit" disabled={busy || !url.trim()} className="rounded-full border border-white/25 px-6 py-3 font-mono text-xs uppercase tracking-[0.18em] text-bone transition hover:border-ember disabled:opacity-40">
                 Scan live
               </button>
             </form>
+            <p id="scan-hint" className="text-center font-mono text-[11px] text-bone-dim">
+              {busy ? "A scan is running. Wait for it to finish." : url.trim() ? "Reads the repository's root package.json (npm projects)." : "Paste a GitHub URL to enable Scan live."}
+            </p>
             <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
               <button type="button" onClick={() => { setUrl(CRYPT_REPO); void runLive(CRYPT_REPO); }} disabled={busy} className="font-mono text-[11px] uppercase tracking-[0.2em] text-moon underline decoration-moon/30 underline-offset-4 hover:text-bone disabled:opacity-40">
                 Haunt the sandbox repo (live PRs)
@@ -212,6 +230,7 @@ export function App() {
                 or scan expressjs/express live
               </button>
             </div>
+            {info && <p role="status" className="rounded-xl border border-moon/40 bg-moon/10 px-4 py-3 text-left text-sm leading-relaxed">{info}</p>}
             {error && <p role="alert" className="rounded-xl border border-ember/40 bg-ember/10 px-4 py-3 text-left text-sm">{error}</p>}
           </div>
         </div>
@@ -227,7 +246,7 @@ export function App() {
                 <h2 id="yard-title" className="mt-2 font-display text-4xl font-semibold sm:text-5xl">{sourceLabel || "The graveyard"}</h2>
               </div>
               <dl className="flex gap-6 font-mono text-xs">
-                <div><dt className="uppercase tracking-widest text-bone-dim">Graveyard score</dt><dd className="mt-1 font-display text-4xl text-ember">{score}%</dd></div>
+                <div className="max-w-[17rem] sm:text-right"><dt className="uppercase tracking-widest text-bone-dim">Graveyard score</dt><dd className="mt-1 font-display text-4xl text-ember">{score}%</dd><dd className="mt-1 text-[12px] leading-snug text-bone-dim">Share of direct dependencies that are dead or dying. Lower is healthier. Old but clean packages count as alive.</dd></div>
               </dl>
             </div>
 

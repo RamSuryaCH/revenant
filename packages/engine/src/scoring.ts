@@ -18,7 +18,9 @@ export function penalties(s: Signals): number {
   let p = 0;
   if (s.deprecated) p += 50;
   if (s.archived) p += 40;
-  if (s.yearsSincePublish !== null) {
+  // Age alone is not death: a finished, stable package can sit untouched for years.
+  // Staleness only counts when it comes with a known vulnerability or a curated legacy mark.
+  if (s.yearsSincePublish !== null && (s.vulnerabilityCount > 0 || s.legacy)) {
     const y = Math.max(0, s.yearsSincePublish);
     p += y >= 4 ? 35 : y >= 2 ? 20 : y >= 1 ? 8 : 0;
   }

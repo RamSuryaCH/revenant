@@ -83,10 +83,10 @@ export async function scan(input: ScanInput, o: ScanOptions = {}): Promise<ScanR
       for (const [file, eco] of UNSUPPORTED_FILES) {
         const hit = await getText(`${base}/${file}`, { fetchImpl: o.fetchImpl, timeoutMs: 6000 }).catch(() => null);
         if (hit !== null) {
-          return emptyResult(source, "unsupported", now, [`This looks like a ${eco} project (${file}). Revenant digs up npm graveyards today; ${eco} support is read-only and not wired yet.`]);
+          return emptyResult(source, "unsupported", now, [`This looks like a ${eco} project (found ${file}). Revenant reads npm projects today, so there is nothing to scan here yet. ${eco} support is planned, not built.`]);
         }
       }
-      throw new ScanError(`No package.json found at the root of ${gh.owner}/${gh.repo}.`, "not-found");
+      throw new ScanError(`Revenant reads npm projects with a package.json at the repository root, and found none in ${gh.owner}/${gh.repo}. Packages inside subfolders of a monorepo are not scanned yet. Try a repository whose root has a package.json.`, "not-found");
     }
   }
   if (manifestText === null) throw new ScanError("package.json not found.", "not-found");
@@ -101,7 +101,7 @@ export async function scan(input: ScanInput, o: ScanOptions = {}): Promise<ScanR
   const entries = Object.entries(deps).filter(([, v]) => typeof v === "string" && !/^(file|link|workspace|git|github|http)/.test(v));
   const maxDirect = o.maxDirect ?? 40;
   const truncated = entries.length > maxDirect;
-  if (truncated) notes.push(`Showing ${maxDirect} of ${entries.length} direct dependencies (fan-out cap).`);
+  if (truncated) notes.push(`Showing the first ${maxDirect} of ${entries.length} direct dependencies, to keep the scan fast.`);
   const chosen = entries.slice(0, maxDirect);
 
   progress(`Reading ${chosen.length} dependencies`);
@@ -136,7 +136,7 @@ export async function scan(input: ScanInput, o: ScanOptions = {}): Promise<ScanR
     const tv = await osvBatch(fresh, ctx);
     const ranked = fresh.map((t, i) => ({ ...t, vulns: tv[i] ?? [] })).sort((a, b) => b.vulns.length - a.vulns.length);
     if (ranked.length > maxT) {
-      notes.push(`Transitive tree has ${ranked.length} packages; analysed the ${maxT} with the most known vulnerabilities (fan-out cap).`);
+      notes.push(`Showing ${maxT} of ${ranked.length} indirect packages, picked by known vulnerabilities.`);
     }
     const picked = ranked.slice(0, maxT);
     await pool(picked, 6, async (p) => {

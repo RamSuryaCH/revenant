@@ -8,8 +8,8 @@ function Stone({ status }: { status: Tombstone["status"] }) {
     <svg viewBox="0 0 160 210" className="absolute inset-0 h-full w-full" aria-hidden="true" preserveAspectRatio="none">
       <defs>
         <linearGradient id={`st-${status}`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={dying ? "#a9b79c" : "#c4c7d1"} />
-          <stop offset="100%" stopColor={dying ? "#5c6a54" : "#5b6070"} />
+          <stop offset="0%" stopColor={dying ? "#d8c878" : "#c4c7d1"} />
+          <stop offset="100%" stopColor={dying ? "#a08f45" : "#9097a8"} />
         </linearGradient>
       </defs>
       <path d="M14 210 V72 Q14 12 80 12 Q146 12 146 72 V210 Z" fill={`url(#st-${status})`} stroke="#c9d3ee" strokeOpacity="0.28" strokeWidth="1.5" />
@@ -57,11 +57,11 @@ export function Plot({ t, index, onOpen }: { t: Tombstone; index: number; onOpen
       <div className="relative mx-auto aspect-[160/210] w-full max-w-[190px]">
         {alive ? <Lantern /> : <Stone status={t.status} />}
         <div className={`absolute inset-0 flex flex-col items-center overflow-hidden px-[17%] ${alive ? "justify-end pb-[3%]" : "pt-[26%]"}`}>
-          {!alive && <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink/70">{LABEL[t.status]}</span>}
+          {!alive && <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink">{LABEL[t.status]}</span>}
           <span className={`mt-1 max-w-full [overflow-wrap:anywhere] font-display text-[clamp(0.85rem,2.4vw,1.15rem)] font-semibold leading-tight ${alive ? "text-bone" : "text-ink"}`}>{t.name}</span>
-          <span className={`mt-1 font-mono text-[10px] ${alive ? "text-lantern" : "text-ink/75"}`}>{t.version ?? t.requested}</span>
-          {!alive && <span className="mt-2 line-clamp-4 max-w-full [overflow-wrap:anywhere] text-[10.5px] leading-snug text-ink/85">{first}</span>}
-          {!t.direct && <span className="mt-1 rounded-full border border-ink/40 px-1.5 font-mono text-[9px] uppercase text-ink/70">transitive</span>}
+          <span className={`mt-1 font-mono text-[10px] ${alive ? "text-lantern" : "text-ink"}`}>{t.version ?? t.requested}</span>
+          {!alive && <span className="mt-2 line-clamp-4 max-w-full [overflow-wrap:anywhere] text-[10.5px] leading-snug text-ink">{first}</span>}
+          {!t.direct && <span className="mt-1 rounded-full border border-ink/60 px-1.5 font-mono text-[9px] uppercase text-ink">transitive</span>}
         </div>
       </div>
       {alive && <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.2em] text-lantern">{LABEL[t.status]}</span>}

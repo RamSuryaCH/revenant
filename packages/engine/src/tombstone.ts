@@ -73,12 +73,25 @@ export function buildTombstone(f: PackageFacts, now: Date): Tombstone {
   }
 
   const status = statusOf(sig);
+  if (status === "living") {
+    // A quiet package with nothing wrong is stable, not stale.
+    for (let i = epitaphs.length - 1; i >= 0; i--) if (epitaphs[i]!.kind === "stale-publish") epitaphs.splice(i, 1);
+  }
   if (status === "living" || epitaphs.length === 0) {
-    epitaphs.unshift({
-      kind: "healthy",
-      text: f.publishedAt ? `Alive: last publish ${day(f.publishedAt)}` : `Declared as ${f.requested}`,
-      evidence: [f.publishedAt ? ev(FIELDS.publishedAt, "deps.dev", f.publishedAt) : ev(FIELDS.requested, "manifest", f.requested)],
-    });
+    const quiet = status === "living" && f.publishedAt !== null && (sig.yearsSincePublish ?? 0) >= 1 && f.vulnIds.length === 0;
+    epitaphs.unshift(
+      quiet
+        ? {
+            kind: "healthy",
+            text: `Stable: last publish ${day(f.publishedAt!)}, no known vulnerabilities, not deprecated`,
+            evidence: [ev(FIELDS.publishedAt, "deps.dev", f.publishedAt!), ev(FIELDS.vulnIds, "osv", f.vulnIds.join(","))],
+          }
+        : {
+            kind: "healthy",
+            text: f.publishedAt ? `Alive: last publish ${day(f.publishedAt)}` : `Declared as ${f.requested}`,
+            evidence: [f.publishedAt ? ev(FIELDS.publishedAt, "deps.dev", f.publishedAt) : ev(FIELDS.requested, "manifest", f.requested)],
+          },
+    );
   }
 
   // Cause of death: composed only from cited facts.
