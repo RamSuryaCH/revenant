@@ -51,7 +51,7 @@ export function TombstoneDialog({ t, onClose, repo, sample }: { t: Tombstone | n
 
           <div className="mt-4 flex items-center gap-3" role="img" aria-label={`Vitality ${t.vitality} out of 100`}>
             <div className="h-1.5 w-40 overflow-hidden rounded-full bg-white/10">
-              <div className={`h-full ${t.status === "living" ? "bg-lantern" : t.status === "dying" ? "bg-moss" : "bg-stone/60"}`} style={{ width: `${Math.max(t.vitality, 3)}%` }} />
+              <div className={`h-full ${t.status === "living" ? "bg-lantern" : t.status === "dying" ? "bg-amber" : "bg-stone"}`} style={{ width: `${Math.max(t.vitality, 3)}%` }} />
             </div>
             <span className="font-mono text-xs text-bone-dim">vitality {t.vitality}/100</span>
           </div>

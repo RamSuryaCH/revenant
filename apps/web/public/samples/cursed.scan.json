@@ -5,7 +5,7 @@
     "ref": "../../samples/cursed"
   },
   "ecosystem": "npm",
-  "scannedAt": "2026-11-19T14:19:10.939Z",
+  "scannedAt": "2026-11-19T15:10:19.844Z",
   "tombstones": [
     {
       "name": "left-pad",
@@ -729,7 +729,7 @@
       "version": "4.2.6",
       "direct": true,
       "status": "dead",
-      "vitality": 5,
+      "vitality": 40,
       "epitaphs": [
         {
           "kind": "deprecated",
@@ -901,64 +901,6 @@
       "scorecard": 4.4
     },
     {
-      "name": "bower",
-      "requested": "^1.8.14",
-      "version": "1.8.14",
-      "direct": true,
-      "status": "dying",
-      "vitality": 65,
-      "epitaphs": [
-        {
-          "kind": "stale-publish",
-          "text": "No publish in 4 years (last 2022-03-14)",
-          "evidence": [
-            {
-              "source": "deps.dev",
-              "field": "deps.dev.versions[isDefault].publishedAt",
-              "value": "2022-03-14T15:41:33Z"
-            }
-          ]
-        },
-        {
-          "kind": "successor",
-          "text": "Successor: npm. bower recommends migrating to npm/yarn",
-          "evidence": [
-            {
-              "source": "curated",
-              "field": "curated.successors[bower]",
-              "value": "npm"
-            }
-          ]
-        }
-      ],
-      "causeOfDeath": {
-        "text": "Cause of death: it went silent on npm after 2022-03-14.",
-        "evidence": [
-          {
-            "source": "deps.dev",
-            "field": "deps.dev.versions[isDefault].publishedAt",
-            "value": "2022-03-14T15:41:33Z"
-          }
-        ]
-      },
-      "successor": {
-        "name": "npm",
-        "reason": "bower recommends migrating to npm/yarn",
-        "evidence": [
-          {
-            "source": "curated",
-            "field": "curated.successors[bower]",
-            "value": "npm"
-          }
-        ]
-      },
-      "recipeId": null,
-      "repository": null,
-      "lastPublish": "2022-03-14T15:41:33Z",
-      "vulnerabilityIds": [],
-      "scorecard": null
-    },
-    {
       "name": "lodash",
       "requested": "^4.17.21",
       "version": "4.17.21",
@@ -1040,6 +982,60 @@
         "GHSA-mrhx-c7xc-m3w5"
       ],
       "scorecard": 5.5
+    },
+    {
+      "name": "bower",
+      "requested": "^1.8.14",
+      "version": "1.8.14",
+      "direct": true,
+      "status": "living",
+      "vitality": 100,
+      "epitaphs": [
+        {
+          "kind": "healthy",
+          "text": "Stable: last publish 2022-03-14, no known vulnerabilities, not deprecated",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2022-03-14T15:41:33Z"
+            },
+            {
+              "source": "osv",
+              "field": "osv.querybatch.results[].vulns[].id",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "kind": "successor",
+          "text": "Successor: npm. bower recommends migrating to npm/yarn",
+          "evidence": [
+            {
+              "source": "curated",
+              "field": "curated.successors[bower]",
+              "value": "npm"
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": null,
+      "successor": {
+        "name": "npm",
+        "reason": "bower recommends migrating to npm/yarn",
+        "evidence": [
+          {
+            "source": "curated",
+            "field": "curated.successors[bower]",
+            "value": "npm"
+          }
+        ]
+      },
+      "recipeId": null,
+      "repository": null,
+      "lastPublish": "2022-03-14T15:41:33Z",
+      "vulnerabilityIds": [],
+      "scorecard": null
     },
     {
       "name": "express",
@@ -1205,54 +1201,6 @@
         "GHSA-7mwh-4pqv-wmr8"
       ],
       "scorecard": 2.1
-    },
-    {
-      "name": "bytes",
-      "requested": "3.1.2",
-      "version": "3.1.2",
-      "direct": false,
-      "status": "dying",
-      "vitality": 55,
-      "epitaphs": [
-        {
-          "kind": "stale-publish",
-          "text": "No publish in 4 years (last 2022-01-28)",
-          "evidence": [
-            {
-              "source": "deps.dev",
-              "field": "deps.dev.versions[isDefault].publishedAt",
-              "value": "2022-01-28T05:02:37Z"
-            }
-          ]
-        },
-        {
-          "kind": "low-scorecard",
-          "text": "OpenSSF Scorecard 2.8/10",
-          "evidence": [
-            {
-              "source": "scorecard",
-              "field": "scorecard.score",
-              "value": 2.8
-            }
-          ]
-        }
-      ],
-      "causeOfDeath": {
-        "text": "Cause of death: it went silent on npm after 2022-01-28.",
-        "evidence": [
-          {
-            "source": "deps.dev",
-            "field": "deps.dev.versions[isDefault].publishedAt",
-            "value": "2022-01-28T05:02:37Z"
-          }
-        ]
-      },
-      "successor": null,
-      "recipeId": null,
-      "repository": "https://github.com/visionmedia/bytes.js",
-      "lastPublish": "2022-01-28T05:02:37Z",
-      "vulnerabilityIds": [],
-      "scorecard": 2.8
     },
     {
       "name": "trim-newlines",
@@ -1446,6 +1394,50 @@
       "scorecard": 5.8
     },
     {
+      "name": "bytes",
+      "requested": "3.1.2",
+      "version": "3.1.2",
+      "direct": false,
+      "status": "living",
+      "vitality": 90,
+      "epitaphs": [
+        {
+          "kind": "healthy",
+          "text": "Stable: last publish 2022-01-28, no known vulnerabilities, not deprecated",
+          "evidence": [
+            {
+              "source": "deps.dev",
+              "field": "deps.dev.versions[isDefault].publishedAt",
+              "value": "2022-01-28T05:02:37Z"
+            },
+            {
+              "source": "osv",
+              "field": "osv.querybatch.results[].vulns[].id",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "kind": "low-scorecard",
+          "text": "OpenSSF Scorecard 2.8/10",
+          "evidence": [
+            {
+              "source": "scorecard",
+              "field": "scorecard.score",
+              "value": 2.8
+            }
+          ]
+        }
+      ],
+      "causeOfDeath": null,
+      "successor": null,
+      "recipeId": null,
+      "repository": "https://github.com/visionmedia/bytes.js",
+      "lastPublish": "2022-01-28T05:02:37Z",
+      "vulnerabilityIds": [],
+      "scorecard": 2.8
+    },
+    {
       "name": "tough-cookie",
       "requested": "2.5.0",
       "version": "2.5.0",
@@ -1492,27 +1484,21 @@
       "version": "1.0.0",
       "direct": false,
       "status": "living",
-      "vitality": 92,
+      "vitality": 100,
       "epitaphs": [
         {
           "kind": "healthy",
-          "text": "Alive: last publish 2025-01-23",
+          "text": "Stable: last publish 2025-01-23, no known vulnerabilities, not deprecated",
           "evidence": [
             {
               "source": "deps.dev",
               "field": "deps.dev.versions[isDefault].publishedAt",
               "value": "2025-01-23T03:15:54Z"
-            }
-          ]
-        },
-        {
-          "kind": "stale-publish",
-          "text": "No publish in 1 year (last 2025-01-23)",
-          "evidence": [
+            },
             {
-              "source": "deps.dev",
-              "field": "deps.dev.versions[isDefault].publishedAt",
-              "value": "2025-01-23T03:15:54Z"
+              "source": "osv",
+              "field": "osv.querybatch.results[].vulns[].id",
+              "value": ""
             }
           ]
         }
@@ -1531,27 +1517,21 @@
       "version": "1.0.0",
       "direct": false,
       "status": "living",
-      "vitality": 92,
+      "vitality": 100,
       "epitaphs": [
         {
           "kind": "healthy",
-          "text": "Alive: last publish 2025-02-14",
+          "text": "Stable: last publish 2025-02-14, no known vulnerabilities, not deprecated",
           "evidence": [
             {
               "source": "deps.dev",
               "field": "deps.dev.versions[isDefault].publishedAt",
               "value": "2025-02-14T18:35:17Z"
-            }
-          ]
-        },
-        {
-          "kind": "stale-publish",
-          "text": "No publish in 1 year (last 2025-02-14)",
-          "evidence": [
+            },
             {
-              "source": "deps.dev",
-              "field": "deps.dev.versions[isDefault].publishedAt",
-              "value": "2025-02-14T18:35:17Z"
+              "source": "osv",
+              "field": "osv.querybatch.results[].vulns[].id",
+              "value": ""
             }
           ]
         }
@@ -1570,27 +1550,21 @@
       "version": "1.0.2",
       "direct": false,
       "status": "living",
-      "vitality": 92,
+      "vitality": 100,
       "epitaphs": [
         {
           "kind": "healthy",
-          "text": "Alive: last publish 2025-02-12",
+          "text": "Stable: last publish 2025-02-12, no known vulnerabilities, not deprecated",
           "evidence": [
             {
               "source": "deps.dev",
               "field": "deps.dev.versions[isDefault].publishedAt",
               "value": "2025-02-12T19:24:56Z"
-            }
-          ]
-        },
-        {
-          "kind": "stale-publish",
-          "text": "No publish in 1 year (last 2025-02-12)",
-          "evidence": [
+            },
             {
-              "source": "deps.dev",
-              "field": "deps.dev.versions[isDefault].publishedAt",
-              "value": "2025-02-12T19:24:56Z"
+              "source": "osv",
+              "field": "osv.querybatch.results[].vulns[].id",
+              "value": ""
             }
           ]
         }
@@ -1609,27 +1583,21 @@
       "version": "1.0.4",
       "direct": false,
       "status": "living",
-      "vitality": 92,
+      "vitality": 100,
       "epitaphs": [
         {
           "kind": "healthy",
-          "text": "Alive: last publish 2025-03-03",
+          "text": "Stable: last publish 2025-03-03, no known vulnerabilities, not deprecated",
           "evidence": [
             {
               "source": "deps.dev",
               "field": "deps.dev.versions[isDefault].publishedAt",
               "value": "2025-03-03T17:50:03Z"
-            }
-          ]
-        },
-        {
-          "kind": "stale-publish",
-          "text": "No publish in 1 year (last 2025-03-03)",
-          "evidence": [
+            },
             {
-              "source": "deps.dev",
-              "field": "deps.dev.versions[isDefault].publishedAt",
-              "value": "2025-03-03T17:50:03Z"
+              "source": "osv",
+              "field": "osv.querybatch.results[].vulns[].id",
+              "value": ""
             }
           ]
         }
@@ -1646,12 +1614,12 @@
   "summary": {
     "total": 24,
     "dead": 9,
-    "dying": 5,
-    "living": 10,
-    "graveyardScore": 75
+    "dying": 3,
+    "living": 12,
+    "graveyardScore": 67
   },
   "notes": [
-    "Transitive tree has 199 packages; analysed the 12 with the most known vulnerabilities (fan-out cap)."
+    "Showing 12 of 199 indirect packages, picked by known vulnerabilities."
   ],
   "truncated": false,
   "fromCache": false

@@ -7,3 +7,4 @@ export { SUCCESSORS, successorFor, parseSuccessorFromDeprecation } from "./succe
 export { RECIPES, recipeForPackage, resurrect, applyResurrection, pullRequestFiles, type Recipe, type SourceFile, type ResurrectInput } from "./recipes/index.js";
 export { fetchRepoSources } from "./repoFiles.js";
 export { SANDBOX_REPO, BRANCH_PREFIX, isSandboxRepo, branchFor, findResurrectionPr, openResurrectionPr, prBody, prTitle, GravekeeperError, type CryptVerification, type OpenPrInput, type OpenPrResult } from "./gravekeeper.js";
+export { ScanCache, headSha, type CacheOptions } from "./cache.js";

@@ -25,6 +25,13 @@ An honest record of how Kiro was used to build Revenant. This project was built 
 - **Agent updated.** `.kiro/agents/gravekeeper.json` now describes what it really does (verify, then open or reuse sandbox PRs).
 - **Still not done.** Hooks are still not exercised through the Kiro hook runner.
 
+## 2026-11-19 (round 3: QA fixes)
+
+- **Spec first.** `.kiro/specs/qa-round3/` (requirements, design, tasks) was committed in `7d638a2` before any code change, from the findings in the QA review `qa-r2` (not committed).
+- **Dying noise.** The QA review showed Express reporting 11 "dying" packages, mostly small finished modules (`depd`, `etag`, `once`). Cause: the staleness penalty (up to 35 points) pushed clean packages under the dying line. Staleness now counts only together with a known vulnerability or a curated legacy mark. Re-scanning Express locally after the fix: 36 packages, 0 dead, 0 dying, 36 living. This is a judgement call, not a ground truth; the Stable epitaph states which facts it rests on, and both a stable fixture and a vulnerable-and-old fixture are tested.
+- **Cache.** `ScanCache` (engine) keyed by repo and commit SHA, 10 minute TTL, 50 entries. Checked locally with a read-only token: first scan of revenant-crypt 5.1 s, second 0.47 s with `fromCache: true`. It lives in one serverless instance, so a cold instance rescans; no shared store was added.
+- **Wording, accessibility, animation.** Notes rewritten for people, score caption added, dying stones amber with darker stone bases (text now full-strength ink on #9097a8 and #a08f45, both above 4.5:1 by calculation), tab list with arrow keys, scan hint text, a tombstone-rising animation that reduced-motion turns off. I did not run an automated contrast checker or Lighthouse this round.
+- **Not done.** Hooks still not exercised through the Kiro hook runner; multi-folder monorepo scanning is stated as unsupported rather than built; mobile filter chips still wrap.
 ## 2026-11-19 (MCP server and Graveyard Watch Crew app)
 
 - **Specs before crew code.** `.kiro/specs/crew-app` and `.kiro/specs/mcp-server` (requirements and tasks) were committed before `apps/crew`. The MCP server code (`packages/mcp`) was written first and its spec after; the spec header says so.

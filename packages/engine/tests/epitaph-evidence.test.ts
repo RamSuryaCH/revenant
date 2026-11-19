@@ -73,3 +73,23 @@ describe("correctness invariant: no invented facts", () => {
     expect(buildTombstone({ ...base, name: "uuid", version: "9.0.0" }, NOW).recipeId).toBeNull();
   });
 });
+
+describe("stable, finished package", () => {
+  const stable: PackageFacts = {
+    name: "depd", requested: "~2.0.0", version: "2.0.0", direct: false,
+    npmDeprecated: null, publishedAt: "2018-10-26T00:00:00.000Z", depsDevDeprecated: false,
+    githubRepo: "dougwilson/nodejs-depd", archived: false, pushedAt: "2020-01-01T00:00:00.000Z",
+    lastCommitMessage: null, lastCommitDate: null, scorecard: 3.2, scorecardSource: "scorecard", vulnIds: [],
+  };
+  it("is living with a cited Stable epitaph, not a stale-publish one", () => {
+    const t = buildTombstone(stable, NOW);
+    expect(t.status).toBe("living");
+    expect(t.causeOfDeath).toBeNull();
+    expect(t.epitaphs[0]!.text).toMatch(/^Stable:/);
+    expect(t.epitaphs.some((e) => e.kind === "stale-publish")).toBe(false);
+    for (const e of t.epitaphs) for (const ev of e.evidence) expect(lookupField(stable, ev.field)).toBeDefined();
+  });
+  it("turns dying once a known vulnerability is attached", () => {
+    expect(buildTombstone({ ...stable, vulnIds: ["GHSA-aaaa-bbbb-cccc"] }, NOW).status).toBe("dying");
+  });
+});

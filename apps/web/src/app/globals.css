@@ -12,6 +12,7 @@
   --color-stone: #cfc8b6;
   --color-moss: #9fb58a;
   --color-lantern: #ffd37a;
+  --color-amber: #e0b84f;
   --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-mono: var(--font-jb), ui-monospace, "SF Mono", Menlo, monospace;
@@ -137,7 +138,21 @@ dialog.crypt[open] { animation: rise 0.35s cubic-bezier(0.22, 1, 0.36, 1) both; 
 .diff-hunk { color: var(--color-moon); }
 .diff-meta { color: var(--color-bone-dim); }
 
+/* Resurrect moment: a small stone rises, then the lantern lights. transform and opacity only. */
+@keyframes tomb-rise {
+  0% { opacity: 0; transform: translate3d(0, 34px, 0) scale(0.92); }
+  60% { opacity: 1; transform: translate3d(0, -4px, 0) scale(1.02); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+@keyframes lantern-on {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.tomb-rise { animation: tomb-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.tomb-glow { animation: lantern-on 0.5s ease-out 0.7s both; }
+
 @media (prefers-reduced-motion: reduce) {
+  .tomb-rise, .tomb-glow { animation: none !important; }
   html { scroll-behavior: auto; }
   .fog, .flicker, .ember-pulse, .rise, dialog.crypt[open] { animation: none !important; }
   .scene-layer { transition: none; transform: none !important; }
