@@ -28,15 +28,15 @@ interface Tree {
 }
 
 /** Fetch package.json and capped JS/TS sources from a GitHub repo (tree API + raw downloads). */
-export async function fetchRepoSources(repo: string, o: { token?: string; fetchImpl?: typeof fetch; maxFiles?: number } = {}): Promise<{ files: SourceFile[]; truncated: boolean }> {
+export async function fetchRepoSources(repo: string, o: { token?: string; fetchImpl?: typeof fetch; maxFiles?: number; ref?: string } = {}): Promise<{ files: SourceFile[]; truncated: boolean }> {
   const max = o.maxFiles ?? 60;
   const headers: Record<string, string> = o.token ? { authorization: `Bearer ${o.token}` } : {};
-  const tree = await getJson<Tree>(`https://api.github.com/repos/${repo}/git/trees/HEAD?recursive=1`, { headers, fetchImpl: o.fetchImpl, timeoutMs: 10000 });
+  const tree = await getJson<Tree>(`https://api.github.com/repos/${repo}/git/trees/${o.ref ?? "HEAD"}?recursive=1`, { headers, fetchImpl: o.fetchImpl, timeoutMs: 10000 });
   const all = (tree?.tree ?? []).filter((t) => t.type === "blob" && SRC.test(t.path) && !SKIP.test(t.path) && (t.size ?? 0) < 120_000 && !/\.d\.ts$|\.min\.|\.test\.|\.spec\.|(^|\/)(test|tests|__tests__|fixtures?)\//.test(t.path));
   // Prefer source over config; cap fan-out.
   all.sort((a, b) => a.path.split("/").length - b.path.split("/").length);
   const picked = all.slice(0, max);
-  const base = `https://raw.githubusercontent.com/${repo}/HEAD`;
+  const base = `https://raw.githubusercontent.com/${repo}/${o.ref ?? "HEAD"}`;
   const files = (
     await pool(["package.json", ...picked.map((p) => p.path)], 10, async (p) => {
       const content = await getText(`${base}/${p}`, { fetchImpl: o.fetchImpl, timeoutMs: 8000 }).catch(() => null);

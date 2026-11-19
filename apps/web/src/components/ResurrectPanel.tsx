@@ -22,6 +22,46 @@ function DiffView({ patch }: { patch: string }) {
   );
 }
 
+type Gk = { phase: "looking" } | { phase: "found"; url: string; number: number } | { phase: "none" } | { phase: "failed"; message: string };
+
+const isCrypt = (repo: string | null) => !!repo && /(?:^|github\.com\/)ramsuryach\/revenant-crypt(?:\.git)?\/?$/i.test(repo.trim());
+
+/** Shows the live Gravekeeper PR on the sandbox repo. Read-only: the app never writes to GitHub. */
+function Gravekeeper({ recipeId }: { recipeId: string }) {
+  const [gk, setGk] = useState<Gk>({ phase: "looking" });
+  useEffect(() => {
+    let alive = true;
+    fetch(`/api/gravekeeper?recipe=${encodeURIComponent(recipeId)}`)
+      .then(async (res) => {
+        const j = (await res.json().catch(() => null)) as { pr?: { url: string; number: number } | null; message?: string } | null;
+        if (!res.ok) throw new Error(j?.message ?? `Lookup failed (HTTP ${res.status}).`);
+        if (alive) setGk(j?.pr ? { phase: "found", url: j.pr.url, number: j.pr.number } : { phase: "none" });
+      })
+      .catch((e: unknown) => alive && setGk({ phase: "failed", message: e instanceof Error ? e.message : "Lookup failed." }));
+    return () => {
+      alive = false;
+    };
+  }, [recipeId]);
+  return (
+    <div className="rounded-xl border border-moon/30 bg-moon/[0.07] p-4" aria-live="polite">
+      <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-moon">Gravekeeper · live pull request</p>
+      {gk.phase === "looking" && <p className="mt-2 text-sm text-bone-dim">Looking for the open pull request on revenant-crypt…</p>}
+      {gk.phase === "found" && (
+        <p className="mt-2 text-sm">
+          <a href={gk.url} target="_blank" rel="noreferrer" className="font-semibold text-ember underline underline-offset-4">Pull request #{gk.number} on RamSuryaCH/revenant-crypt</a>
+          <span className="text-bone-dim"> carries this patch, its Kiro spec and the differential tests, with the sandbox suite output in the description.</span>
+        </p>
+      )}
+      {gk.phase === "none" && (
+        <p className="mt-2 text-sm text-bone-dim">
+          No Gravekeeper pull request is open for this recipe right now. The maintainer opens it with <code className="font-mono text-moon">revenant gravekeeper {recipeId}</code>.
+        </p>
+      )}
+      {gk.phase === "failed" && <p role="alert" className="mt-2 text-sm text-ember">Could not look up the pull request: {gk.message} The patch below still works.</p>}
+    </div>
+  );
+}
+
 export function ResurrectPanel({ pkg, recipeId, repo, sample, version, evidence }: { pkg: string; recipeId: string; repo: string | null; sample: boolean; version: string | null; evidence: string[] }) {
   const [state, setState] = useState<{ phase: "loading" } | { phase: "error"; message: string } | { phase: "ready"; r: Resurrection }>({ phase: "loading" });
   const [tab, setTab] = useState<Tab>("diff");
@@ -81,6 +121,7 @@ export function ResurrectPanel({ pkg, recipeId, repo, sample, version, evidence 
       </div>
       {tab === "diff" && (
         <div className="space-y-3" role="tabpanel">
+          {!sample && repo && isCrypt(repo) && r.patch && <Gravekeeper recipeId={recipeId} />}
           {r.patch ? <DiffView patch={r.patch} /> : <p className="text-sm text-bone-dim">Nothing to migrate in the scanned files.</p>}
           <div className="flex flex-wrap items-center gap-2">
             <button onClick={download} disabled={!r.patch} className="rounded-full bg-ember px-4 py-2 text-sm font-semibold text-ink transition hover:bg-[#ffa070] disabled:opacity-40">Download .patch</button>

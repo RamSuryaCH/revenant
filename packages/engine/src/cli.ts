@@ -2,7 +2,8 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
 import { classifyInput, scan, ScanError } from "./scan.js";
-import { recipeForPackage, resurrect } from "./recipes/index.js";
+import { RECIPES, recipeForPackage, resurrect } from "./recipes/index.js";
+import { openResurrectionPr, SANDBOX_REPO, type CryptVerification } from "./gravekeeper.js";
 import { fetchRepoSources, readLocalSources } from "./repoFiles.js";
 import { ScanResult } from "./schema.js";
 
@@ -11,6 +12,9 @@ const HELP = `revenant - resurrect abandoned open-source dependencies
 Usage:
   revenant scan <github-url|dir|package.json> [--out file.json] [--transitive N] [--dev]
   revenant resurrect <scan.json> <package> [--from <dir|owner/repo>] [--out file.json] [--patch file.patch]
+  revenant gravekeeper <recipe-id|package|all> [--verification file.json]
+      Opens (or reuses) the pull request on ${SANDBOX_REPO}, branch revenant/<recipe-id>.
+      Needs a write token: GITHUB_TOKEN=$(gh auth token). Never run this from a server.
 
 Env: GITHUB_TOKEN raises GitHub API limits.`;
 
@@ -52,6 +56,20 @@ async function main(argv: string[]) {
     const patchOut = flag(args, "--patch");
     if (patchOut) await writeFile(patchOut, r.patch);
     await save(flag(args, "--out"), r);
+    return;
+  }
+  if (cmd === "gravekeeper" && args[0]) {
+    const token = process.env["GITHUB_TOKEN"];
+    if (!token) throw new Error("GITHUB_TOKEN is required (for example GITHUB_TOKEN=$(gh auth token)).");
+    const ids = args[0] === "all" ? Object.keys(RECIPES) : [RECIPES[args[0]]?.id ?? recipeForPackage(args[0])?.id];
+    if (ids.some((id) => !id)) throw new Error(`No curated recipe "${args[0]}". Use one of: ${Object.keys(RECIPES).join(", ")}, or all.`);
+    const vPath = flag(args, "--verification") ?? "apps/web/src/data/crypt-verification.json";
+    const verification = (await readFile(vPath, "utf8").then((t) => JSON.parse(t) as CryptVerification).catch(() => null));
+    if (!verification) process.stderr.write(`no verification file at ${vPath}; PR bodies will say the suites were not run\n`);
+    for (const id of ids as string[]) {
+      const pr = await openResurrectionPr({ repo: SANDBOX_REPO, recipeId: id, token, verification, appUrl: "https://revenant-beta.vercel.app" });
+      process.stdout.write(`${id}\t${pr.reused ? "reused" : "opened"}\t#${pr.number}\t${pr.url}\n`);
+    }
     return;
   }
   process.stdout.write(`${HELP}\n`);

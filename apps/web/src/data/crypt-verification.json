@@ -1,0 +1,57 @@
+{
+  "repo": "RamSuryaCH/revenant-crypt",
+  "baseSha": "4882d02aedb7e7354dd4695f49174db97861c9a1",
+  "node": "v26.12.0",
+  "generatedAt": "2026-11-19T14:46:43.021Z",
+  "baseline": {
+    "ok": true,
+    "summary": "✔ cli id is deterministic (2.259458ms)\n✔ cli when formats the date (6.29225ms)\n✔ cli usage exit code (0.199667ms)\n✔ getJson parses JSON and sends user-agent (28.937125ms)\n✔ postJson sends a JSON body and parses the reply (4.222875ms)\n✔ non-2xx rejects with status (4.892208ms)\n✔ connection failure rejects (3.55975ms)\n✔ spookyForecast verdicts (9.978542ms)\n✔ newEventId yields unique v4 uuids (5.702666ms)\n✔ slugId is deterministic v5 with pinned output (1.041917ms)\n✔ event lifecycle with pinned human-readable output (122.22925ms)\n✔ countdown, validation and 404 (20.118125ms)\n✔ formatEventTime pins moment format output (5.876625ms)\n✔ durationLabel pins humanized durations (1.418709ms)\n✔ relativeTo pins relative-time strings (2.767875ms)\n✔ daysUntilHalloween (1.008375ms)\nℹ tests 16\nℹ pass 16\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0"
+  },
+  "recipes": {
+    "moment-to-dayjs": {
+      "filesChanged": [
+        "src/time.js",
+        "package.json"
+      ],
+      "npmTest": {
+        "ok": true,
+        "summary": "✔ cli id is deterministic (1.868667ms)\n✔ cli when formats the date (1.891375ms)\n✔ cli usage exit code (0.100791ms)\n✔ getJson parses JSON and sends user-agent (22.249625ms)\n✔ postJson sends a JSON body and parses the reply (2.48125ms)\n✔ non-2xx rejects with status (1.555541ms)\n✔ connection failure rejects (1.299834ms)\n✔ spookyForecast verdicts (3.926292ms)\n✔ newEventId yields unique v4 uuids (2.538708ms)\n✔ slugId is deterministic v5 with pinned output (1.756583ms)\n✔ event lifecycle with pinned human-readable output (62.289667ms)\n✔ countdown, validation and 404 (10.006959ms)\n✔ formatEventTime pins moment format output (2.319ms)\n✔ durationLabel pins humanized durations (1.937625ms)\n✔ relativeTo pins relative-time strings (0.2585ms)\n✔ daysUntilHalloween (0.261458ms)\nℹ tests 16\nℹ pass 16\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0"
+      },
+      "differential": {
+        "ok": true,
+        "command": "npm install --no-save vitest fast-check moment dayjs && npx vitest run tests/revenant/moment-to-dayjs.differential.test.ts",
+        "output": "RUN  v5.1.1 /Users/ramsuryachelluboyina/.kiro/crew/scratch/2742354f/revenant-verify-VMdKCm/moment-to-dayjs\n\n ✓ tests/revenant/moment-to-dayjs.differential.test.ts (7 tests) 42ms\n\n Test Files  1 passed (1)\n      Tests  7 passed (7)\n   Start at  20:16:48\n   Duration  279ms (tests 47%, import 27%, transform 24%, worker 3%)"
+      }
+    },
+    "request-to-fetch": {
+      "filesChanged": [
+        "src/http-client.js",
+        "lib/request-compat.cjs",
+        "package.json"
+      ],
+      "npmTest": {
+        "ok": true,
+        "summary": "✔ cli id is deterministic (4.34225ms)\n✔ cli when formats the date (6.830833ms)\n✔ cli usage exit code (0.171917ms)\n✔ getJson parses JSON and sends user-agent (60.397333ms)\n✔ postJson sends a JSON body and parses the reply (11.165833ms)\n✔ non-2xx rejects with status (4.802791ms)\n✔ connection failure rejects (2.738333ms)\n✔ spookyForecast verdicts (6.542584ms)\n✔ newEventId yields unique v4 uuids (2.094292ms)\n✔ slugId is deterministic v5 with pinned output (1.363334ms)\n✔ event lifecycle with pinned human-readable output (79.441167ms)\n✔ countdown, validation and 404 (13.821875ms)\n✔ formatEventTime pins moment format output (6.501291ms)\n✔ durationLabel pins humanized durations (1.804417ms)\n✔ relativeTo pins relative-time strings (2.639709ms)\n✔ daysUntilHalloween (0.981459ms)\nℹ tests 16\nℹ pass 16\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0"
+      },
+      "differential": {
+        "ok": true,
+        "command": "npm install --no-save vitest fast-check request && npx vitest run tests/revenant/request-to-fetch.differential.test.ts",
+        "output": "RUN  v5.1.1 /Users/ramsuryachelluboyina/.kiro/crew/scratch/2742354f/revenant-verify-VMdKCm/request-to-fetch\n\n ✓ tests/revenant/request-to-fetch.differential.test.ts (6 tests) 373ms\n\n Test Files  1 passed (1)\n      Tests  6 passed (6)\n   Start at  20:16:54\n   Duration  748ms (tests 72%, import 22%, transform 5%, worker 1%)"
+      }
+    },
+    "uuid3-to-randomuuid": {
+      "filesChanged": [
+        "src/ids.js"
+      ],
+      "npmTest": {
+        "ok": true,
+        "summary": "✔ cli id is deterministic (2.653ms)\n✔ cli when formats the date (6.1615ms)\n✔ cli usage exit code (0.158875ms)\n✔ getJson parses JSON and sends user-agent (25.826458ms)\n✔ postJson sends a JSON body and parses the reply (5.679875ms)\n✔ non-2xx rejects with status (2.915292ms)\n✔ connection failure rejects (1.427667ms)\n✔ spookyForecast verdicts (4.551125ms)\n✔ newEventId yields unique v4 uuids (4.394875ms)\n✔ slugId is deterministic v5 with pinned output (1.365042ms)\n✔ event lifecycle with pinned human-readable output (90.299209ms)\n✔ countdown, validation and 404 (12.639916ms)\n✔ formatEventTime pins moment format output (6.998917ms)\n✔ durationLabel pins humanized durations (1.693042ms)\n✔ relativeTo pins relative-time strings (2.11325ms)\n✔ daysUntilHalloween (1.043666ms)\nℹ tests 16\nℹ pass 16\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0"
+      },
+      "differential": {
+        "ok": true,
+        "command": "npm install --no-save vitest fast-check uuid@3 && npx vitest run tests/revenant/uuid3-to-randomuuid.differential.test.ts",
+        "output": "RUN  v5.1.1 /Users/ramsuryachelluboyina/.kiro/crew/scratch/2742354f/revenant-verify-VMdKCm/uuid3-to-randomuuid\n\n ✓ tests/revenant/uuid3-to-randomuuid.differential.test.ts (4 tests) 27ms\n\n Test Files  1 passed (1)\n      Tests  4 passed (4)\n   Start at  20:17:00\n   Duration  233ms (tests 45%, transform 26%, import 25%, worker 4%)"
+      }
+    }
+  }
+}

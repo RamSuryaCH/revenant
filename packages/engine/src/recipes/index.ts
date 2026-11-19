@@ -1,4 +1,4 @@
-import { createTwoFilesPatch } from "diff";
+import { applyPatch, createTwoFilesPatch } from "diff";
 import { SCHEMA_VERSION, type Resurrection } from "../schema.js";
 import { momentRecipe } from "./momentRecipe.js";
 import { requestRecipe } from "./requestRecipe.js";
@@ -42,7 +42,7 @@ export interface ResurrectInput {
 }
 
 export function resurrect(input: ResurrectInput): Resurrection {
-  const recipe = RECIPES[input.recipeId];
+  const recipe = Object.hasOwn(RECIPES, input.recipeId) ? RECIPES[input.recipeId] : undefined;
   if (!recipe) throw new Error(`No curated recipe "${input.recipeId}".`);
   const pkgFile = input.files.find((f) => f.path === "package.json");
   const sources = input.files.filter((f) => SOURCE_EXT.test(f.path) && !/(^|\/)node_modules\//.test(f.path));
@@ -94,4 +94,33 @@ export function resurrect(input: ResurrectInput): Resurrection {
     notes,
     stats: { filesScanned: sources.length, filesChanged: changed.length },
   };
+}
+
+/**
+ * Apply a Resurrection's per-file diffs to the original sources and return the new file contents.
+ * Used by the Gravekeeper to commit through the GitHub API (no git binary needed).
+ */
+export function applyResurrection(files: SourceFile[], r: Resurrection): SourceFile[] {
+  const byPath = new Map(files.map((f) => [f.path, f.content]));
+  const out: SourceFile[] = [];
+  for (const f of r.files) {
+    const before = f.kind === "add" ? "" : byPath.get(f.path);
+    if (before === undefined) throw new Error(`Cannot apply patch: ${f.path} is missing.`);
+    const after = applyPatch(before, f.diff);
+    if (after === false) throw new Error(`Patch did not apply cleanly to ${f.path}.`);
+    out.push({ path: f.path, content: after });
+  }
+  return out;
+}
+
+/** Every file a Gravekeeper pull request commits: migrated sources, Kiro spec, differential tests. */
+export function pullRequestFiles(files: SourceFile[], r: Resurrection): SourceFile[] {
+  const base = `.kiro/specs/${r.spec.slug}`;
+  return [
+    ...applyResurrection(files, r),
+    { path: `${base}/requirements.md`, content: r.spec.requirements },
+    { path: `${base}/design.md`, content: r.spec.design },
+    { path: `${base}/tasks.md`, content: r.spec.tasks },
+    { path: r.tests.path, content: r.tests.content },
+  ];
 }

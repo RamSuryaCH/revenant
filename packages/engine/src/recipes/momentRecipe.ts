@@ -2,12 +2,13 @@ import { MOMENT_TEST } from "./generated.js";
 import type { Recipe, SourceFile, TransformResult } from "./types.js";
 
 const PLUGINS: { name: string; module: string; test: RegExp }[] = [
-  { name: "relativeTime", module: "dayjs/plugin/relativeTime", test: /\.(?:fromNow|toNow)\(/ },
+  { name: "relativeTime", module: "dayjs/plugin/relativeTime", test: /\.(?:fromNow|toNow|from|to|humanize)\(/ },
   { name: "utc", module: "dayjs/plugin/utc", test: /\bdayjs\.utc\(|\.(?:utc|local)\(/ },
   { name: "duration", module: "dayjs/plugin/duration", test: /\bdayjs\.duration\(/ },
   { name: "isSameOrBefore", module: "dayjs/plugin/isSameOrBefore", test: /\.isSameOrBefore\(/ },
   { name: "isSameOrAfter", module: "dayjs/plugin/isSameOrAfter", test: /\.isSameOrAfter\(/ },
   { name: "isBetween", module: "dayjs/plugin/isBetween", test: /\.isBetween\(/ },
+  { name: "objectSupport", module: "dayjs/plugin/objectSupport", test: /\bdayjs(?:\.utc)?\(\s*\{/ },
   { name: "calendar", module: "dayjs/plugin/calendar", test: /\.calendar\(/ },
   { name: "advancedFormat", module: "dayjs/plugin/advancedFormat", test: /format\(\s*['"`][^'"`]*(?:Do|Q|X|x|k|z)/ },
 ];

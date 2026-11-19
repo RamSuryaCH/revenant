@@ -11,6 +11,7 @@ type Phase = "idle" | "loading" | "streaming" | "ready";
 type Filter = "all" | "dead" | "dying" | "living";
 
 const SAMPLE_REPO = "https://github.com/expressjs/express";
+const CRYPT_REPO = "https://github.com/RamSuryaCH/revenant-crypt";
 const ORDER = { dead: 0, dying: 1, living: 2 } as const;
 
 export function App() {
@@ -203,9 +204,14 @@ export function App() {
                 Scan live
               </button>
             </form>
-            <button type="button" onClick={() => { setUrl(SAMPLE_REPO); void runLive(SAMPLE_REPO); }} disabled={busy} className="self-center font-mono text-[11px] uppercase tracking-[0.2em] text-bone-dim underline decoration-white/20 underline-offset-4 hover:text-bone disabled:opacity-40">
-              or scan expressjs/express live
-            </button>
+            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+              <button type="button" onClick={() => { setUrl(CRYPT_REPO); void runLive(CRYPT_REPO); }} disabled={busy} className="font-mono text-[11px] uppercase tracking-[0.2em] text-moon underline decoration-moon/30 underline-offset-4 hover:text-bone disabled:opacity-40">
+                Haunt the sandbox repo (live PRs)
+              </button>
+              <button type="button" onClick={() => { setUrl(SAMPLE_REPO); void runLive(SAMPLE_REPO); }} disabled={busy} className="font-mono text-[11px] uppercase tracking-[0.2em] text-bone-dim underline decoration-white/20 underline-offset-4 hover:text-bone disabled:opacity-40">
+                or scan expressjs/express live
+              </button>
+            </div>
             {error && <p role="alert" className="rounded-xl border border-ember/40 bg-ember/10 px-4 py-3 text-left text-sm">{error}</p>}
           </div>
         </div>
