@@ -90,7 +90,6 @@ export function Hero({ url, setUrl, busy, onScan, onSandbox, onExample, onSample
           </form>
 
           <p className="lift mt-1 grid grid-cols-[auto_auto] justify-start gap-x-5 sm:mt-3 sm:flex sm:flex-wrap sm:items-center sm:gap-x-5" style={{ ["--i" as string]: 6 }}>
-            <span className="hidden text-[15px] text-mist sm:inline">No repo handy?</span>
             <button type="button" className="link-moon col-span-2 justify-self-start" disabled={busy} onClick={onSandbox}>Haunt the sandbox repo</button>
             <button type="button" className="link-moon" disabled={busy} onClick={onExample}>or scan bower/bower</button>
             <button type="button" className="link-moon" disabled={busy} onClick={onSample}>or the sample</button>
