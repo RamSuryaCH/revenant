@@ -62,3 +62,11 @@ An honest record of how Kiro was used to build Revenant. This project was built 
 - **PR numbers say what they cover.** The card shows the patch to the scanned repo (source files only) and, separately, the whole pull request's totals read live from GitHub (`#2`: +347 −4 in 7 files), which matched `gh pr list` when checked.
 - **Errors.** Network failures read "Could not reach the server. Check your connection and try again." and focus moves to "Try again". `owner/repo` is accepted; a missing or private repo gets its own message.
 - **Resurrect re-staged.** The right half of the stage now holds the three artifact cards and then the PR card, so the money frame is full.
+
+## 2026-11-19 (round 5: carved stones, narrative, share card, mobile sheet)
+
+- **Spec first.** `.kiro/specs/design-round5/` (EARS requirements, design, traced tasks) and the steering update were committed before any code, from the qa-r4 Awwwards list (items 1, 2, 5) and P2-5, P2-9.
+- **Built to the spec.** Stones are inline SVG over real HTML text (shared defs, grain, lit and shaded edge, carved inset, crack for dying, ember rim). The three-beat narrative reads only bundled sample data and is covered by tests that check each number comes from the sample. The share image is generated from the hero stones. The tslint-style sentence is corrected in the display layer (`displayEpitaph`), with the cited field untouched.
+- **Measured.** Lighthouse 13.6.0 mobile on the local production build: performance 100, accessibility 100 (two runs). Stone text contrast is tested against the fill darkened by the maximum grain.
+- **Looked at, not assumed.** A screenshot showed the first OG draft overlapping its own subtitle and mono chips breaking mid-word; both were fixed after viewing.
+- **Not verified by a person:** touch dragging of the mobile sheet (the code path was exercised only by opening and closing it).

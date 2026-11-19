@@ -138,6 +138,10 @@ export function Drawer({ t, opener, onClose, repo, sample, reduce }: { t: Tombst
                 const dy = Math.max(0, e.clientY - drag.current.y);
                 ref.current.style.transform = `translate3d(0,${dy}px,0)`;
               }}
+              onPointerCancel={() => {
+                drag.current = null;
+                if (ref.current) ref.current.style.transform = "";
+              }}
               onPointerUp={(e) => {
                 if (!drag.current || !ref.current) return;
                 const dy = e.clientY - drag.current.y;

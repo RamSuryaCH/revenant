@@ -107,7 +107,7 @@ export function Graveyard(props: {
       {notes.map((n, i) => <p key={i} className="t-evidence mt-3 text-mist">Note: {n}</p>)}
       {live && <SourceLedger tombs={tombs} phase={phase} />}
 
-      <div role="group" aria-label="Filter by status" className="mt-8 max-w-full overflow-x-auto">
+      <div role="group" aria-label="Filter by status" className="filterbar mt-8 max-w-full">
         <div className="seg">
           {FILTERS.map(([f, label, n, st]) => (
             <button key={f} type="button" aria-pressed={filter === f} onClick={() => setFilter(f)}>

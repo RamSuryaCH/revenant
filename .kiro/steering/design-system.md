@@ -47,6 +47,10 @@ Fraunces for display and epitaph pull quotes, Inter for UI, JetBrains Mono for e
 - The Resurrect stage on wide screens keeps the stone in the left half and the three artifact cards, then the PR card, in the right half. Narrow screens swap the cards for the PR card.
 - Cursor candle (ember radial following the pointer) on hero and graveyard stones; off under either reduced-motion switch.
 
+## Stones (round 5)
+
+Dead and dying packages are inline SVG tombstones (one shared defs sheet, per-stone `viewBox 0 0 300 380`, `preserveAspectRatio=none`): gradient body, grain, bright top-left lit edge, dark bottom-right edge, carved inset arch, crack for dying, ember rim on hover/focus. The arch is an ellipse 50% by 39.5% so CSS `border-radius: 50% 50% 0 0 / 39.5% 39.5% 0 0` clips the cursor candle to the same shape. Text stays HTML. Grain and edge shading darken at most 12%; `tests/stones.test.ts` asserts AA on the darkened stops. Below the hero a three-beat narrative (Scan, Epitaph, Resurrect) shows one real artifact each. Under 768 px the filter bar sticks to the bottom and the drawer is a draggable bottom sheet. Share image is generated from the same hero data. All art is original SVG; no raster art.
+
 ## Accessibility
 
 Keyboard operable end to end, visible 2 px lantern focus ring, native `dialog` with focus return, status never by colour alone, `aria-live="polite"` for scan and resurrect progress, works to 360 px and 200% zoom.

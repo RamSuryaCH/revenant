@@ -39,7 +39,7 @@ function useReduceMotion(): [boolean, () => void] {
   return [reduce, () => setReduce((v) => !v)];
 }
 
-export function App() {
+export function App({ narrative }: { narrative?: React.ReactNode }) {
   const [phase, setPhase] = useState<Phase>("idle");
   const [tombs, setTombs] = useState<Tombstone[]>([]);
   const [notes, setNotes] = useState<string[]>([]);
@@ -215,6 +215,8 @@ export function App() {
         reduce={reduce}
         toggleReduce={toggleReduce}
       />
+
+      {narrative}
 
       <main id="main">
         <p role="status" aria-live="polite" className="sr-only">{status}</p>
