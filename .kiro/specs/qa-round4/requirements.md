@@ -15,6 +15,7 @@ Input: the independent QA review `qa-r4` of the live Ledger of the Dead build (i
 ### Live example and counts (P0-1)
 - R1.1 THE SYSTEM SHALL offer, as the hero's live example, a public repository whose root `package.json` yields at least 3 dead direct dependencies and that scans in under 20 seconds (`bower/bower`, verified before the swap).
 - R1.2 WHEN a scan finishes THE SYSTEM SHALL state the same package total in the headline, the filter bar and the alive row.
+- R1.5 WHILE a scan is still streaming THE SYSTEM SHALL show only the running count, never a verdict such as "all alive".
 - R1.3 WHEN a scan finds no dead or dying package THE SYSTEM SHALL say "N packages checked, all alive".
 - R1.4 WHEN a source was read but no epitaph cites it THE SYSTEM SHALL label it "checked, nothing to cite", never "cited by no package".
 
