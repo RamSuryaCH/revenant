@@ -132,7 +132,11 @@ kirocrew app install apps/crew
 kirocrew app enable graveyard-watch                   # third-party apps need your trust: approve it in the App Store prompt
 ```
 
-Needs only Node 20+. Optional: `GITHUB_TOKEN` for GitHub limits, `REVENANT_CRYPT_DIR` for the local clone used by the nightly reset, `REVENANT_RESET_DRY_RUN=1` to preview the reset. The nightly reset closes open `revenant/*` demo pull requests and deletes those branches; set the dry-run variable while judges may be looking at them.
+![Graveyard Watch page](docs/graveyard-watch.png)
+
+The screenshot is the app's real page bundle and live backend data, rendered by `node apps/crew/scripts/preview.mjs` (a local harness with a stand-in for the Crew SDK), because an agent cannot capture the Kiro Crew dashboard itself.
+
+Needs only Node 20+. Optional: `GITHUB_TOKEN` for GitHub limits, `REVENANT_CRYPT_DIR` for the local clone used by the nightly reset, `REVENANT_RESET_LIVE=1` to make the nightly reset real. Without it the reset is a dry run, because a live reset closes the open `revenant/*` demo pull requests and deletes their branches.
 
 ## Built with Kiro
 

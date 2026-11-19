@@ -4,7 +4,12 @@
   "displayName": "Graveyard Watch",
   "description": "Watches GitHub repositories for dead npm dependencies, shows them as a graveyard, reports who newly died each night, and lets the necromancer agent resurrect them with curated, tested recipes. Powered by Revenant.",
   "author": "RamSuryaCH",
-  "tags": ["dependencies", "npm", "maintenance", "revenant"],
+  "tags": [
+    "dependencies",
+    "npm",
+    "maintenance",
+    "revenant"
+  ],
   "highlights": [
     "Graveyard page: every watched repo as tombstones, with the cited API field behind each cause of death",
     "Nightly rescan that names the packages that died since last night",
@@ -13,9 +18,21 @@
   ],
   "defaultEnabled": false,
   "iconPath": "assets/icon.png",
-  "platform": { "os": ["macos", "linux", "windows"] },
-  "agents": ["agents/necromancer.json", "agents/gravekeeper.json"],
-  "skills": ["skills/revenant-resurrection", "skills/graveyard-watch-ops"],
+  "platform": {
+    "os": [
+      "macos",
+      "linux",
+      "windows"
+    ]
+  },
+  "agents": [
+    "agents/necromancer.json",
+    "agents/gravekeeper.json"
+  ],
+  "skills": [
+    "skills/revenant-resurrection",
+    "skills/graveyard-watch-ops"
+  ],
   "mcpServers": {
     "revenant": {
       "command": "node",
@@ -23,7 +40,10 @@
         "-e",
         "const p=require('path'),o=require('os');import(require('url').pathToFileURL(p.join(process.env.KIROCREW_HOME||p.join(o.homedir(),'.kiro','crew'),'apps','graveyard-watch','bin','revenant-mcp.mjs')).href)"
       ],
-      "autoApprove": ["scan_dependencies", "explain_tombstone"]
+      "autoApprove": [
+        "scan_dependencies",
+        "explain_tombstone"
+      ]
     }
   },
   "backend": {
@@ -34,7 +54,13 @@
   },
   "ui": {
     "entry": "ui/index.mjs",
-    "pages": [{ "route": "/apps/graveyard-watch", "label": "Graveyard Watch", "icon": "Skull" }]
+    "pages": [
+      {
+        "route": "/apps/graveyard-watch",
+        "label": "Graveyard Watch",
+        "icon": "Skull"
+      }
+    ]
   },
   "crons": [
     {
@@ -56,11 +82,18 @@
     "cron": true
   },
   "dependencies": {
-    "commands": ["node"],
-    "optionalCommands": ["gh", "git"]
+    "commands": [
+      "node"
+    ],
+    "optionalCommands": [
+      "gh",
+      "git"
+    ]
   },
-  "useCases": ["Know the morning after which of your dependencies were declared dead, then resurrect them."],
+  "useCases": [
+    "Know the morning after which of your dependencies were declared dead, then resurrect them."
+  ],
   "configuration": [
-    "Set GITHUB_TOKEN in the gateway environment to raise GitHub limits. Set REVENANT_CRYPT_DIR to your local clone of RamSuryaCH/revenant-crypt for the nightly reset."
+    "Set GITHUB_TOKEN in the gateway environment to raise GitHub limits. Set REVENANT_CRYPT_DIR to your local clone of RamSuryaCH/revenant-crypt for the nightly reset. The nightly reset is a dry run unless REVENANT_RESET_LIVE=1 is set in the gateway environment, because a live reset closes the demo pull requests."
   ]
 }

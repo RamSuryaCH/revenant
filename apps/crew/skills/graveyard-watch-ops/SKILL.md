@@ -10,5 +10,5 @@ triggers: graveyard watch, newly dead, nightly rescan, watchlist, demo reset, re
 - State file: `<crew home>/apps/graveyard-watch/data/state.json` (override with `REVENANT_WATCH_DATA`). Read it, do not hand-edit it while the backend runs.
 - "Newly dead" means dead in the latest scan and not dead in the previous one. The first scan of a repo is a baseline and reports none.
 - The nightly job runs at 02:00: it rescans every watched repo, records the run in `state.json` (`nightly`), then runs `scripts/reset.sh` in a local clone of `RamSuryaCH/revenant-crypt`. It skips the reset, and says why, when the clone's origin or the script's pinned repo is anything else.
-- `REVENANT_CRYPT_DIR` points at the clone. `REVENANT_RESET_DRY_RUN=1` previews the reset. `GITHUB_TOKEN` raises GitHub rate limits.
+- `REVENANT_CRYPT_DIR` points at the clone. The reset is a dry run unless `REVENANT_RESET_LIVE=1` is set, because a live reset closes the demo pull requests. `GITHUB_TOKEN` raises GitHub rate limits.
 - Only `owner/name` GitHub repositories can be watched.

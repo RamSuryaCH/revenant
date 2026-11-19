@@ -39,7 +39,7 @@ async function resetDemoRepo(o = {}) {
     if (!(await readFile(script, "utf8")).includes(`REPO="${RESET_REPO}"`)) {
       return { status: "skipped", detail: `Refused: ${script} does not pin ${RESET_REPO}.` };
     }
-    const dry = env["REVENANT_RESET_DRY_RUN"] === "1";
+    const dry = env["REVENANT_RESET_LIVE"] !== "1";
     const { stdout } = await exec("bash", [script], { cwd: dir, timeout: 12e4, env: { ...env, DRY_RUN: dry ? "1" : "0" } });
     const tail = stdout.trim().split("\n").slice(-3).join(" | ");
     return { status: dry ? "dry-run" : "done", detail: tail || "reset finished" };

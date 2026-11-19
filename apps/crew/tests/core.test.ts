@@ -100,6 +100,18 @@ describe("resetDemoRepo", () => {
     expect(r.status).toBe("skipped");
     expect(calls.every((c) => !c.startsWith("bash"))).toBe(true);
   });
+  it("runs live only with REVENANT_RESET_LIVE=1", async () => {
+    const { mkdirSync, writeFileSync } = await import("node:fs");
+    mkdirSync(join(dir, "scripts"));
+    writeFileSync(join(dir, "scripts", "reset.sh"), `REPO="${RESET_REPO}"\n`);
+    let env: Record<string, string | undefined> = {};
+    const r = await resetDemoRepo({
+      env: { REVENANT_CRYPT_DIR: dir, REVENANT_RESET_LIVE: "1" },
+      exec: async (f, _a, o) => { if (f === "bash") env = (o?.["env"] ?? {}) as typeof env; return { stdout: f === "git" ? `https://github.com/${RESET_REPO}` : "reset done" }; },
+    });
+    expect(r.status).toBe("done");
+    expect(env["DRY_RUN"]).toBe("0");
+  });
   it("refuses a script that does not pin the repo", async () => {
     const { mkdirSync, writeFileSync } = await import("node:fs");
     mkdirSync(join(dir, "scripts"));
@@ -113,7 +125,7 @@ describe("resetDemoRepo", () => {
     writeFileSync(join(dir, "scripts", "reset.sh"), `REPO="${RESET_REPO}"\n`);
     let env: Record<string, string | undefined> = {};
     const r = await resetDemoRepo({
-      env: { REVENANT_CRYPT_DIR: dir, REVENANT_RESET_DRY_RUN: "1" },
+      env: { REVENANT_CRYPT_DIR: dir },
       exec: async (f, _a, o) => { if (f === "bash") env = (o?.["env"] ?? {}) as typeof env; return { stdout: f === "git" ? `git@github.com:${RESET_REPO}.git` : "reset done" }; },
     });
     expect(r).toEqual({ status: "dry-run", detail: "reset done" });
