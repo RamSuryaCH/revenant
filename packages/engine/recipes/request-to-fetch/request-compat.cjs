@@ -23,6 +23,29 @@ function encodeQuery(qs) {
   return parts.join('&');
 }
 
+/**
+ * fetch wraps socket errors as TypeError('fetch failed') with the real error in `cause`;
+ * request passed the socket error itself (err.code === 'ECONNREFUSED'), so unwrap it.
+ * fetch also refuses ports on the WHATWG bad-port list (e.g. 1, 25, 6000) before connecting;
+ * for those, probe the socket so callers still see the error request would have produced.
+ */
+function toRequestError(e, href) {
+  const cause = e && e.cause;
+  if (cause && cause.code) return Promise.resolve(cause);
+  if (!cause || cause.message !== 'bad port') return Promise.resolve(e);
+  const u = new URL(href);
+  return new Promise(function (resolve) {
+    const sock = require('node:net').connect(Number(u.port), u.hostname.replace(/^\[|\]$/g, ''));
+    sock.once('error', function (err) { resolve(err); });
+    sock.once('connect', function () {
+      sock.destroy();
+      const err = new Error('request-compat: port ' + u.port + ' is blocked by fetch (WHATWG bad port list)');
+      err.code = 'ERR_BLOCKED_PORT';
+      resolve(err);
+    });
+  });
+}
+
 function request(uri, options, callback) {
   let opts = typeof uri === 'object' && uri !== null ? Object.assign({}, uri) : { uri: uri };
   if (typeof options === 'function') callback = options;
@@ -101,7 +124,10 @@ function request(uri, options, callback) {
   if (callback) {
     promise.then(
       function (r) { callback(null, r.response, r.body); },
-      function (e) { if (timer) clearTimeout(timer); callback(e); }
+      function (e) {
+        if (timer) clearTimeout(timer);
+        toRequestError(e, href).then(callback);
+      }
     );
   }
   return { abort: function () { controller.abort(); }, then: undefined, promise: promise };

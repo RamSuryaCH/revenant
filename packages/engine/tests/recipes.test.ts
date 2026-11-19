@@ -114,3 +114,17 @@ describe("cached samples", () => {
     for (const t of s.tombstones) for (const e of t.epitaphs) expect(e.evidence.length).toBeGreaterThan(0);
   });
 });
+
+import { applyResurrection } from "../src/recipes/index.js";
+describe("applyResurrection", () => {
+  it("reproduces the migrated files from the diffs", () => {
+    const files = [
+      { path: "package.json", content: '{\n  "name": "x",\n  "dependencies": {\n    "uuid": "3.4.0"\n  }\n}\n' },
+      { path: "src/ids.js", content: 'const uuid = require("uuid/v4");\nmodule.exports = () => uuid();\n' },
+    ];
+    const r = resurrect({ recipeId: "uuid3-to-randomuuid", files });
+    const out = applyResurrection(files, r);
+    expect(out.length).toBe(r.files.length);
+    expect(out.find((f) => f.path === "src/ids.js")?.content).not.toContain('require("uuid/v4")');
+  });
+});

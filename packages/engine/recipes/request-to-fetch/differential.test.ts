@@ -100,4 +100,15 @@ describe("request vs request-compat (differential)", () => {
     expect(() => newRequest({})).toThrow();
     expect(() => oldRequest({})).toThrow();
   });
+
+  it("connection failures surface the same socket error code", async () => {
+    const closed = createServer();
+    await new Promise<void>((r) => closed.listen(0, "127.0.0.1", r));
+    const port = (closed.address() as AddressInfo).port;
+    await new Promise<void>((r) => closed.close(() => r()));
+    for (const p of [port, 1]) {
+      const codes = await Promise.all([oldRequest, newRequest].map((impl) => call(impl, { uri: `http://127.0.0.1:${p}/x` }).then(() => "ok", (e: { code?: string }) => e.code)));
+      expect(codes[1]).toBe(codes[0]);
+    }
+  });
 });

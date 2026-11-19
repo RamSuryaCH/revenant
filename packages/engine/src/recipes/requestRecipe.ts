@@ -2,6 +2,7 @@ import { REQUEST_SHIM, REQUEST_TEST } from "./generated.js";
 import { relImport, type Recipe, type SourceFile, type TransformResult } from "./types.js";
 
 export const SHIM_PATH = "lib/request-compat.cjs";
+const TEST_PATH = "tests/revenant/request-to-fetch.differential.test.ts";
 
 function transform(file: SourceFile): TransformResult {
   const notes: string[] = [];
@@ -56,10 +57,11 @@ export const requestRecipe: Recipe = {
     json["engines"] = engines;
     return `${JSON.stringify(json, null, 2)}\n`;
   },
-  testFile: { path: "tests/revenant/request-to-fetch.differential.test.ts", content: REQUEST_TEST, deps: ["vitest", "fast-check", "request"] },
+  testFile: { path: TEST_PATH, content: REQUEST_TEST.replace('"./request-compat.cjs"', JSON.stringify(relImport(TEST_PATH, SHIM_PATH))), deps: ["vitest", "fast-check", "request"] },
   limits: [
     "The shim covers the common callback API: uri/url, method, qs, headers, body, json, form, auth, timeout, followRedirect, encoding: null, plus get/post/put/patch/del/head/defaults.",
     "Streams and .pipe(), cookie jars, multipart, proxies and nested qs objects are not supported; call sites are flagged with TODOs.",
+    "fetch refuses WHATWG bad ports (for example 1, 25, 6000); the shim then probes the socket and reports its error code, or ERR_BLOCKED_PORT if the port is open.",
     "Differential tests run both clients against a local HTTP server; they do not cover TLS, redirects across hosts or retry behaviour.",
   ],
 };
