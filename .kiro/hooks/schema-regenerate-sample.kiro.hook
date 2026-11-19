@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "name": "Regenerate cached sample on schema change",
+  "description": "When the frozen schema or tombstone builder changes, regenerate the committed sample ScanResult and Resurrections and re-run the schema validation test.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": ["packages/engine/src/schema.ts", "packages/engine/src/tombstone.ts", "packages/engine/src/scoring.ts"]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "GITHUB_TOKEN=$(gh auth token 2>/dev/null) pnpm sample && pnpm --filter @revenant/engine exec vitest run tests/recipes.test.ts"
+  }
+}

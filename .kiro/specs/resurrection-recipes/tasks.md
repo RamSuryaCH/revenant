@@ -1,0 +1,24 @@
+# Tasks: Resurrection recipes
+
+- [x] 1. Recipe contract and runner (`resurrect()`, git-format diff, spec generator)
+  - _Requirements: R1.1, R1.3_
+- [x] 2. moment to dayjs
+  - [x] 2.1 Transform with plugin detection and mutation TODOs
+  - [x] 2.2 Differential PBT (7 properties, 200 runs)
+  - _Requirements: R2.1, R3.1, R5.1_
+- [x] 3. request to fetch
+  - [x] 3.1 `request-compat.cjs` shim on native fetch
+  - [x] 3.2 Differential PBT against a local HTTP server (100 runs each)
+  - _Requirements: R2.1, R3.1, R5.1_
+- [x] 4. uuid@3 to crypto.randomUUID
+  - [x] 4.1 Five import shapes, bail-out on arguments
+  - [x] 4.2 Differential PBT
+  - _Requirements: R2.1, R3.1, R5.1_
+- [x] 5. No-op property and `git apply --check` against the sample
+  - _Requirements: R1.2, R2.2_
+- [x] 6. Hook: re-embed and re-run tests when recipes change
+  - _Requirements: R3.2_
+- [x] 7. Web: Resurrect panel (spec, diff, tests, download .patch)
+  - _Requirements: R1.1, R4.1, R5.1_
+- [ ] 8. AI-written plan behind a feature flag
+  - _Requirements: R4.2_ (deferred)

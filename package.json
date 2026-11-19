@@ -1,0 +1,22 @@
+{
+  "name": "revenant-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "license": "MIT",
+  "packageManager": "pnpm@10.33.2",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "typecheck": "pnpm -r typecheck",
+    "lint": "eslint .",
+    "test": "pnpm --filter @revenant/engine test",
+    "build": "pnpm --filter @revenant/engine build && pnpm --filter @revenant/web build",
+    "sample": "pnpm --filter @revenant/engine run sample",
+    "embed": "node scripts/embed-recipes.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "eslint": "^9.39.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.46.0"
+  }
+}
