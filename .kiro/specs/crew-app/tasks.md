@@ -1,0 +1,26 @@
+# Tasks: Graveyard Watch
+
+- [ ] 1. Core state: types, atomic locked store, repo normalization
+  - [ ] 1.1 Store with lock and atomic rename
+  - [ ] 1.2 Repo normalizer that rejects non-GitHub input
+  - _Requirements: R1.1, R1.2, R1.4, R5.1, R5.2_
+- [ ] 2. Diff and scan wiring (engine called directly, not the web API)
+  - [ ] 2.1 Newly-dead computation with baseline handling
+  - [ ] 2.2 rescan persists snapshot; failure keeps previous snapshot
+  - _Requirements: R2.2, R2.6, R3.3, R5.4_
+- [ ] 3. Nightly job and guarded reset
+  - [ ] 3.1 runNightly continues past a failing repo and records the run
+  - [ ] 3.2 resetDemoRepo checks origin and script pin
+  - _Requirements: R3.1, R3.2, R3.4, R3.5, R3.6, R3.7_
+- [ ] 4. Backend (Node) with state, watch, unwatch, scan routes
+  - _Requirements: R1.1, R1.2, R1.3, R2.5, R2.6_
+- [ ] 5. Dashboard page with graveyard visuals and detail panel
+  - _Requirements: R2.1, R2.3, R2.4, R2.5, R2.7_
+- [ ] 6. Manifest, agents, skills, MCP registration, cron
+  - _Requirements: R3.1, R4.1, R4.2, R4.3, R4.4_
+- [ ] 7. Build script bundling backend, nightly and MCP into the app folder
+  - _Requirements: R6.1_
+- [ ] 8. Install locally and verify: page renders, cron registered, one cron run logged
+  - _Requirements: R3.1, R3.2, R3.6_
+- [ ] 9. README section and screenshot
+  - _Requirements: R6.2_
