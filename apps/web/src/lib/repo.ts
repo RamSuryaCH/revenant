@@ -24,10 +24,14 @@ export interface PrTotals {
   files: number;
 }
 
-/** Read the pull request's own totals from GitHub's pulls API shape. Returns null unless all three are numbers. */
+/**
+ * Read a pull request's own totals, from GitHub's pulls API shape (`changed_files`) or from our
+ * route's reply (`files`). Returns null unless all three are numbers.
+ */
 export function parsePrTotals(j: unknown): PrTotals | null {
   const o = (j ?? {}) as Record<string, unknown>;
-  const { additions, deletions, changed_files: files } = o;
+  const { additions, deletions } = o;
+  const files = o["changed_files"] ?? o["files"];
   return typeof additions === "number" && typeof deletions === "number" && typeof files === "number" ? { additions, deletions, files } : null;
 }
 

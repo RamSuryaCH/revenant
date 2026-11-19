@@ -65,6 +65,7 @@ describe("clampAtClause (R5.1)", () => {
 describe("PR totals (R3.2, R3.3)", () => {
   it("reads GitHub's pull shape and refuses anything partial", () => {
     expect(parsePrTotals({ additions: 347, deletions: 4, changed_files: 7 })).toEqual({ additions: 347, deletions: 4, files: 7 });
+    expect(parsePrTotals({ additions: 347, deletions: 4, files: 7 })).toEqual({ additions: 347, deletions: 4, files: 7 });
     expect(parsePrTotals({ additions: 1 })).toBeNull();
     expect(parsePrTotals(null)).toBeNull();
   });

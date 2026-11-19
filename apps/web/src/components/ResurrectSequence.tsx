@@ -86,7 +86,7 @@ export function ResurrectSequence(props: Props) {
 
   // Keyboard users land on "Try again" when an attempt fails.
   useEffect(() => {
-    if (error) requestAnimationFrame(() => retry.current?.focus());
+    if (error) retry.current?.focus();
   }, [error, phase]);
 
   // Layers the timeline drives.
@@ -209,7 +209,8 @@ export function ResurrectSequence(props: Props) {
       });
       capTimers.push(setTimeout(() => setCaption(STEPS[3]), 800));
       // Cards stack away, the PR card takes their place, then the stage pulls back.
-      A(cardsEl, [{ opacity: 1, transform: "scale(1)" }, { opacity: 0, transform: "scale(0.96)" }], { duration: 400, delay: 1900, easing: "cubic-bezier(0.4,0,0.2,1)" });
+      // Wide screens keep the three artifact cards beside the stone under the PR card; narrow ones swap them.
+      if (!window.matchMedia("(min-width: 900px)").matches) A(cardsEl, [{ opacity: 1, transform: "scale(1)" }, { opacity: 0, transform: "scale(0.96)" }], { duration: 400, delay: 1900, easing: "cubic-bezier(0.4,0,0.2,1)" });
       A(prEl, [{ opacity: 0, transform: "translate3d(0,16px,0)" }, { opacity: 1, transform: "translate3d(0,0,0)" }], { duration: 600, delay: 2000, easing: "cubic-bezier(0.16,1,0.3,1)" });
       capTimers.push(setTimeout(() => setCaption(STEPS[4]), 2000));
       A(rootEl, [{ transform: "scale(1)" }, { transform: "scale(0.94)" }], { duration: 600, delay: 2500, easing: "cubic-bezier(0.65,0,0.35,1)" });
@@ -249,7 +250,10 @@ export function ResurrectSequence(props: Props) {
         if (!reduce && phaseRef.current === "playing") {
           e.preventDefault();
           skip.current();
+          return;
         }
+        e.preventDefault();
+        dlg.current?.close();
       }}
       onClose={onClose}
     >
@@ -275,7 +279,7 @@ export function ResurrectSequence(props: Props) {
               <span className="t-evidence" style={{ color: "var(--color-stone-text)" }}>{t.version ?? t.requested}</span>
             </div>
           </div>
-          <div style={{ position: "relative", width: "100%", maxWidth: 560, minHeight: 280 }}>
+          <div className="stage-right">
             <div ref={cards} className="cards">
               {[
                 { k: "Patch", v: facts ? <><span className="num add">+<span className="count" data-count={facts.patch.added} aria-label={String(facts.patch.added)} /></span> <span className="num del">−<span className="count" data-count={facts.patch.removed} aria-label={String(facts.patch.removed)} /></span> in {facts.patch.files} {facts.patch.files === 1 ? "file" : "files"}</> : "…" },

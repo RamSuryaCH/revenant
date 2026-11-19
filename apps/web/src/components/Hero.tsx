@@ -34,7 +34,7 @@ export function Hero({ url, setUrl, busy, onScan, onSandbox, onExample, onSample
         <div className="grain" />
       </div>
 
-      <nav className="relative z-10 mx-auto flex max-w-[1280px] items-center justify-between px-[var(--pad)] py-5" aria-label="Primary">
+      <nav className="relative z-10 mx-auto flex w-full max-w-[1280px] items-center justify-between px-[var(--pad)] py-5" aria-label="Primary">
         <span className="t-title" style={{ fontSize: 24 }}>Revenant</span>
         <span className="flex items-center gap-3">
           <button type="button" className="btn-ghost" aria-pressed={reduce} onClick={toggleReduce}>Reduce motion</button>
@@ -92,7 +92,7 @@ export function Hero({ url, setUrl, busy, onScan, onSandbox, onExample, onSample
           <p className="lift mt-1 flex flex-wrap items-center gap-x-4 sm:mt-3 sm:gap-x-5" style={{ ["--i" as string]: 6 }}>
             <span className="hidden text-[15px] text-mist sm:inline">No repo handy?</span>
             <button type="button" className="link-moon" disabled={busy} onClick={onSandbox}>Haunt the sandbox repo</button>
-            <button type="button" className="link-moon" disabled={busy} onClick={onExample}>or scan bower, a famous graveyard</button>
+            <button type="button" className="link-moon" disabled={busy} onClick={onExample}>or scan bower/bower</button>
             <button type="button" className="link-moon" disabled={busy} onClick={onSample}>or the sample</button>
           </p>
 

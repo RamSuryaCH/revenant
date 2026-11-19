@@ -94,7 +94,7 @@ export function Drawer({ t, opener, onClose, repo, sample, reduce }: { t: Tombst
   const closed = () => {
     onClose();
     // Native dialogs restore focus; do it explicitly so it also holds for list rows that re-render.
-    requestAnimationFrame(() => opener?.isConnected && opener.focus());
+    setTimeout(() => opener?.isConnected && opener.focus(), 0);
   };
 
   const rows = t ? evidenceRows(t) : [];
@@ -115,6 +115,12 @@ export function Drawer({ t, opener, onClose, repo, sample, reduce }: { t: Tombst
         ref={ref}
         className="drawer"
         onClose={closed}
+        // Close explicitly on Escape: some Chrome builds fire "cancel" without a following "close",
+        // which left the drawer mounted but shut, so the next click on the same card did nothing.
+        onCancel={(e) => {
+          e.preventDefault();
+          ref.current?.close();
+        }}
         onClick={(e) => e.target === ref.current && ref.current?.close()}
         aria-labelledby="drawer-title"
       >

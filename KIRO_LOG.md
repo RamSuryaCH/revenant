@@ -53,3 +53,12 @@ An honest record of how Kiro was used to build Revenant. This project was built 
 - **Measured, not assumed.** Lighthouse mobile first scored 88 (LCP 2.9 s, TBT 320 ms) on a local production build. Making the hero entrance transform-only and lazy-loading the graveyard and drawer lifted it to 96 with TBT 10 ms. The default simulated LCP stayed at 2.8 s locally while the Chrome-throttled run reported 1.5 s; both are recorded in PR #5.
 - **A bug found by looking.** On a 390 px screen the first hero build clipped the scan box because a grid column had no `min-width: 0`. `overflow-x: clip` hid it from the scrollWidth check, so the check alone was not enough; a screenshot caught it.
 - **Not done by Kiro.** The Vercel preview sits behind deployment protection, so the preview could not be opened in an unauthenticated browser; production is checked after the merge.
+
+## 2026-11-19 (round 4: judge's-eye QA fixes)
+
+- **Spec first.** `.kiro/specs/qa-round4/` (EARS requirements, design, traced tasks) was committed in `b2d11a5` before any code, from the independent review `qa-r4` (not committed).
+- **Live example swapped.** The hero's "or scan express" link found nothing dead. It now scans `bower/bower`, measured locally at about 10 s with 12 of 30 direct dependencies dead or dying (request, glob, mkdirp, q and others). The headline, the filter bar and the alive row now use one list; a clean repo reads "N packages checked, all alive."
+- **The ignored first click, found.** In the headless test browser the page is "hidden", so `requestAnimationFrame` never runs and a `<dialog>` closed with Escape never fires `close`. The drawer stayed mounted but shut, and the next click on the same card set the same state, so nothing happened. Each open now remounts the drawer, Escape closes explicitly, global smooth scrolling is gone, and card buttons no longer move on hover. Whether a real trackpad ever hit this was not confirmed by a person.
+- **PR numbers say what they cover.** The card shows the patch to the scanned repo (source files only) and, separately, the whole pull request's totals read live from GitHub (`#2`: +347 −4 in 7 files), which matched `gh pr list` when checked.
+- **Errors.** Network failures read "Could not reach the server. Check your connection and try again." and focus moves to "Try again". `owner/repo` is accepted; a missing or private repo gets its own message.
+- **Resurrect re-staged.** The right half of the stage now holds the three artifact cards and then the PR card, so the money frame is full.

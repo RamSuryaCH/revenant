@@ -50,6 +50,7 @@ export function App() {
   const [isSample, setIsSample] = useState(true);
   const [repo, setRepo] = useState<string | null>(null);
   const [selected, setSelected] = useState<Tombstone | null>(null);
+  const [openId, setOpenId] = useState(0);
   const [opener, setOpener] = useState<HTMLElement | null>(null);
   /** The hero stones come from the bundled sample, so they always resurrect from the sample files. */
   const [fromHero, setFromHero] = useState(false);
@@ -76,6 +77,7 @@ export function App() {
     setOpener(el);
     setFromHero(hero);
     setSelected(t);
+    setOpenId((n) => n + 1);
   }, []);
 
   const loadSample = useCallback(
@@ -238,7 +240,7 @@ export function App() {
         Data: npm registry, deps.dev, OSV, OpenSSF Scorecard, GitHub. Built with Kiro. MIT licensed. Fonts: Fraunces, Inter, JetBrains Mono (SIL OFL 1.1).
       </footer>
 
-      {selected && <Drawer t={selected} opener={opener} onClose={() => setSelected(null)} repo={fromHero ? null : repo} sample={fromHero ? true : isSample} reduce={reduce} />}
+      {selected && <Drawer key={openId} t={selected} opener={opener} onClose={() => setSelected(null)} repo={fromHero ? null : repo} sample={fromHero ? true : isSample} reduce={reduce} />}
     </>
   );
 }

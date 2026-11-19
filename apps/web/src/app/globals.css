@@ -46,7 +46,7 @@
 
 html {
   background: var(--color-ink);
-  scroll-behavior: smooth;
+  /* No global smooth scrolling: a click that scrolls a card into view must land where the pointer is. The reveal uses JS smooth scroll. */
   -webkit-text-size-adjust: 100%;
 }
 
@@ -84,7 +84,7 @@ button:disabled { cursor: not-allowed; }
 .wrap-any { overflow-wrap: anywhere; }
 
 /* ---------- ambient hero layers ---------- */
-.ambient { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.ambient { position: absolute; inset: 0; overflow: hidden; pointer-events: none; mask-image: linear-gradient(180deg, #000 70%, transparent); }
 .ambient::before {
   content: "";
   position: absolute;
@@ -482,3 +482,19 @@ html[data-reduce="true"] .stone:hover, html[data-reduce="true"] .stone:focus-vis
 @media (max-width: 479px) { .seg button { padding: 0 10px; gap: 6px; font-size: 13px; } }
 
 .srclink { display: inline-flex; align-items: center; min-height: 44px; padding: 0 2px; }
+
+/* Hero ambience off when either reduced-motion switch is on. */
+html[data-reduce="true"] .hstone::after, html[data-reduce="true"] .stone::after { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .tick { animation: none; }
+  .hstone::after, .stone::after { display: none; }
+}
+
+/* Resurrect stage: the right column always holds the artifacts, so the frame is never half empty. */
+.stage-right { position: relative; width: 100%; max-width: 560px; min-height: 280px; display: grid; gap: 14px; }
+@media (min-width: 900px) {
+  .stage-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); width: min(1180px, 100%); }
+  .stage-right { max-width: 580px; justify-self: start; }
+  .stage-right .stage-pr { position: relative; inset: auto; }
+  .big-stone { justify-self: end; }
+}

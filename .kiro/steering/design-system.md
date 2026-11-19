@@ -43,6 +43,9 @@ Fraunces for display and epitaph pull quotes, Inter for UI, JetBrains Mono for e
 - The Resurrect sequence is one Web Animations API timeline built from real response data; if the response is late, hold the ember beat; never fake completion.
 - `prefers-reduced-motion` or the in-page toggle: no translation, parallax, drift or particles; Resurrect becomes a captioned step-through with the same data.
 - Ambient motion pauses when the tab is hidden.
+- Click targets never move: no `transform` on a card button on hover or focus (hover is a border, shadow and the cursor candle). Entrance rise lives on the list item and is 12 px over 480 ms. No global `scroll-behavior: smooth`.
+- The Resurrect stage on wide screens keeps the stone in the left half and the three artifact cards, then the PR card, in the right half. Narrow screens swap the cards for the PR card.
+- Cursor candle (ember radial following the pointer) on hero and graveyard stones; off under either reduced-motion switch.
 
 ## Accessibility
 
