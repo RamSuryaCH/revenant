@@ -2,7 +2,14 @@
 
 > Resurrect the open-source packages your project buried.
 
-**Live demo: https://revenant-beta.vercel.app** (no login; one click loads a cached cursed repo in under a second)
+**Live demo: [revenant-beta.vercel.app](https://revenant-beta.vercel.app)** (no login; one click loads a cached cursed repo in under a second)
+
+**Live resurrections** on the sandbox repo [RamSuryaCH/revenant-crypt](https://github.com/RamSuryaCH/revenant-crypt), each with the migration, its Kiro spec, differential tests and the sandbox suite output (16/16 before and after):
+[#1 moment to dayjs](https://github.com/RamSuryaCH/revenant-crypt/pull/1) ·
+[#2 request to native fetch](https://github.com/RamSuryaCH/revenant-crypt/pull/2) ·
+[#3 uuid@3 to crypto.randomUUID](https://github.com/RamSuryaCH/revenant-crypt/pull/3)
+
+![Revenant landing page: moonlit graveyard and the Exhume button](docs/hero.png)
 
 Revenant maps a repository's npm dependencies as a graveyard. Dead and dying packages become **tombstones** with epitaphs and a cause of death; healthy ones are **living lanterns**. Every sentence cites the API field it came from, so nothing is invented. For three curated migrations, **Resurrect** produces:
 
@@ -12,7 +19,17 @@ Revenant maps a repository's npm dependencies as a graveyard. Dead and dying pac
 
 Built for Kiroween 2026, category **Resurrection**.
 
-<!-- screenshot placeholders: docs/hero.png, docs/graveyard.png, docs/resurrect.png -->
+![From landing page to tombstones to a resurrection with its live pull request](docs/resurrection.gif)
+
+| Graveyard | Resurrection |
+|---|---|
+| ![Tombstones for dead and dying dependencies of the cached sample](docs/graveyard.png) | ![moment tombstone opened, with the live Gravekeeper pull request link and the patch](docs/resurrect.png) |
+
+## 30-second quickstart
+
+1. Open [revenant-beta.vercel.app](https://revenant-beta.vercel.app) and press **Exhume a cursed repo**.
+2. Click the `moment` tombstone, then **Resurrect moment**: read the patch, the Kiro spec and the tests, or download the `.patch`.
+3. Press **Haunt the sandbox repo**, open any curated tombstone and follow the link to its live pull request.
 
 ## What it does
 
@@ -23,6 +40,7 @@ Built for Kiroween 2026, category **Resurrection**.
 | Judge | Pure vitality score 0 to 100. Deprecated or archived means dead. |
 | Epitaph | Each epitaph carries `Evidence { source, field, value }`. A property test proves every cited value equals the value in the source facts. |
 | Resurrect | Curated recipes: `moment` to `dayjs`, `request` to native fetch, `uuid@3` to `crypto.randomUUID`. |
+| Gravekeeper | `revenant gravekeeper <recipe\|all>` opens or reuses the pull request on the sandbox, branch `revenant/<recipe-id>`. The web app only reads and links it. |
 
 Honest limits: exactly three recipes; other packages get "no curated recipe yet". Successors come from a small curated table (labelled `curated`) or from the package's own deprecation message. Differential tests cover pure behaviour (dates, UUID shape, HTTP request/response), not everything a library can do. Mutating `moment` calls and streaming `request` calls are flagged with `TODO(revenant)` instead of being silently rewritten. The AI-written plan for uncurated packages is not built.
 
@@ -39,13 +57,23 @@ node packages/engine/dist/cli.js scan samples/cursed --out scan.json
 node packages/engine/dist/cli.js resurrect scan.json moment --from samples/cursed --patch moment.patch
 ```
 
-`GITHUB_TOKEN` (server side only) raises GitHub rate limits. Live scans that hit a rate limit or timeout fall back to the cached sample with a visible note.
+`GITHUB_TOKEN` (server side only) raises GitHub rate limits.
+
+### Gravekeeper (maintainer only)
+
+```bash
+packages/engine/node_modules/.bin/tsx scripts/verify-crypt.mts      # sandbox npm test before/after each recipe + differential tests
+GITHUB_TOKEN=$(gh auth token) node packages/engine/dist/cli.js gravekeeper all
+```
+
+The command refuses every repository except `RamSuryaCH/revenant-crypt`, reuses an open PR instead of opening a duplicate, and pastes the recorded test output into the PR body (GitHub Actions is unavailable on this account because of a billing lock). The deployed app holds only a read token and has no write route, by design: a public button backed by a write token would hand every visitor write access. Reset the sandbox with `scripts/reset.sh` in revenant-crypt. Live scans that hit a rate limit or timeout fall back to the cached sample with a visible note.
 
 ## Layout
 
 ```
 packages/engine   zod schema (frozen), scanner, scoring, recipes, CLI  (@revenant/engine)
-apps/web          Next.js App Router graveyard UI, /api/scan (NDJSON stream), /api/resurrect
+apps/web          Next.js App Router graveyard UI, /api/scan (NDJSON stream), /api/resurrect, /api/gravekeeper (read-only PR lookup)
+docs              README media and the dead-package study (docs/study/REPORT.md)
 samples/cursed    haunted input project; cached output lives in apps/web/public/samples
 .kiro             specs, steering, hooks, agents (see KIRO_LOG.md)
 ```
