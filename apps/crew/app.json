@@ -1,0 +1,66 @@
+{
+  "name": "graveyard-watch",
+  "version": "0.1.0",
+  "displayName": "Graveyard Watch",
+  "description": "Watches GitHub repositories for dead npm dependencies, shows them as a graveyard, reports who newly died each night, and lets the necromancer agent resurrect them with curated, tested recipes. Powered by Revenant.",
+  "author": "RamSuryaCH",
+  "tags": ["dependencies", "npm", "maintenance", "revenant"],
+  "highlights": [
+    "Graveyard page: every watched repo as tombstones, with the cited API field behind each cause of death",
+    "Nightly rescan that names the packages that died since last night",
+    "Necromancer agent resurrects moment, request and uuid@3 through the Revenant MCP tools, with differential tests",
+    "Resets the Revenant demo repo (RamSuryaCH/revenant-crypt) every night, and only that repo"
+  ],
+  "defaultEnabled": false,
+  "iconPath": "assets/icon.png",
+  "platform": { "os": ["macos", "linux", "windows"] },
+  "agents": ["agents/necromancer.json", "agents/gravekeeper.json"],
+  "skills": ["skills/revenant-resurrection", "skills/graveyard-watch-ops"],
+  "mcpServers": {
+    "revenant": {
+      "command": "node",
+      "args": [
+        "-e",
+        "const p=require('path'),o=require('os');import(require('url').pathToFileURL(p.join(process.env.KIROCREW_HOME||p.join(o.homedir(),'.kiro','crew'),'apps','graveyard-watch','bin','revenant-mcp.mjs')).href)"
+      ],
+      "autoApprove": ["scan_dependencies", "explain_tombstone"]
+    }
+  },
+  "backend": {
+    "entryPoint": "backend/server.mjs",
+    "type": "node",
+    "port": "auto",
+    "healthCheck": "/health"
+  },
+  "ui": {
+    "entry": "ui/index.mjs",
+    "pages": [{ "route": "/apps/graveyard-watch", "label": "Graveyard Watch", "icon": "Skull" }]
+  },
+  "crons": [
+    {
+      "name": "nightly-rescan",
+      "cron_expr": "0 2 * * *",
+      "command": "node \"$HOME/.kiro/crew/apps/graveyard-watch/bin/nightly.mjs\"",
+      "message": "Rescan watched repositories, report newly dead dependencies, reset the Revenant demo repo",
+      "persistent_session": false,
+      "enabled": true
+    }
+  ],
+  "permissions": {
+    "api": [
+      "/api/apps/graveyard-watch",
+      "/api/apps/graveyard-watch/*"
+    ],
+    "network": true,
+    "storage": true,
+    "cron": true
+  },
+  "dependencies": {
+    "commands": ["node"],
+    "optionalCommands": ["gh", "git"]
+  },
+  "useCases": ["Know the morning after which of your dependencies were declared dead, then resurrect them."],
+  "configuration": [
+    "Set GITHUB_TOKEN in the gateway environment to raise GitHub limits. Set REVENANT_CRYPT_DIR to your local clone of RamSuryaCH/revenant-crypt for the nightly reset."
+  ]
+}

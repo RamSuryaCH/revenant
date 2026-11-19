@@ -1,0 +1,25 @@
+{
+  "name": "@revenant/crew",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Graveyard Watch: the Revenant app for Kiro Crew.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@revenant/engine": "workspace:*",
+    "@revenant/mcp": "workspace:*",
+    "react": "^19.2.0",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.2.0",
+    "esbuild": "^0.28.0",
+    "vitest": "^3.2.4"
+  }
+}
