@@ -95,7 +95,7 @@ export function Graveyard(props: {
       <div className="border-t border-rule pt-6">
         <p className="t-label text-moon">{eyebrow}</p>
         <h2 id="yard-title" className="t-display wrap-any mt-3">{title || "The graveyard"}</h2>
-        <p className="t-pull mt-4 max-w-[48ch] text-bone" aria-live="polite">{tombs.length ? summaryLine(tombs) : phase === "streaming" ? "Digging…" : ""}</p>
+        <p className="t-pull mt-4 max-w-[48ch] text-bone" aria-live="polite">{phase === "streaming" ? (tombs.length ? `${tombs.length} checked so far. Digging…` : "Digging…") : tombs.length ? summaryLine(tombs) : ""}</p>
         {direct.length > 0 && (
           <p className="mt-2 max-w-[60ch] text-[13px] leading-relaxed text-dim">
             Graveyard score {score}%: the share of direct dependencies that are dead or dying. Lower is healthier. Old but clean packages count as alive.
