@@ -3,23 +3,41 @@
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Resurrection, Tombstone } from "@revenant/engine";
-import { clampAtWord, evidenceRows, STATUS_WORD, type Chip, type EvidenceRow } from "@/lib/ledger";
+import { evidenceRows, STATUS_WORD, type Chip, type EvidenceRow } from "@/lib/ledger";
 import { ExternalIcon, Glyph } from "./Glyph";
 import { isCrypt } from "./PrCard";
+import { scopeLabel } from "@/lib/repo";
 
 const ResultView = dynamic(() => import("./PrCard").then((m) => m.ResultView), { ssr: false, loading: () => <p className="text-mist">Loading the result…</p> });
 const ResurrectSequence = dynamic(() => import("./ResurrectSequence").then((m) => m.ResurrectSequence), { ssr: false });
 const preload = () => void import("./ResurrectSequence");
 
-function Source({ c }: { c: Chip }) {
+const isApi = (u: string) => /^https:\/\/(api\.|registry\.npmjs\.org)/.test(u);
+
+/** Field paths wrap only after a separator, never mid-word. */
+const FieldPath = ({ f }: { f: string }) => (
+  <>
+    {f.split(/(?=[.[])/).map((part, i) => (
+      <span key={i}>
+        {i > 0 && <wbr />}
+        {part}
+      </span>
+    ))}
+  </>
+);
+
+function Source({ c, name }: { c: Chip; name: string }) {
+  // The deps.dev epitaphs cite the packages endpoint the engine read; link it like the other sources.
+  const url = c.url ?? (c.source === "deps.dev" ? `https://api.deps.dev/v3/systems/npm/packages/${encodeURIComponent(name)}` : undefined);
   const inner = (
     <>
       <b>{c.label}</b>
-      {c.url && <ExternalIcon />}
+      {url && isApi(url) && <span>view JSON</span>}
+      {url && <ExternalIcon />}
     </>
   );
-  return c.url ? (
-    <a className="chip" href={c.url} target="_blank" rel="noreferrer" aria-label={`${c.label}, opens in a new tab`}>{inner}</a>
+  return url ? (
+    <a className="chip" href={url} target="_blank" rel="noreferrer" aria-label={`${c.label}${isApi(url) ? ", raw JSON" : ""}, opens in a new tab`}>{inner}</a>
   ) : (
     <span className="chip">{inner}</span>
   );
@@ -27,11 +45,11 @@ function Source({ c }: { c: Chip }) {
 
 const GROUP_LABEL = { cause: "Cause of death", epitaph: "Epitaph", successor: "Successor" } as const;
 
-function EvidenceTable({ rows }: { rows: EvidenceRow[] }) {
+function EvidenceTable({ rows, name }: { rows: EvidenceRow[]; name: string }) {
   return (
     <table className="ev">
       <caption className="sr-only">Every claim and the API field it was read from</caption>
-      <colgroup><col style={{ width: "38%" }} /><col style={{ width: "34%" }} /><col style={{ width: "28%" }} /></colgroup>
+      <colgroup><col style={{ width: "34%" }} /><col style={{ width: "40%" }} /><col style={{ width: "26%" }} /></colgroup>
       <thead>
         <tr><th scope="col">Claim</th><th scope="col">Field</th><th scope="col">Source</th></tr>
       </thead>
@@ -42,11 +60,11 @@ function EvidenceTable({ rows }: { rows: EvidenceRow[] }) {
               {ci === 0 && (
                 <td rowSpan={row.chips.length}>
                   <span className="t-label block pb-1 text-dim">{GROUP_LABEL[row.group]}</span>
-                  {row.group === "cause" ? `${clampAtWord(row.claim, 80)} (in full above)` : row.claim}
+                  {row.claim}
                 </td>
               )}
-              <td><span className="field">{c.field}</span></td>
-              <td><Source c={c} /></td>
+              <td><span className="field"><FieldPath f={c.field} /></span></td>
+              <td><Source c={c} name={name} /></td>
             </tr>
           )),
         )}
@@ -152,13 +170,13 @@ export function Drawer({ t, opener, onClose, repo, sample, reduce }: { t: Tombst
               {result && (
                 <section className="mt-8" aria-labelledby="res">
                   <h3 id="res" className="t-label text-ember">Resurrection</h3>
-                  <div className="mt-3">{t.recipeId && <ResultView r={result} recipeId={t.recipeId} crypt={isCrypt(repo)} />}</div>
+                  <div className="mt-3">{t.recipeId && <ResultView r={result} recipeId={t.recipeId} crypt={isCrypt(repo)} scope={scopeLabel(repo, sample)} />}</div>
                 </section>
               )}
 
               <section className="mt-8" aria-labelledby="evi">
                 <h3 id="evi" className="t-label text-moon">Evidence</h3>
-                <div className="mt-3"><EvidenceTable rows={table} /></div>
+                <div className="mt-3"><EvidenceTable rows={table} name={t.name} /></div>
               </section>
 
               {successor && (
@@ -172,7 +190,15 @@ export function Drawer({ t, opener, onClose, repo, sample, reduce }: { t: Tombst
               {t.status !== "living" && !t.recipeId && (
                 <p className="mt-8 text-[15px] text-mist">
                   <span className="t-label text-moon">No curated recipe yet.</span>{" "}
-                  {t.successor ? `Suggested successor: ${t.successor.name}. ` : ""}Revenant ships tested migrations for moment, request and uuid@3 only, and will not guess at the rest.
+                  {t.successor ? `Suggested successor: ${t.successor.name}. ` : ""}Revenant ships tested migrations for moment, request and uuid@3 only, and will not guess at the rest.{" "}
+                  <a
+                    className="text-moon underline underline-offset-4"
+                    href={`https://github.com/RamSuryaCH/revenant/issues/new?${new URLSearchParams({ title: `Recipe request: ${t.name}`, body: `Package: ${t.name} ${t.version ?? t.requested}\nStatus: ${t.status}\nWhy it needs a recipe: ${t.epitaphs[0]?.text ?? ""}` })}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Open an issue asking for a recipe <ExternalIcon />
+                  </a>
                 </p>
               )}
 

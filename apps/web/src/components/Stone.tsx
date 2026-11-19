@@ -1,7 +1,7 @@
 "use client";
 
 import type { Tombstone } from "@revenant/engine";
-import { clampAtWord, sourceChips, STATUS_WORD } from "@/lib/ledger";
+import { clampAtClause, clampAtWord, sourceChips, STATUS_WORD } from "@/lib/ledger";
 import { Glyph } from "./Glyph";
 
 const ARIA = (t: Tombstone) => `${t.name} ${t.version ?? t.requested}, ${STATUS_WORD[t.status]}. ${clampAtWord(t.epitaphs[0]?.text ?? "", 160)} Open the evidence.`;
@@ -61,11 +61,24 @@ export function Stone({ t, index, onOpen }: { t: Tombstone; index: number; onOpe
   );
 }
 
+const heroText = (t: Tombstone) => clampAtClause(t.epitaphs[0]?.text ?? "", 90);
+
 /** Row used in the hero: plaque with the carved name, the epitaph and its sources. */
 export function HeroStone({ t, index, onOpen }: { t: Tombstone; index: number; onOpen: (t: Tombstone, el: HTMLElement) => void }) {
   return (
     <li className="tombrise" style={{ ["--i" as string]: index }}>
-      <button type="button" className="hstone" data-status={t.status} aria-label={ARIA(t)} onClick={(e) => onOpen(t, e.currentTarget)}>
+      <button
+        type="button"
+        className="hstone"
+        data-status={t.status}
+        aria-label={ARIA(t)}
+        onClick={(e) => onOpen(t, e.currentTarget)}
+        onPointerMove={(e) => {
+          const r = e.currentTarget.getBoundingClientRect();
+          e.currentTarget.style.setProperty("--lx", `${e.clientX - r.left}px`);
+          e.currentTarget.style.setProperty("--ly", `${e.clientY - r.top}px`);
+        }}
+      >
         <span className="plaque carved">
           <span className="t-label" style={{ color: "var(--color-stone-text)", display: "inline-flex", alignItems: "center", gap: 6 }}>
             <Glyph status={t.status} />
@@ -77,7 +90,8 @@ export function HeroStone({ t, index, onOpen }: { t: Tombstone; index: number; o
           </span>
         </span>
         <span className="body">
-          <span className="font-display wrap-any" style={{ fontSize: 17, lineHeight: 1.4, display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{clampAtWord(t.epitaphs[0]?.text ?? "", 80)}</span>
+          <span className="font-display wrap-any" style={{ fontSize: 17, lineHeight: 1.4, display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{heroText(t)}</span>
+          {heroText(t) !== (t.epitaphs[0]?.text ?? "").trim() && <span className="t-evidence" style={{ textDecoration: "underline", textUnderlineOffset: 3 }}>more in the evidence</span>}
           <span style={{ display: "flex", flexWrap: "wrap", gap: 6 }}><Chips t={t} max={2} /></span>
         </span>
       </button>

@@ -1,5 +1,6 @@
 import { classifyInput, finish, headSha, parseGithubUrl, scan, ScanCache, ScanError, type ScanResult, type Tombstone } from "@revenant/engine";
 import { allow, clientIp } from "@/lib/rateLimit";
+import { normalizeRepo, repoExists } from "@/lib/repo";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -17,10 +18,10 @@ export type ScanEvent =
   | { type: "error"; code: string; message: string };
 
 export async function GET(req: Request) {
-  const repo = new URL(req.url).searchParams.get("repo")?.trim() ?? "";
+  const repo = normalizeRepo(new URL(req.url).searchParams.get("repo") ?? "");
   const gh = parseGithubUrl(repo);
   if (!gh) {
-    return Response.json({ code: "bad-input", message: "Paste a GitHub repository URL like https://github.com/expressjs/express." }, { status: 400 });
+    return Response.json({ code: "bad-input", message: "Paste a GitHub repository like expressjs/express or https://github.com/expressjs/express." }, { status: 400 });
   }
   const sha = await headSha(gh.owner, gh.repo, { githubToken: process.env["GITHUB_TOKEN"] });
   const key = sha ? ScanCache.key(`${gh.owner}/${gh.repo}`, sha) : null;
@@ -61,7 +62,9 @@ export async function GET(req: Request) {
           send({ type: "done", data: winner });
         }
       } catch (e) {
-        if (e instanceof ScanError) send({ type: "error", code: e.code, message: e.message });
+        if (e instanceof ScanError && e.code === "not-found" && (await repoExists(gh.owner, gh.repo, { token: process.env["GITHUB_TOKEN"] })) === false) {
+          send({ type: "error", code: "not-found", message: `GitHub has no public repository called ${gh.owner}/${gh.repo}. Check the spelling, or the repository may be private. Revenant reads public repositories only.` });
+        } else if (e instanceof ScanError) send({ type: "error", code: e.code, message: e.message });
         else send({ type: "error", code: "unreachable", message: "The scan failed unexpectedly." });
       } finally {
         controller.close();

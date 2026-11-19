@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { ScanResult, Tombstone } from "@revenant/engine";
 import type { ScanEvent } from "@/app/api/scan/route";
 import dynamic from "next/dynamic";
+import { normalizeRepo } from "@/lib/repo";
 import { Hero } from "./Hero";
 
 // Off the critical path: the first view is the hero only.
@@ -12,7 +13,8 @@ const Drawer = dynamic(() => import("./Drawer").then((m) => m.Drawer), { ssr: fa
 
 type Phase = "idle" | "loading" | "streaming" | "ready";
 
-const SAMPLE_REPO = "https://github.com/expressjs/express";
+/** Live example on the hero: a real repo with many dead direct dependencies (11 at the time of writing), scanned in about 10 s. */
+const LIVE_EXAMPLE = "https://github.com/bower/bower";
 const CRYPT_REPO = "https://github.com/RamSuryaCH/revenant-crypt";
 
 /** OS preference plus the in-page toggle; mirrored on <html data-reduce> so CSS can honour it. */
@@ -102,7 +104,8 @@ export function App() {
   );
 
   const runLive = useCallback(
-    async (target: string) => {
+    async (raw: string) => {
+      const target = normalizeRepo(raw);
       setError(null);
       setInfo(null);
       setBanner(null);
@@ -117,7 +120,7 @@ export function App() {
       }
       if (res.status === 400) {
         setPhase("idle");
-        setError(((await res.json().catch(() => null)) as { message?: string } | null)?.message ?? "That does not look like a GitHub repository URL.");
+        setError(((await res.json().catch(() => null)) as { message?: string } | null)?.message ?? "That does not look like a GitHub repository. Try owner/repo or a github.com link.");
         return;
       }
       if (!res.ok || !res.body) {
@@ -199,9 +202,9 @@ export function App() {
           setUrl(CRYPT_REPO);
           void runLive(CRYPT_REPO);
         }}
-        onExpress={() => {
-          setUrl(SAMPLE_REPO);
-          void runLive(SAMPLE_REPO);
+        onExample={() => {
+          setUrl(LIVE_EXAMPLE);
+          void runLive(LIVE_EXAMPLE);
         }}
         onSample={() => void loadSample(null)}
         info={info}

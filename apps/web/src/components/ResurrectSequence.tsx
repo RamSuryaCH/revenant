@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Resurrection, Tombstone } from "@revenant/engine";
 import { artifactFacts, clampAtWord } from "@/lib/ledger";
+import { friendlyError, withStop } from "@/lib/messages";
+import { scopeLabel } from "@/lib/repo";
 import { isCrypt, PrCard, useGravekeeper } from "./PrCard";
 
 interface Props {
@@ -80,6 +82,12 @@ export function ResurrectSequence(props: Props) {
   const [error, setError] = useState<string | null>(null);
   const [step, setStep] = useState(0);
   const gk = useGravekeeper(recipeId);
+  const retry = useRef<HTMLButtonElement>(null);
+
+  // Keyboard users land on "Try again" when an attempt fails.
+  useEffect(() => {
+    if (error) requestAnimationFrame(() => retry.current?.focus());
+  }, [error, phase]);
 
   // Layers the timeline drives.
   const root = useRef<HTMLDivElement>(null);
@@ -116,7 +124,7 @@ export function ResurrectSequence(props: Props) {
     if (!reduce) return;
     let alive = true;
     setError(null);
-    fetchOnce().catch((e: unknown) => alive && setError(e instanceof Error ? e.message : "Could not resurrect."));
+    fetchOnce().catch((e: unknown) => alive && setError(friendlyError(e)));
     return () => {
       alive = false;
     };
@@ -178,7 +186,7 @@ export function ResurrectSequence(props: Props) {
         stopMotes();
         crackAnim.reverse();
         glowIn.reverse();
-        setError(e instanceof Error ? e.message : "Could not resurrect.");
+        setError(friendlyError(e));
         setPhase("failed");
         setCaption("The resurrection failed");
         return;
@@ -196,7 +204,7 @@ export function ResurrectSequence(props: Props) {
       A(typedEl, [{ clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0 0 0)" }], { duration: 45 * len, delay: 200, easing: `steps(${len}, end)` });
       const ci = cardEls.current.filter((c): c is HTMLDivElement => !!c);
       ci.forEach((c, i) => {
-        A(c, [{ opacity: 0, transform: "translate3d(0,24px,0) scale(0.98)" }, { opacity: 1, transform: "translate3d(0,0,0) scale(1)" }], { duration: 240, delay: 800 + i * 160, easing: "cubic-bezier(0.16,1,0.3,1)" });
+        A(c, [{ opacity: 0.35, transform: "translate3d(0,8px,0) scale(0.99)", borderStyle: "dashed" }, { opacity: 1, transform: "translate3d(0,0,0) scale(1)", borderStyle: "solid" }], { duration: 240, delay: 800 + i * 160, easing: "cubic-bezier(0.16,1,0.3,1)" });
         c.querySelectorAll<HTMLElement>("[data-count]").forEach((n) => A(n, [{ ["--n" as string]: "0" }, { ["--n" as string]: n.dataset["count"] ?? "0" }], { duration: 700, delay: 800 + i * 160, easing: "cubic-bezier(0.16,1,0.3,1)" }));
       });
       capTimers.push(setTimeout(() => setCaption(STEPS[3]), 800));
@@ -229,6 +237,7 @@ export function ResurrectSequence(props: Props) {
   const close = () => dlg.current?.close();
   const facts = r ? artifactFacts(r) : null;
   const crypt = isCrypt(props.repo);
+  const scope = scopeLabel(props.repo, props.sample);
   const typedName = shortName(facts?.replacement ?? "");
 
   return (
@@ -280,7 +289,7 @@ export function ResurrectSequence(props: Props) {
               ))}
             </div>
             <div ref={pr} className="stage-pr" style={{ opacity: 0 }}>
-              {r && <PrCard recipeId={recipeId} gk={gk} crypt={crypt} r={r} compact />}
+              {r && <PrCard recipeId={recipeId} gk={gk} crypt={crypt} r={r} scope={scope} compact />}
             </div>
           </div>
         </div>
@@ -300,12 +309,12 @@ export function ResurrectSequence(props: Props) {
                   <li>Tests: {facts.tests.properties} differential properties in {facts.tests.path}</li>
                 </ul>
               ) : <p>{error ?? "Waiting for the response."}</p>)}
-              {step === 4 && (r ? <PrCard recipeId={recipeId} gk={gk} crypt={crypt} r={r} /> : <p>{error ?? "Waiting for the response."}</p>)}
+              {step === 4 && (r ? <PrCard recipeId={recipeId} gk={gk} crypt={crypt} r={r} scope={scope} /> : <p>{error ?? "Waiting for the response."}</p>)}
             </div>
             <div className="steps-nav">
               <button type="button" className="btn-ghost" disabled={step === 0} onClick={() => setStep((s) => Math.max(0, s - 1))}>Back</button>
               <button type="button" className="btn-ghost" disabled={step === STEPS.length - 1} onClick={() => setStep((s) => Math.min(STEPS.length - 1, s + 1))}>Next</button>
-              {error && <button type="button" className="btn-ember" onClick={() => setRun((n) => n + 1)}>Try again</button>}
+              {error && <button ref={retry} type="button" className="btn-ember" onClick={() => setRun((n) => n + 1)}>Try again</button>}
             </div>
           </div>
         </div>
@@ -314,8 +323,8 @@ export function ResurrectSequence(props: Props) {
       <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "14px var(--pad) calc(14px + env(safe-area-inset-bottom))", display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
         {phase === "failed" && (
           <>
-            <p role="alert" className="w-full text-center text-[15px] text-ember">{error} The crack closed. Nothing was written anywhere.</p>
-            <button type="button" className="btn-ember" onClick={() => setRun((n) => n + 1)}>Try again</button>
+            <p role="alert" className="w-full text-center text-[15px] text-ember">{withStop(error ?? "Could not resurrect")} The crack closed. Nothing was written anywhere.</p>
+            <button ref={retry} type="button" className="btn-ember" onClick={() => setRun((n) => n + 1)}>Try again</button>
           </>
         )}
         {(phase === "done" || (reduce && r && step === STEPS.length - 1)) && (
