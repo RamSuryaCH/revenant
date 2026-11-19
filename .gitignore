@@ -10,3 +10,4 @@ coverage
 .conductor
 docs/study/.cache/
 docs/study/data.json
+.tmp
