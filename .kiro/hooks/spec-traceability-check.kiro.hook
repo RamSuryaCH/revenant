@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "name": "Check spec traceability",
+  "description": "When a requirements.md or tasks.md changes, verify every requirement id is covered by a task and every task cites existing requirement ids.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [".kiro/specs/**/requirements.md", ".kiro/specs/**/tasks.md"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A spec file changed. In the same spec folder, list every requirement id (R<n>.<m>) in requirements.md and every id cited in tasks.md. Report ids with no task and tasks citing unknown ids. Fix tasks.md traceability only; do not change requirements without asking."
+  }
+}

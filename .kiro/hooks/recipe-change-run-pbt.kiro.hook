@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "name": "Re-embed recipes and run differential PBT",
+  "description": "When a recipe, its shim or its differential test changes, re-embed the files into the engine and run all recipe property tests.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": ["packages/engine/recipes/**", "packages/engine/src/recipes/*Recipe.ts"]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "node scripts/embed-recipes.mjs && pnpm --filter @revenant/engine exec vitest run recipes tests/recipes.test.ts"
+  }
+}

@@ -1,0 +1,29 @@
+# Tasks: Revenant engine
+
+- [x] 1. Freeze the schema
+  - [x] 1.1 zod `Evidence`, `Epitaph`, `Tombstone`, `ScanResult`, `Resurrection`
+  - [x] 1.2 Hook: regenerate cached sample on schema change (`.kiro/hooks/schema-regenerate-sample.kiro.hook`)
+  - _Requirements: R1.1, R1.2_
+- [x] 2. Facts and scoring
+  - [x] 2.1 `PackageFacts`, `FIELDS`, `lookupField`
+  - [x] 2.2 Pure `vitality` / `statusOf` with property tests
+  - _Requirements: R3.2, R3.3, R4.1, R4.2, R4.3_
+- [x] 3. Sources
+  - [x] 3.1 npm, deps.dev, GitHub, Scorecard, OSV `querybatch`
+  - [x] 3.2 Per-source failure isolation with notes
+  - _Requirements: R3.1, R3.4_
+- [x] 4. Tombstones
+  - [x] 4.1 Epitaphs, cause of death, curated successors
+  - [x] 4.2 Evidence-equality property test
+  - _Requirements: R3.2, R3.3, R6.2_
+- [x] 5. Scan orchestration
+  - [x] 5.1 GitHub / path / pasted manifest input, non-npm friendly result
+  - [x] 5.2 Direct and transitive fan-out caps, streaming callback
+  - [x] 5.3 Unreachable sources raise `rate-limited`
+  - _Requirements: R2.1, R2.2, R2.3, R2.4, R2.5, R3.5, R5.1_
+- [x] 6. CLI and cached sample
+  - [x] 6.1 `revenant scan`, `revenant resurrect`
+  - [x] 6.2 `pnpm sample` writes `apps/web/public/samples/*`
+  - _Requirements: R1.2, R6.1_
+- [ ] 7. Scan with mocked fetch: rate-limit fallback test
+  - _Requirements: R3.4, R3.5_
