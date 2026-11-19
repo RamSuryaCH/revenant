@@ -1,0 +1,22 @@
+# Tasks: Final polish
+
+- [ ] 1. Honest click claim in hero, narrative, og and twitter image, and the pack
+  - [ ] 1.1 Hero.tsx, Narrative.tsx, opengraph-image.tsx, twitter-image.tsx
+  - [ ] 1.2 SUBMISSION, VIDEO, BLOG, SOCIAL wording
+  - _Requirements: R1.1, R1.2, R1.3_
+- [ ] 2. "Spec-driven" wording in VIDEO VO 8, KIRO_WRITEUP, SUBMISSION
+  - _Requirements: R1.4_
+- [ ] 3. UI fixes
+  - [ ] 3.1 Resurrect stage overlap
+  - [ ] 3.2 Focus into the stage dialog
+  - [ ] 3.3 One term for differential tests
+  - [ ] 3.4 Hero link wrap at 390 px
+  - [ ] 3.5 Empty band under the desktop hero
+  - _Requirements: R3.1, R3.2, R3.3, R3.4, R3.5_
+- [ ] 4. Local gate: typecheck, lint, tests, build
+  - _Requirements: all UI_
+- [ ] 5. KIRO_LOG fixes and mcp-server, crew-app design.md
+  - _Requirements: R4.2, R4.3_
+- [ ] 6. Merge, deploy, verify prod
+- [ ] 7. README quickstart and screenshots from prod; pack Lighthouse line
+  - _Requirements: R2.1, R2.2, R2.3, R4.1_

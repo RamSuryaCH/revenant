@@ -70,3 +70,8 @@ An honest record of how Kiro was used to build Revenant. This project was built 
 - **Measured.** Lighthouse 13.6.0 mobile on the local production build: performance 100, accessibility 100 (two runs). Stone text contrast is tested against the fill darkened by the maximum grain.
 - **Looked at, not assumed.** A screenshot showed the first OG draft overlapping its own subtitle and mono chips breaking mid-word; both were fixed after viewing.
 - **Not verified by a person:** touch dragging of the mobile sheet (the code path was exercised only by opening and closing it).
+
+## 2026-11-19 (final polish)
+
+- **Spec first.** `.kiro/specs/final-polish/` (EARS requirements, design, traced tasks) was committed before any code, from the independent judge-style review `qa-final` (P1-1 to P1-3, P2-1 to P2-8; not committed).
+- **Honest copy.** The hero and share image said one click raises a pull request while the Resurrect card said it does not. Both now say a click shows the spec, the patch, the tests and the real pull request it became.
