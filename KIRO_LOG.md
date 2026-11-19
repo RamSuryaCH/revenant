@@ -79,3 +79,4 @@ An honest record of how Kiro was used to build Revenant. This project was built 
 - **Hero.** The three links sit on two deliberate rows at 390 px, and the desktop hero no longer forces a full-height band.
 - **Design docs added after the fact** for `mcp-server` and `crew-app`, each with one diagram, written from the code as built.
 - **Measured on prod.** Lighthouse 13.6.0, mobile, headless, one run on the live URL (2026-11-19): performance 100, accessibility 100, best practices 100, SEO 100.
+- **README media retaken from prod** after the deploy (desktop hero, graveyard, evidence drawer, Resurrect ending on the PR card, mobile hero) in `docs/readme/`; the older images, linked from nowhere, were deleted.

@@ -9,7 +9,9 @@
 [#2 request to native fetch](https://github.com/RamSuryaCH/revenant-crypt/pull/2) ·
 [#3 uuid@3 to crypto.randomUUID](https://github.com/RamSuryaCH/revenant-crypt/pull/3)
 
-![Revenant landing page: headline, scan control and three real tombstones with their sources](docs/redesign/after-desktop-hero.png)
+![Revenant landing page: headline, scan control and three real tombstones with their sources](docs/readme/hero-desktop.png)
+
+<img src="docs/readme/hero-mobile.png" alt="Revenant hero at 390 px wide" width="260">
 
 Revenant maps a repository's npm dependencies as a graveyard. Dead and dying packages become **tombstones** with epitaphs and a cause of death; healthy ones collapse into a quiet **alive ledger**. Every sentence cites the API field it came from, so nothing is invented. For three curated migrations, **Resurrect** produces:
 
@@ -19,11 +21,11 @@ Revenant maps a repository's npm dependencies as a graveyard. Dead and dying pac
 
 Built for Kiroween 2026, category **Resurrection**.
 
-![The Resurrect moment ends on the real pull request on the sandbox repo](docs/redesign/after-resurrect-pr.png)
+![The Resurrect moment ends on the real pull request on the sandbox repo](docs/readme/resurrect-pr-desktop.png)
 
 | Graveyard | Resurrection |
 |---|---|
-| ![Tombstones for dead and dying dependencies of the cached sample](docs/redesign/after-desktop-graveyard.png) | ![request tombstone opened: cause of death and the evidence table, one row per cited field](docs/redesign/after-desktop-drawer.png) |
+| ![Tombstones for dead and dying dependencies of the cached sample](docs/readme/graveyard-desktop.png) | ![request tombstone opened: cause of death and the evidence table, one row per cited field](docs/readme/drawer-desktop.png) |
 
 ## 30-second quickstart
 
